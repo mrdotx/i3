@@ -3,7 +3,7 @@
 # path:       ~/projects/i3/i3_tiling.sh
 # user:       klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-01-24T20:18:23+0100
+# date:       2020-01-27T12:50:13+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling i3 focused window
@@ -44,10 +44,10 @@ elif [ $# -ne 0 ]; then
         && "$@" &
 else
     if [ "$(pgrep -x i3_tiling.sh | wc -l)" -gt 2 ]; then
-        notify-send -i "$HOME/projects/shell/icons/i3.png" "i3" "optimal automatic tilings off"
+        notify-send "i3" "optimal automatic tilings off"
         pkill -x i3_tiling.sh
     else
-        notify-send -i "$HOME/projects/shell/icons/i3.png" "i3" "optimal automatic tilings on"
+        notify-send "i3" "optimal automatic tilings on"
         w_pid=$(xdotool getwindowfocus getwindowpid)
         while true
         do
