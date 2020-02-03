@@ -1,9 +1,9 @@
 #!/bin/sh
 
 # path:       ~/projects/i3/i3_knockout.sh
-# user:       klassiker [mrdotx]
+# author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-01-24T22:05:48+0100
+# date:       2020-02-03T13:17:58+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for \"knockout\" the system
