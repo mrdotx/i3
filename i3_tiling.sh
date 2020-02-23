@@ -3,7 +3,7 @@
 # path:       ~/projects/i3/i3_tiling.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-02-12T13:16:05+0100
+# date:       2020-02-23T20:59:27+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling i3 focused window
@@ -21,8 +21,8 @@ help="$script [-h/--help] -- script for optimal tiling i3 focused window
 
 dim() {
     w_dim=$(xdotool getwindowfocus getwindowgeometry | grep Geometry: | awk -F ': ' '{print $2}')
-    x=$(echo "$w_dim" | awk -F 'x' '{print $1}')
-    y=$(echo "$w_dim" | awk -F 'x' '{print $2}')
+    x=$(printf "%s" "$w_dim" | awk -F 'x' '{print $1}')
+    y=$(printf "%s" "$w_dim" | awk -F 'x' '{print $2}')
 }
 
 split() {
@@ -36,7 +36,7 @@ split() {
 }
 
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
-    echo "$help"
+    printf "%s\n" "$help"
     exit 0
 elif [ $# -ne 0 ]; then
     dim \

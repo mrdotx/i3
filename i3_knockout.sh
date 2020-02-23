@@ -3,7 +3,7 @@
 # path:       ~/projects/i3/i3_knockout.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-02-03T13:17:58+0100
+# date:       2020-02-23T21:00:35+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for \"knockout\" the system
@@ -64,7 +64,7 @@ case "$1" in
             lock_simple
             exit 0
         else
-            echo "$help"
+            printf "%s\n" "$help"
             exit 0
         fi
         ;;
@@ -79,7 +79,7 @@ case "$1" in
             lock_simple && systemctl suspend
             exit 0
         else
-            echo "$help"
+            printf "%s\n" "$help"
             exit 0
         fi
         ;;
@@ -96,7 +96,7 @@ case "$1" in
         dm-tool switch-to-greeter
         ;;
     *)
-        echo "$help"
+        printf "%s\n" "$help"
         exit 0
 esac
 exit 0
