@@ -3,12 +3,12 @@
 # path:       ~/repos/i3/i3_knockout.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-02-28T08:10:16+0100
+# date:       2020-03-09T16:25:17+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for \"knockout\" the system
   Usage:
-    $script [-lock/-suspend/-logout/-reboot/-shutdown/-switch] [lockmethod]
+    $script [-lock/-suspend/-logout/-reboot/-shutdown] [lockmethod]
 
   Settings:
     [-lock]         = lock the screen with [lockmethod]
@@ -16,7 +16,6 @@ help="$script [-h/--help] -- script for \"knockout\" the system
     [-logout]       = logout from current session
     [-reboot]       = reboot the system
     [-shutdown]     = shutdown the system
-    [-switch]       = switch user
     [lockmethod]    = method to lock the screen
       blur          = blured screenshot of the desktop
       simple        = single color with message
@@ -29,8 +28,7 @@ help="$script [-h/--help] -- script for \"knockout\" the system
     $script -suspend simple
     $script -logout
     $script -reboot
-    $script -shutdown
-    $script -switch"
+    $script -shutdown"
 
 # suckless simple lock
 lock_simple ()
@@ -91,9 +89,6 @@ case "$1" in
         ;;
     -shutdown)
         systemctl poweroff
-        ;;
-    -switch)
-        dm-tool switch-to-greeter
         ;;
     *)
         printf "%s\n" "$help"
