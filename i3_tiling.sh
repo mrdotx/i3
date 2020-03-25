@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       ~/repos/i3/i3_tiling.sh
+# path:       ~/.local/share/repos/i3/i3_tiling.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-02-28T08:10:26+0100
+# date:       2020-03-25T23:13:17+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling i3 focused window
