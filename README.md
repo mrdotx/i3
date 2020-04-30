@@ -8,3 +8,5 @@ shell scripts for i3
 | i3_tiling.sh   | optimal i3 tilings, automatic or for specific applications |
 
 config files: [dotfiles/i3](https://github.com/mrdotx/dotfiles/tree/master/.config/i3)
+
+related project: [rofi](https://github.com/mrdotx/rofi)
