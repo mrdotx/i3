@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tiling.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-04-29T11:09:09+0200
+# date:       2020-05-01T11:42:56+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling i3 focused window
@@ -28,9 +28,7 @@ dim() {
 split() {
     if [ "$x" -gt "$y" ]; then
         i3-msg -q split h
-    elif [ "$x" -lt "$y" ]; then
-        i3-msg -q split v
-    elif [ "$x" -eq "$y" ]; then
+    else
         i3-msg -q split v
     fi
 }
@@ -43,19 +41,10 @@ elif [ $# -ne 0 ]; then
         && split \
         && "$@" &
 else
-    if [ "$(pgrep -x i3_tiling.sh | wc -l)" -gt 2 ]; then
-        notify-send "i3" "optimal automatic tilings off"
-        pkill -x i3_tiling.sh
-    else
-        notify-send "i3" "optimal automatic tilings on"
-        w_pid=$(xdotool getwindowfocus getwindowpid)
-        while true
-        do
-            if [ ! "$(xdotool getwindowfocus getwindowpid)" = "$w_pid" ]; then
-                dim \
-                    && split
-            fi
-            sleep 1
-        done
-    fi
+    while true
+    do
+        dim \
+            && split \
+            && i3-msg -t subscribe '[ "window" ]' > /dev/null 2>&1
+    done
 fi
