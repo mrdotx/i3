@@ -3,16 +3,18 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tiling.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-05-02T09:13:55+0200
+# date:       2020-05-05T14:41:30+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling i3 focused window
   Usage:
     $script [command]
 
+    without command, the script runs in background and divides the focused
+    window automatically
+
   Settings:
-    [command] = open application in new window. without command, the script
-                runs in background and divides the window automatically
+    [command] = open application in new window
 
   Examples:
     $script
