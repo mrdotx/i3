@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_knockout.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-05-06T18:06:36+0200
+# date:       2020-05-06T18:18:49+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for \"knockout\" the system
@@ -41,7 +41,7 @@ lock_simple ()
 lock_blur ()
 {
     # take screenshot
-    maim /tmp/screenshot.png
+    maim -B -u /tmp/screenshot.png
 
     # blur it
     #convert -scale 10% -blur 0x0.5 -resize 1000% /tmp/screenshot.png /tmp/screenshot_blur.png
