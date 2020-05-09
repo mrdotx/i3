@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_knockout.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-05-06T18:18:49+0200
+# date:       2020-05-09T15:19:10+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for \"knockout\" the system
@@ -33,8 +33,11 @@ help="$script [-h/--help] -- script for \"knockout\" the system
 # suckless simple lock
 lock_simple ()
 {
-    # slock message "locked [user] at [date]"
-    slock -m "locked $(whoami) at $(date "+%a %d.%m.%Y %k:%M")" &
+    slock -m "$(printf "| host: %s\n\n| user: %s\n\n| date: %s\n\n| time: %s" \
+        "$(hostname)" \
+        "$(whoami)" \
+        "$(date "+%d.%m.%Y")" \
+        "$(date "+%k:%M:%S")")" &
 }
 
 # take screenshot, blur it and lock the screen with i3lock
