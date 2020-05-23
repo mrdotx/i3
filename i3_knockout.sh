@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_knockout.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-05-09T15:19:10+0200
+# date:       2020-05-23T20:16:06+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for \"knockout\" the system
@@ -37,7 +37,8 @@ lock_simple ()
         "$(hostname)" \
         "$(whoami)" \
         "$(date "+%d.%m.%Y")" \
-        "$(date "+%k:%M:%S")")" &
+        "$(date "+%k:%M:%S")" \
+        )" &
 }
 
 # take screenshot, blur it and lock the screen with i3lock
