@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tiling.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-05-23T20:17:07+0200
+# date:       2020-05-26T12:33:25+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling i3 focused window
@@ -21,7 +21,7 @@ help="$script [-h/--help] -- script for optimal tiling i3 focused window
     $script firefox
     $script $TERMINAL"
 
-dim() {
+dim(){
     w_dim=$(xdotool getwindowfocus getwindowgeometry \
         | grep Geometry: \
         | awk -F ': ' '{print $2}' \
@@ -34,7 +34,7 @@ dim() {
     )
 }
 
-split() {
+split(){
     if [ "$x" -gt "$y" ]; then
         i3-msg -q split h
     else
