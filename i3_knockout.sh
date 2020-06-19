@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_knockout.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-06-19T13:47:43+0200
+# date:       2020-06-19T14:43:36+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for \"knockout\" the system
@@ -32,13 +32,10 @@ help="$script [-h/--help] -- script for \"knockout\" the system
 
 # suckless simple lock
 lock_simple() {
-    slock -m "$(figlet -k \
-            "$(printf "#%s\n#%s\n#%s\n#%s" \
-                "$(hostname)" \
-                "$(whoami)" \
-                "$(date "+%d.%m.%Y")" \
-                "$(date "+%k:%M:%S")" \
-            )" \
+    slock -m "$(printf "# %s@%s\n# %s" \
+            "$(whoami)" \
+            "$(hostname)" \
+            "$(date "+%FT%T%z")" \
         )" &
 }
 
