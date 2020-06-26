@@ -3,22 +3,24 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_knockout.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-06-25T17:07:02+0200
+# date:       2020-06-26T08:52:32+0200
 
 script=$(basename "$0")
-help="$script [-h/--help] -- script for \"knockout\" the system
+help="$script [-h/--help] -- script to \"knockout\" the system
   Usage:
     $script [-lock/-suspend/-logout/-reboot/-shutdown] [lockmethod]
 
   Settings:
     [-lock]         = lock the screen with [lockmethod]
     [-suspend]      = suspend or suspend with [lockmethod]
-    [-logout]       = logout from current session
-    [-reboot]       = reboot the system
-    [-shutdown]     = shutdown the system
+
     [lockmethod]    = method to lock the screen
       blur          = blured screenshot of the desktop
       simple        = single color with message
+
+    [-logout]       = logout from current session
+    [-reboot]       = reboot the system
+    [-shutdown]     = shutdown the system
 
   Examples:
     $script -lock blur
@@ -33,10 +35,10 @@ help="$script [-h/--help] -- script for \"knockout\" the system
 # suckless simple lock
 lock_simple() {
     slock -m "$(printf "\n--\n# %s@%s\n# %s" \
-            "$(whoami)" \
-            "$(hostname)" \
-            "$(date "+%FT%T%z")" \
-        )" &
+        "$(whoami)" \
+        "$(hostname)" \
+        "$(date "+%FT%T%z")" \
+    )" &
 }
 
 # take screenshot, blur it and lock the screen with i3lock
@@ -44,7 +46,7 @@ lock_blur() {
     # take screenshot
     maim -B -u /tmp/screenshot.png
 
-    # blur it
+    # blur
     #convert -scale 10% -blur 0x0.5 -resize 1000% /tmp/screenshot.png /tmp/screenshot_blur.png
 
     # more blur but faster
