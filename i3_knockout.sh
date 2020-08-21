@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_knockout.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-07-18T12:18:53+0200
+# date:       2020-08-21T18:00:23+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to \"knockout\" the system
@@ -34,10 +34,7 @@ help="$script [-h/--help] -- script to \"knockout\" the system
 
 # suckless simple lock
 lock_simple() {
-    slock -m "$(printf "%s\n\n--\n# %s" \
-        "$(neofetch --stdout)" \
-        "$(date "+%FT%T%z")" \
-    )" &
+    slock -m "$(status.sh)"
 }
 
 # take screenshot, blur it and lock the screen with i3lock
