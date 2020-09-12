@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_knockout.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-08-23T21:41:54+0200
+# date:       2020-09-12T14:50:54+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to \"knockout\" the system
@@ -50,31 +50,27 @@ lock_blur() {
 }
 
 case "$1" in
+    -h | --help)
+        printf "%s\n" "$help"
+        ;;
     -lock)
         if [ "$2" = "blur" ]; then
             lock_blur
-            exit 0
         elif [ "$2" = "simple" ]; then
             lock_simple
-            exit 0
         else
             printf "%s\n" "$help"
-            exit 0
         fi
         ;;
     -suspend)
         if [ -z "$2" ]; then
             systemctl suspend
-            exit 0
         elif [ "$2" = "blur" ]; then
             lock_blur && systemctl suspend
-            exit 0
         elif [ "$2" = "simple" ]; then
             lock_simple && systemctl suspend
-            exit 0
         else
             printf "%s\n" "$help"
-            exit 0
         fi
         ;;
     -logout)
@@ -88,6 +84,5 @@ case "$1" in
         ;;
     *)
         printf "%s\n" "$help"
-        exit 0
+        exit 1
 esac
-exit 0
