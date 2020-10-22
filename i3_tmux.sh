@@ -3,10 +3,32 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-22T15:06:52+0200
+# date:       2020-10-22T16:27:04+0200
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
+
+script=$(basename "$0")
+help="$script [-h/--help] -- script to open applications in tmux windows
+  Usage:
+    $script [window] [title] [command]
+
+  Settings:
+    without given setting, start/attach tmux session
+    [window]  = tmux window nr to open application in
+    [title]   = optional title of the window (default command)
+    [command] = application to start
+
+  Examples:
+    $script
+    $script 8 'htop'
+    $script 9 'sensors' 'watch -n1 sensors'"
+
+if [ "$1" = "-h" ] \
+    || [ "$1" = "--help" ]; then
+        printf "%s\n" "$help"
+        exit 0
+fi
 
 tmux_start() {
     tmux -f "$config" new -s "$session" -n "shell" -d
