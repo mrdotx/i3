@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-22T16:27:04+0200
+# date:       2020-10-22T19:12:44+0200
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
@@ -45,7 +45,7 @@ tmux_open() {
             shift
         fi
         cmd="$*"
-        tmux neww -t"$session:$window" -n "$title" "$cmd"
+        tmux neww -t "$session:$window" -n "$title" "$cmd"
         tmux selectw -t "$session:$window"
     fi
 }
