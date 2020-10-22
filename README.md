@@ -2,12 +2,12 @@
 
 shell scripts for i3
 
-| name            | comment                                                            |
-| :-------------- | :----------------------------------------------------------------- |
-| i3.keepassxc.sh | start keepassxc, if it's running toggle from/to i3 scratchpad      |
-| i3_knockout.sh  | lock/suspend/logout/reboot/shutdown/switch user script             |
-| i3_tiling.sh    | optimal i3 tilings, automatic or for specific applications         |
-| i3_tmux.sh      | start/attach tmux session and open program to specified the window |
+| name            | comment                                                       |
+| :-------------- | :------------------------------------------------------------ |
+| i3.keepassxc.sh | start keepassxc, if it's running toggle from/to i3 scratchpad |
+| i3_knockout.sh  | lock/suspend/logout/reboot/shutdown/switch user script        |
+| i3_tiling.sh    | optimal tilings i3 focused window                             |
+| i3_tmux.sh      | open applications in tmux windows                             |
 
 config files:
 
