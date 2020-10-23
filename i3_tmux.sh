@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-22T19:12:44+0200
+# date:       2020-10-23T12:38:05+0200
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
@@ -30,13 +30,8 @@ if [ "$1" = "-h" ] \
         exit 0
 fi
 
-tmux_start() {
-    tmux -f "$config" new -s "$session" -n "shell" -d
-    # tmux_open 8 "htop"
-}
-
 tmux_open() {
-    if [ $# -ge 1 ]; then
+    if [ $# -ge 2 ]; then
         window=$1
         title=$2
         if [ $# -ge 3 ]; then
@@ -50,15 +45,13 @@ tmux_open() {
     fi
 }
 
-tmux_attach() {
-    tmux -2 attach -t "$session" -d
-}
-
 [ -z "$TMUX" ] \
-    && if [ "$(tmux ls 2>/dev/null | cut -d ':' -f1)" = "$session" ]; then
-        tmux_open "$@"
-    else
-        tmux_start
-        tmux_open "$@"
-    fi \
-    && tmux_attach
+    &&  if [ "$(tmux ls 2>/dev/null | cut -d ':' -f1)" = "$session" ]; then
+            tmux_open "$@"
+        else
+            tmux -f "$config" new -s "$session" -n "shell" -d
+            # tmux_open 8 "htop"
+            tmux_open "$@"
+        fi \
+    && ! [ "$(pgrep -fx "tmux attach -t $session -d")" ] \
+    && $TERMINAL -T "i3 tmux" -e tmux attach -t "$session" -d
