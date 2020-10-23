@@ -3,18 +3,21 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-23T12:38:05+0200
+# date:       2020-10-23T19:17:13+0200
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
+attach="tmux attach -t $session -d"
+term="$TERMINAL -T 'i3 tmux' -e"
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to open applications in tmux windows
   Usage:
-    $script [window] [title] [command]
+    $script [-t] [window] [title] [command]
 
   Settings:
     without given setting, start/attach tmux session
+    [-t]      = open tmux in separate terminal
     [window]  = tmux window nr to open application in
     [title]   = optional title of the window (default command)
     [command] = application to start
@@ -22,7 +25,9 @@ help="$script [-h/--help] -- script to open applications in tmux windows
   Examples:
     $script
     $script 8 'htop'
-    $script 9 'sensors' 'watch -n1 sensors'"
+    $script 9 'sensors' 'watch -n1 sensors'
+    $script -t 8 'htop'
+    $script -t 9 'sensors' 'watch -n1 sensors'"
 
 if [ "$1" = "-h" ] \
     || [ "$1" = "--help" ]; then
@@ -31,6 +36,13 @@ if [ "$1" = "-h" ] \
 fi
 
 tmux_open() {
+    if [ "$1" = "-t" ]; then
+        open="$term $attach"
+        shift
+    else
+        open="$attach"
+    fi
+
     if [ $# -ge 2 ]; then
         window=$1
         title=$2
@@ -53,5 +65,5 @@ tmux_open() {
             # tmux_open 8 "htop"
             tmux_open "$@"
         fi \
-    && ! [ "$(pgrep -fx "tmux attach -t $session -d")" ] \
-    && $TERMINAL -T "i3 tmux" -e tmux attach -t "$session" -d
+    && ! [ "$(pgrep -fx "$attach")" ] \
+    && eval "$open"
