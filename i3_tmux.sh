@@ -3,31 +3,34 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-23T19:17:13+0200
+# date:       2020-10-24T10:17:17+0200
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
 attach="tmux attach -t $session -d"
 term="$TERMINAL -T 'i3 tmux' -e"
+kill_window_0=1
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to open applications in tmux windows
   Usage:
-    $script [-t] [window] [title] [command]
+    $script [-t] [window] [title] [directory/command]
 
   Settings:
     without given setting, start/attach tmux session
-    [-t]      = open tmux in separate terminal
-    [window]  = tmux window nr to open application in
-    [title]   = optional title of the window (default command)
-    [command] = application to start
+    [-t]                = open tmux in separate terminal
+    [window]            = tmux window nr to open application in
+    [title]             = optional title of the window (default command)
+                          if title is \"shell\" it opens the shell
+    [directory/command] = application to start
+                          if title is \"shell\" this is the start-directory
 
   Examples:
     $script
-    $script 8 'htop'
-    $script 9 'sensors' 'watch -n1 sensors'
-    $script -t 8 'htop'
-    $script -t 9 'sensors' 'watch -n1 sensors'"
+    $script 0 \"shell\"
+    $script 9 \"sensors\"
+    $script -t 0 \"shell\" \"$HOME/.config\"
+    $script -t 9 \"sensors\" \"watch -n1 sensors\""
 
 if [ "$1" = "-h" ] \
     || [ "$1" = "--help" ]; then
@@ -52,7 +55,11 @@ tmux_open() {
             shift
         fi
         cmd="$*"
-        tmux neww -t "$session:$window" -n "$title" "$cmd"
+        if printf "%s" "$title" | grep -q "^shell$"; then
+            tmux neww -t "$session:$window" -n "$title" -c "$cmd"
+        else
+            tmux neww -t "$session:$window" -n "$title" "$cmd"
+        fi
         tmux selectw -t "$session:$window"
     fi
 }
@@ -64,6 +71,11 @@ tmux_open() {
             tmux -f "$config" new -s "$session" -n "shell" -d
             # tmux_open 8 "htop"
             tmux_open "$@"
+            if [ "$kill_window_0" -eq 1 ] \
+                && [ -n "$window" ] \
+                && ! [ "$window" -eq 0 ]; then
+                    tmux killw -t "$session:0"
+            fi
         fi \
     && ! [ "$(pgrep -fx "$attach")" ] \
     && eval "$open"
