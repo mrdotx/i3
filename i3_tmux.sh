@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-24T12:11:41+0200
+# date:       2020-10-24T14:51:00+0200
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
@@ -55,11 +55,14 @@ tmux_open() {
         shift
         cmd="$*"
 
-        if printf "%s" "$title" | grep -q "^shell$"; then
-            tmux neww -t "$session:$window" -n "$title" -c "$cmd"
-        else
-            tmux neww -t "$session:$window" -n "$title" "$cmd"
+        if ! tmux lsw 2>/dev/null | grep -q "^$window:"; then
+            if printf "%s" "$title" | grep -q "^shell$"; then
+                tmux neww -t "$session:$window" -n "$title" -c "$cmd"
+            else
+                tmux neww -t "$session:$window" -n "$title" "$cmd"
+            fi
         fi
+
         tmux selectw -t "$session:$window"
     fi
 }
@@ -75,6 +78,8 @@ else
         && ! [ "$window" -eq 0 ]; then
             tmux killw -t "$session:0"
     fi
-fi \
-    && ! [ "$(pgrep -fx "$attach")" ] \
-    && eval "$open"
+fi
+
+if ! [ "$(pgrep -fx "$attach")" ]; then
+    eval "$open"
+fi
