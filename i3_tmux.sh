@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-24T10:17:17+0200
+# date:       2020-10-24T12:11:41+0200
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
@@ -32,29 +32,29 @@ help="$script [-h/--help] -- script to open applications in tmux windows
     $script -t 0 \"shell\" \"$HOME/.config\"
     $script -t 9 \"sensors\" \"watch -n1 sensors\""
 
-if [ "$1" = "-h" ] \
-    || [ "$1" = "--help" ]; then
+case "$1" in
+    "-h"|"--help")
         printf "%s\n" "$help"
         exit 0
-fi
-
-tmux_open() {
-    if [ "$1" = "-t" ]; then
+        ;;
+    "-t")
         open="$term $attach"
         shift
-    else
+        ;;
+    *)
         open="$attach"
-    fi
+        ;;
+esac
 
+tmux_open() {
     if [ $# -ge 2 ]; then
         window=$1
         title=$2
-        if [ $# -ge 3 ]; then
-            shift 2
-        else
-            shift
-        fi
+        [ $# -ge 3 ] \
+            && shift
+        shift
         cmd="$*"
+
         if printf "%s" "$title" | grep -q "^shell$"; then
             tmux neww -t "$session:$window" -n "$title" -c "$cmd"
         else
@@ -64,18 +64,17 @@ tmux_open() {
     fi
 }
 
-[ -z "$TMUX" ] \
-    &&  if [ "$(tmux ls 2>/dev/null | cut -d ':' -f1)" = "$session" ]; then
-            tmux_open "$@"
-        else
-            tmux -f "$config" new -s "$session" -n "shell" -d
-            # tmux_open 8 "htop"
-            tmux_open "$@"
-            if [ "$kill_window_0" -eq 1 ] \
-                && [ -n "$window" ] \
-                && ! [ "$window" -eq 0 ]; then
-                    tmux killw -t "$session:0"
-            fi
-        fi \
+if [ "$(tmux ls 2>/dev/null | cut -d ':' -f1)" = "$session" ]; then
+    tmux_open "$@"
+else
+    tmux -f "$config" new -s "$session" -n "shell" -d
+    # tmux_open 8 "htop"
+    tmux_open "$@"
+    if [ "$kill_window_0" -eq 1 ] \
+        && [ -n "$window" ] \
+        && ! [ "$window" -eq 0 ]; then
+            tmux killw -t "$session:0"
+    fi
+fi \
     && ! [ "$(pgrep -fx "$attach")" ] \
     && eval "$open"
