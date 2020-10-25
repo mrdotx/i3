@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-24T14:51:00+0200
+# date:       2020-10-25T21:09:22+0100
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
@@ -57,7 +57,7 @@ tmux_open() {
 
         if ! tmux lsw 2>/dev/null | grep -q "^$window:"; then
             if printf "%s" "$title" | grep -q "^shell$"; then
-                tmux neww -t "$session:$window" -n "$title" -c "$cmd"
+                tmux neww -t "$session:$window" -c "$cmd"
             else
                 tmux neww -t "$session:$window" -n "$title" "$cmd"
             fi
@@ -70,7 +70,7 @@ tmux_open() {
 if [ "$(tmux ls 2>/dev/null | cut -d ':' -f1)" = "$session" ]; then
     tmux_open "$@"
 else
-    tmux -f "$config" new -s "$session" -n "shell" -d
+    tmux -f "$config" new -s "$session" -d
     # tmux_open 8 "htop"
     tmux_open "$@"
     if [ "$kill_window_0" -eq 1 ] \
