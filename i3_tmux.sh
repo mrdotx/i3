@@ -3,23 +3,23 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-25T21:09:22+0100
+# date:       2020-10-26T14:03:12+0100
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
-attach="tmux attach -t $session -d"
+attach="tmux attach -d -t $session"
 term="$TERMINAL -T 'i3 tmux' -e"
 kill_window_0=1
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to open applications in tmux windows
   Usage:
-    $script [-t] [window] [title] [directory/command]
+    $script [-o] [window] [title] [directory/command]
 
   Settings:
     without given setting, start/attach tmux session
-    [-t]                = open tmux in separate terminal
-    [window]            = tmux window nr to open application in
+    [-o]                = open tmux in separate terminal
+    [window]            = tmux window no. to open application in
     [title]             = optional title of the window (default command)
                           if title is \"shell\" it opens the shell
     [directory/command] = application to start
@@ -37,7 +37,7 @@ case "$1" in
         printf "%s\n" "$help"
         exit 0
         ;;
-    "-t")
+    "-o")
         open="$term $attach"
         shift
         ;;
@@ -70,7 +70,7 @@ tmux_open() {
 if [ "$(tmux ls 2>/dev/null | cut -d ':' -f1)" = "$session" ]; then
     tmux_open "$@"
 else
-    tmux -f "$config" new -s "$session" -d
+    tmux -f "$config" new -d -s "$session"
     # tmux_open 8 "htop"
     tmux_open "$@"
     if [ "$kill_window_0" -eq 1 ] \
