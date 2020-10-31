@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tooltip_services.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-31T19:51:27+0100
+# date:       2020-10-31T23:45:45+0100
 
 title="i3 services mode"
 message="\
@@ -27,6 +27,7 @@ notification() {
     notify-send \
         -u low  \
         -t "$1" \
+        -i "dialog-question" \
         "$title" \
         "$message" \
         -h string:x-canonical-private-synchronous:"$title"
