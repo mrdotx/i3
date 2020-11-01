@@ -3,25 +3,28 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tooltip_services.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-31T23:45:45+0100
+# date:       2020-11-01T16:39:41+0100
 
 title="i3 services mode"
-message="\
-a - autolock enable/disable\n\
-b - bluetooth enable/disable\n\
-c - compositor enable/disable\n\
-d - dunst restart\n\
-f - firewall enable/disable\n\
-g - gestures enable/disable\n\
-l - authentication enable/disable\n\
-m - mousepointer enable/disable\n\
-n - resolver enable/disable\n\
-p - printer enable/disable\n\
-r - rss enable/disable\n\
-t - tiling enable/disable\n\
-v - vpn enable/disable\n\
-y - timesync enable/disable\n\
-q - quit"
+message="
+<i>restart</i>
+  <b>d</b> - dunst
+<i>enable/disable</i>
+  <b>a</b> - autolock
+  <b>b</b> - bluetooth
+  <b>c</b> - compositor
+  <b>f</b> - firewall
+  <b>g</b> - gestures
+  <b>l</b> - authentication
+  <b>m</b> - mousepointer
+  <b>n</b> - resolver
+  <b>p</b> - printer
+  <b>r</b> - rss
+  <b>t</b> - tiling
+  <b>v</b> - vpn
+  <b>y</b> - timesync
+
+<b>q, return, escape, alt+space</b> - quit"
 
 notification() {
     notify-send \
