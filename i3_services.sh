@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-16T17:10:37+0100
+# date:       2020-11-16T17:33:08+0100
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -55,6 +55,7 @@ title="i3 services mode"
 message="
 <i>restart</i>
   <b>[d]</b>unst
+
 <i>enable/disable</i>
   $(service_status authentication.service user) - <b>[a]</b>uthentication
   $(service_status xautolock.service user) - auto<b>[l]</b>lock
