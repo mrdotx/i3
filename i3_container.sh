@@ -3,26 +3,26 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-16T17:30:58+0100
+# date:       2020-11-16T17:59:25+0100
 
 title="i3 container mode"
 message="
 <i>resize</i>
-  <b>[←,→,↑,↓]</b> - container
-  <b>[-,+,=]</b>   - gaps
+  [<b>←,→,↑,↓</b>] - container
+  [<b>-,+,=</b>]   - gaps
 
 <i>scratchpad</i>
-  <b>[m]</b>ove to
-  <b>[c]</b>ycle
+  [<b>m</b>]ove to
+  [<b>c</b>]ycle
 
 <i>tile</i>
-  <b>[h]</b>orizontal
-  <b>[v]</b>ertical
+  [<b>h</b>]orizontal
+  [<b>v</b>]ertical
 
 <i>sticky</i>
-  toggle <b>[s]</b>ticky
+  toggle [<b>s</b>]ticky
 
-<b>[q]</b>uit, <b>[return]</b>, <b>[escape]</b>, <b>[super+space]</b>"
+[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+space</b>]"
 
 notification() {
     notify-send \
