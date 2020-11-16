@@ -1,25 +1,28 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/i3/i3_tooltip_container.sh
+# path:       /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-01T16:39:50+0100
+# date:       2020-11-16T17:30:58+0100
 
 title="i3 container mode"
 message="
 <i>resize</i>
-  <b>←,→,↑,↓</b> - container
-  <b>-,+,=</b>   - gaps
-<i>scratchpad</i>
-  <b>m</b>       - move to
-  <b>c</b>       - cycle
-<i>tile</i>
-  <b>h</b>       - horizontal
-  <b>v</b>       - vertical
-<i>sticky</i>
-  <b>s</b>       - toggle
+  <b>[←,→,↑,↓]</b> - container
+  <b>[-,+,=]</b>   - gaps
 
-<b>q, return, escape, super+space</b> - quit"
+<i>scratchpad</i>
+  <b>[m]</b>ove to
+  <b>[c]</b>ycle
+
+<i>tile</i>
+  <b>[h]</b>orizontal
+  <b>[v]</b>ertical
+
+<i>sticky</i>
+  toggle <b>[s]</b>ticky
+
+<b>[q]</b>uit, <b>[return]</b>, <b>[escape]</b>, <b>[super+space]</b>"
 
 notification() {
     notify-send \
