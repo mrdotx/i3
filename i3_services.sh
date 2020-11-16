@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-16T17:33:08+0100
+# date:       2020-11-16T19:58:33+0100
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -54,24 +54,24 @@ service_toggle() {
 title="i3 services mode"
 message="
 <i>restart</i>
-  <b>[d]</b>unst
+  [<b>d</b>]unst
 
 <i>enable/disable</i>
-  $(service_status authentication.service user) - <b>[a]</b>uthentication
-  $(service_status xautolock.service user) - auto<b>[l]</b>lock
-  $(service_status bluetooth.service) - <b>[b]</b>luetooth
-  $(service_status picom.service user) - <b>[c]</b>ompositor
-  $(service_status ufw.service) - <b>[f]</b>irewall
-  $(service_status gestures.service user) - <b>[g]</b>estures
-  $(service_status xbanish.service user) - <b>[m]</b>ousepointer
-  $(service_status org.cups.cupsd.service) - <b>[p]</b>rinter
-  $(service_status systemd-resolved.service) - re<b>[s]</b>olver
-  $(service_status rss.timer user) - <b>[r]</b>ss
-  $(service_status i3_tiling.service user) - <b>[t]</b>iling
-  $(service_status systemd-timesyncd.service) - times<b>[y]</b>nc
-  $(service_status vpnc@hades.service) - <b>[v]</b>pn
+  $(service_status authentication.service user) - [<b>a</b>]uthentication
+  $(service_status xautolock.service user) - auto[<b>l</b>]ock
+  $(service_status bluetooth.service) - [<b>b</b>]luetooth
+  $(service_status picom.service user) - [<b>c</b>]ompositor
+  $(service_status ufw.service) - [<b>f</b>]irewall
+  $(service_status gestures.service user) - [<b>g</b>]estures
+  $(service_status xbanish.service user) - [<b>m</b>]ousepointer
+  $(service_status org.cups.cupsd.service) - [<b>p</b>]rinter
+  $(service_status systemd-resolved.service) - re[<b>s</b>]olver
+  $(service_status rss.timer user) - [<b>r</b>]ss
+  $(service_status i3_tiling.service user) - [<b>t</b>]iling
+  $(service_status systemd-timesyncd.service) - times[<b>y</b>]nc
+  $(service_status vpnc@hades.service) - [<b>v</b>]pn
 
-<b>[q]</b>uit, <b>[return]</b>, <b>[escape]</b>, <b>[alt+space]</b>"
+[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 
 notification() {
     notify-send \
