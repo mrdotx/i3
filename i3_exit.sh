@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-16T19:55:14+0100
+# date:       2020-11-17T13:40:07+0100
 
 # suckless simple lock
 lock_simple() {
@@ -51,7 +51,7 @@ notification() {
 }
 
 case "$1" in
-    lock)
+    --lock)
         case "$2" in
             blur)
                 lock_blur
@@ -61,7 +61,7 @@ case "$1" in
                 ;;
         esac
         ;;
-    suspend)
+    --suspend)
         case "$2" in
             blur)
                 lock_blur && systemctl suspend
@@ -74,13 +74,13 @@ case "$1" in
                 ;;
         esac
         ;;
-    logout)
+    --logout)
         i3-msg exit
         ;;
-    reboot)
+    --reboot)
         systemctl reboot
         ;;
-    shutdown)
+    --shutdown)
         systemctl poweroff
         ;;
     --kill)

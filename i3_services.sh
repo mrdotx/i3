@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-16T19:58:33+0100
+# date:       2020-11-17T13:39:28+0100
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -85,28 +85,28 @@ notification() {
 
 # toggle service or start and kill notification tooltip
 case "$1" in
-    authentication)
+    --authentication)
         service_toggle "authentication.service" "user"
         ;;
-    autolock)
+    --autolock)
         service_toggle "xautolock.service" "user"
         ;;
-    bluetooth)
+    --bluetooth)
         service_toggle "bluetooth.service"
         ;;
-    compositor)
+    --compositor)
         service_toggle "picom.service" "user"
         ;;
-    firewall)
+    --firewall)
         service_toggle "ufw.service"
         ;;
-    gestures)
+    --gestures)
         service_toggle "gestures.service" "user"
         ;;
-    mousepointer)
+    --mousepointer)
         service_toggle "xbanish.service" "user"
         ;;
-    printer)
+    --printer)
         service="org.cups.cupsd.service"
         avahi_service="avahi-daemon.service"
         avahi_socket="avahi-daemon.socket"
@@ -119,7 +119,7 @@ case "$1" in
                 && service_toggle "$avahi_service"
         fi
         ;;
-    resolver)
+    --resolver)
         service="systemd-resolved.service"
         network="systemd-networkd.service"
         avahi_socket="avahi-daemon.socket"
@@ -131,17 +131,17 @@ case "$1" in
                 && service_toggle "$network"
         fi
         ;;
-    rss)
+    --rss)
         service_toggle "rss.timer" "user" \
             && polybar_rss.sh --update
         ;;
-    tiling)
+    --tiling)
         service_toggle "i3_tiling.service" "user"
         ;;
-    vpn)
+    --vpn)
         service_toggle "vpnc@hades.service"
         ;;
-    timesync)
+    --timesync)
         service_toggle "systemd-timesyncd.service"
         ;;
     --kill)
