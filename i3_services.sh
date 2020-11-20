@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-17T13:39:28+0100
+# date:       2020-11-20T20:55:02+0100
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -121,14 +121,15 @@ case "$1" in
         ;;
     --resolver)
         service="systemd-resolved.service"
-        network="systemd-networkd.service"
-        avahi_socket="avahi-daemon.socket"
+        network_service="systemd-networkd.service"
+        network_socket="systemd-networkd.socket"
         if [ "$(systemctl is-active $service)" = "active" ]; then
-            service_toggle "$service" \
-                && service_toggle "$network"
+            service_toggle "$network_service" \
+                && service_toggle "$network_socket" \
+                && service_toggle "$service"
         else
             service_toggle "$service" \
-                && service_toggle "$network"
+                && service_toggle "$network_service"
         fi
         ;;
     --rss)
