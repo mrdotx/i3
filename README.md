@@ -10,7 +10,7 @@ shell scripts for i3
 | i3_tmux.sh           | open applications in tmux windows                             |
 | i3_container.sh      | shows keybindings for container mode with notify-send         |
 | i3_services.sh       | shows keybindings for services mode with notify-send          |
-| i3_workspace_swap.sh | swap workspaces and focus window(left,right,up,down)          |
+| i3_workspace_swap.sh | swap workspaces and focus(left,right,up,down)                 |
 
 config files:
 

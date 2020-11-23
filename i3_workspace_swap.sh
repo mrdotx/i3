@@ -3,15 +3,15 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_workspace_swap.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-23T16:52:40+0100
+# date:       2020-11-23T17:34:27+0100
 
 script=$(basename "$0")
-help="$script [-h/--help] -- swap workspaces and focus window
+help="$script [-h/--help] -- swap workspaces and focus
   Usage:
     $script [left/right/up/down]
 
   Settings:
-    [left/right/up/down] = direction to focus window after swap workspaces
+    [left/right/up/down] = direction to focus after the workspaces swaped
 
   Examples:
     $script left
@@ -38,6 +38,7 @@ swap_workspaces() {
         i3-msg -- focus "$swap" >/dev/null 2>&1
     }
 }
+
 case "$1" in
     -h | --help)
         printf "%s\n" "$help"
