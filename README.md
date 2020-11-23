@@ -2,14 +2,15 @@
 
 shell scripts for i3
 
-| name            | comment                                                       |
-| :-------------- | :------------------------------------------------------------ |
-| i3.keepassxc.sh | start keepassxc, if it's running toggle from/to i3 scratchpad |
-| i3_exit.sh      | lock/suspend/logout/reboot/shutdown/switch user script        |
-| i3_tiling.sh    | optimal tilings i3 focused window                             |
-| i3_tmux.sh      | open applications in tmux windows                             |
-| i3_container.sh | shows keybindings for container mode with notify-send         |
-| i3_services.sh  | shows keybindings for services mode with notify-send          |
+| name                 | comment                                                       |
+| :------------------- | :------------------------------------------------------------ |
+| i3.keepassxc.sh      | start keepassxc, if it's running toggle from/to i3 scratchpad |
+| i3_exit.sh           | lock/suspend/logout/reboot/shutdown/switch user script        |
+| i3_tiling.sh         | optimal tilings i3 focused window                             |
+| i3_tmux.sh           | open applications in tmux windows                             |
+| i3_container.sh      | shows keybindings for container mode with notify-send         |
+| i3_services.sh       | shows keybindings for services mode with notify-send          |
+| i3_workspace_swap.sh | swap workspaces and focus window(left,right,up,down)          |
 
 config files:
 
