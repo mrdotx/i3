@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_workspace_swap.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-23T13:09:16+0100
+# date:       2020-11-23T16:52:40+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- swap workspaces and focus window
@@ -25,7 +25,7 @@ swap="${1:-up}"
 swap_workspaces() {
     current_workspaces=$( \
         i3-msg -t get_outputs \
-            | grep -Po '"current_workspace":"(.*?[^\\]")' \
+            | grep -Po '"current_workspace":"\d*?"' \
             | cut -d "\"" -f4
     )
 
