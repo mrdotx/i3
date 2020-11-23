@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_workspace_swap.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-23T12:37:24+0100
+# date:       2020-11-23T12:58:35+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- swap workspaces and focus window
@@ -19,7 +19,7 @@ help="$script [-h/--help] -- swap workspaces and focus window
     $script up
     $script down"
 
-# swap direction, default up (left, right, up, down)
+# swap direction, default up
 swap="${1:-up}"
 
 swap_workspaces() {
