@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-10-26T14:03:12+0100
+# date:       2020-11-25T11:32:32+0100
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
@@ -29,8 +29,8 @@ help="$script [-h/--help] -- script to open applications in tmux windows
     $script
     $script 0 \"shell\"
     $script 9 \"sensors\"
-    $script -t 0 \"shell\" \"$HOME/.config\"
-    $script -t 9 \"sensors\" \"watch -n1 sensors\""
+    $script -o 0 \"shell\" \"$HOME/.config\"
+    $script -o 9 \"sensors\" \"watch -n1 sensors\""
 
 case "$1" in
     "-h"|"--help")
