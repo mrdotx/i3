@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-21T21:37:00+0100
+# date:       2020-12-01T21:49:20+0100
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -57,8 +57,7 @@ message="
   [<b>d</b>]unst
 
 <i>enable/disable</i>
-  $(service_status authentication.service user) - [<b>a</b>]uthentication
-  $(service_status xautolock.service user) - auto[<b>l</b>]ock
+  $(service_status xautolock.service user) - [<b>a</b>]utolock
   $(service_status bluetooth.service) - [<b>b</b>]luetooth
   $(service_status picom.service user) - [<b>c</b>]ompositor
   $(service_status ufw.service) - [<b>f</b>]irewall
@@ -85,9 +84,6 @@ notification() {
 
 # toggle service or start and kill notification tooltip
 case "$1" in
-    --authentication)
-        service_toggle "authentication.service" "user"
-        ;;
     --autolock)
         service_toggle "xautolock.service" "user"
         ;;
