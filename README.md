@@ -21,5 +21,4 @@ related projects:
 
 - [polybar](https://github.com/mrdotx/polybar)
 - [dmenu](https://github.com/mrdotx/dmenu)
-- [rofi](https://github.com/mrdotx/rofi)
 - [rclone](https://github.com/mrdotx/rclone)
