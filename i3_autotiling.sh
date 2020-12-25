@@ -1,29 +1,27 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/i3/i3_tiling.sh
+# path:       /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-09-13T12:03:23+0200
+# date:       2020-12-25T09:23:23+0100
 
 script=$(basename "$0")
-help="$script [-h/--help] -- script for optimal tiling i3 focused window
+help="$script [-h/--help] -- script for optimal tiling focused window
   Usage:
-    $script [--auto/--tile] [command]
+    $script [--tile] [command]
 
   Settings:
-    [--auto]  = script runs in background and divides the focuses window
-                automatically
+    without given settings, script runs in background and divides the focused window
+    automatically
     [--tile]  = tile once and execute command
     [command] = application to start
 
   Examples:
-    $script --auto
+    $script
     $script --tile firefox
     $script --tile $TERMINAL"
 
 split() {
-    sleep .1
-
     window_geometry=$(xdotool getwindowfocus getwindowgeometry \
         | awk -F ': ' 'NR==3 {print $2}' \
     )
@@ -41,19 +39,16 @@ case "$1" in
     -h | --help)
         printf "%s\n" "$help"
         ;;
-    --auto)
-        while true; do
-            split \
-                && i3-msg -q -t subscribe '[ "window" ]'
-        done
-        ;;
     --tile)
         shift
         split \
             && "$@" &
         ;;
     *)
-        printf "%s\n" "$help"
-        exit 1
+        while true; do
+            sleep .1
+            split \
+                && i3-msg -q -t subscribe '[ "window" ]'
+        done
         ;;
 esac
