@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-12-25T09:01:06+0100
+# date:       2020-12-25T10:18:04+0100
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -57,7 +57,8 @@ message="
   [<b>d</b>]unst
 
 <i>enable/disable</i>
-  $(service_status xautolock.service user) - [<b>a</b>]utolock
+  $(service_status xautolock.service user) - auto[<b>l</b>]ock
+  $(service_status i3_autotiling.service user) - auto[<b>t</b>]iling
   $(service_status bluetooth.service) - [<b>b</b>]luetooth
   $(service_status picom.service user) - [<b>c</b>]ompositor
   $(service_status ufw.service) - [<b>f</b>]irewall
@@ -66,7 +67,6 @@ message="
   $(service_status cups.service) - [<b>p</b>]rinter
   $(service_status systemd-resolved.service) - re[<b>s</b>]olver
   $(service_status rss.timer user) - [<b>r</b>]ss
-  $(service_status i3_autotiling.service user) - auto[<b>t</b>]iling
   $(service_status systemd-timesyncd.service) - times[<b>y</b>]nc
   $(service_status vpnc@hades.service) - [<b>v</b>]pn
 
