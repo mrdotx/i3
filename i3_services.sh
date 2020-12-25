@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-12-01T21:49:20+0100
+# date:       2020-12-25T09:01:06+0100
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
@@ -66,7 +66,7 @@ message="
   $(service_status cups.service) - [<b>p</b>]rinter
   $(service_status systemd-resolved.service) - re[<b>s</b>]olver
   $(service_status rss.timer user) - [<b>r</b>]ss
-  $(service_status i3_tiling.service user) - [<b>t</b>]iling
+  $(service_status i3_autotiling.service user) - auto[<b>t</b>]iling
   $(service_status systemd-timesyncd.service) - times[<b>y</b>]nc
   $(service_status vpnc@hades.service) - [<b>v</b>]pn
 
@@ -138,7 +138,7 @@ case "$1" in
             && polybar_rss.sh --update
         ;;
     --tiling)
-        service_toggle "i3_tiling.service" "user"
+        service_toggle "i3_autotiling.service" "user"
         ;;
     --vpn)
         service_toggle "vpnc@hades.service"
