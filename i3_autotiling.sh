@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-12-25T09:23:23+0100
+# date:       2020-12-25T17:16:25+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling focused window
@@ -46,7 +46,6 @@ case "$1" in
         ;;
     *)
         while true; do
-            sleep .1
             split \
                 && i3-msg -q -t subscribe '[ "window" ]'
         done
