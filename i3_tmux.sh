@@ -3,7 +3,7 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-25T11:32:32+0100
+# date:       2020-12-25T09:08:56+0100
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
@@ -17,7 +17,7 @@ help="$script [-h/--help] -- script to open applications in tmux windows
     $script [-o] [window] [title] [directory/command]
 
   Settings:
-    without given setting, start/attach tmux session
+    without given settings, start/attach tmux session
     [-o]                = open tmux in separate terminal
     [window]            = tmux window no. to open application in
     [title]             = optional title of the window (default command)
