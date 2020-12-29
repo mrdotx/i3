@@ -3,11 +3,11 @@
 # path:       /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author:     klassiker [mrdotx]
 # github:     https://github.com/mrdotx/i3
-# date:       2020-11-17T13:40:07+0100
+# date:       2020-12-29T20:37:24+0100
 
 # suckless simple lock
 lock_simple() {
-    slock -m "$(/home/klassiker/.local/share/repos/shell/status.sh)" &
+    slock -m "$(cinfo -a)" &
 }
 
 # take screenshot, blur it and lock the screen with i3lock
