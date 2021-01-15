@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/i3/i3_container.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/i3
-# date:       2020-11-16T17:59:25+0100
+# path:   /home/klassiker/.local/share/repos/i3/i3_container.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/i3
+# date:   2021-01-15T13:36:22+0100
 
 title="i3 container mode"
 message="

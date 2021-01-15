@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/i3
-# date:       2020-12-25T17:16:25+0100
+# path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/i3
+# date:   2021-01-15T13:36:14+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling focused window

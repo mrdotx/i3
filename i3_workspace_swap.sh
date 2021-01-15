@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/i3/i3_workspace_swap.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/i3
-# date:       2020-11-23T18:02:18+0100
+# path:   /home/klassiker/.local/share/repos/i3/i3_workspace_swap.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/i3
+# date:   2021-01-15T13:36:49+0100
 
 script=$(basename "$0")
 help="$script [-h/--help] -- swap workspaces and focus

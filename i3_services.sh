@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:       /home/klassiker/.local/share/repos/i3/i3_services.sh
-# author:     klassiker [mrdotx]
-# github:     https://github.com/mrdotx/i3
-# date:       2020-12-25T10:18:04+0100
+# path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/i3
+# date:   2021-01-15T13:36:34+0100
 
 # auth can be something like sudo -A, doas -- or
 # nothing, depending on configuration requirements
