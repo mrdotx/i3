@@ -3,11 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-04-10T20:21:48+0200
+# date:   2021-04-30T10:04:49+0200
 
-# auth can be something like sudo -A, doas -- or
-# nothing, depending on configuration requirements
-auth="doas"
+# auth can be something like sudo -A, doas -- or nothing,
+# depending on configuration requirements
+auth="$EXEC_AS_USER"
 active="[X]"
 inactive="[ ]"
 
