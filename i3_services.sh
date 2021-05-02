@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-04-30T10:04:49+0200
+# date:   2021-05-02T08:41:43+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -89,7 +89,13 @@ case "$1" in
         service_toggle "xautolock.service" "user"
         ;;
     --bluetooth)
-        service_toggle "bluetooth.service"
+        if lsmod | grep -q btusb; then
+            service_toggle "bluetooth.service" \
+                && $auth modprobe -r btusb
+        else
+            $auth modprobe btusb \
+                && service_toggle "bluetooth.service"
+        fi
         ;;
     --compositor)
         service_toggle "picom.service" "user"
@@ -104,34 +110,28 @@ case "$1" in
         service_toggle "xbanish.service" "user"
         ;;
     --printer)
-        printer_service="cups.service"
-        color_service="colord.service"
-        avahi_service="avahi-daemon.service"
-        avahi_socket="avahi-daemon.socket"
-        if [ "$(systemctl is-active $printer_service)" = "active" ]; then
-            service_toggle "$printer_service" \
+        if [ "$(systemctl is-active cups.service)" = "active" ]; then
+            service_toggle "cups.service" \
                 && sleep .5 \
-                && service_toggle "$avahi_service" \
-                && service_toggle "$avahi_socket" \
-                && service_toggle "$color_service"
+                && service_toggle "avahi-daemon.service" \
+                && service_toggle "avahi-daemon.socket" \
+                && service_toggle "colord.service"
         else
-            service_toggle "$printer_service" \
-                && service_toggle "$avahi_service"
+            service_toggle "cups.service" \
+                && service_toggle "avahi-daemon.service"
         fi
         ;;
     --resolver)
-        resolver_service="systemd-resolved.service"
-        network_service="systemd-networkd.service"
         network_socket="systemd-networkd.socket"
-        if [ "$(systemctl is-active $resolver_service)" = "active" ]; then
-            service_toggle "$resolver_service" \
+        if [ "$(systemctl is-active systemd-resolved.service)" = "active" ]; then
+            service_toggle "systemd-resolved.service" \
                 && sleep .5 \
-                && service_toggle "$network_socket" \
-                && service_toggle "$network_service"
+                && service_toggle "systemd-networkd.socket" \
+                && service_toggle "systemd-networkd.service"
         else
-            service_toggle "$network_socket" \
-                && service_toggle "$network_service" \
-                && service_toggle "$resolver_service"
+            service_toggle "systemd-networkd.socket" \
+                && service_toggle "systemd-networkd.service" \
+                && service_toggle "systemd-resolved.service"
         fi
         ;;
     --rss)
