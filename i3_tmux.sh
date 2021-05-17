@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-01-15T13:36:42+0100
+# date:   2021-05-17T07:57:08+0200
 
 config="$HOME/.config/tmux/tmux.conf"
 session="mi"
 attach="tmux attach -d -t $session"
 term="$TERMINAL -T 'i3 tmux' -e"
-kill_window_0=1
+kill_window=1
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script to open applications in tmux windows
@@ -71,12 +71,12 @@ if [ "$(tmux ls 2>/dev/null | cut -d ':' -f1)" = "$session" ]; then
     tmux_open "$@"
 else
     tmux -f "$config" new -d -s "$session"
-    # tmux_open 8 "htop"
+    # tmux_open 7 "htop"
     tmux_open "$@"
-    if [ "$kill_window_0" -eq 1 ] \
+    if [ -n "$kill_window" ] \
         && [ -n "$window" ] \
-        && ! [ "$window" -eq 0 ]; then
-            tmux killw -t "$session:0"
+        && ! [ "$window" -eq "$kill_window" ]; then
+            tmux killw -t "$session:$kill_window"
     fi
 fi
 
