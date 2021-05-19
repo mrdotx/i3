@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-05-02T08:41:43+0200
+# date:   2021-05-19T17:53:34+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -53,6 +53,9 @@ service_toggle() {
 
 title="i3 services mode"
 message="
+<i>kill</i>
+  [<b>u</b>]rxvtd
+
 <i>restart</i>
   [<b>d</b>]unst
 
@@ -122,7 +125,6 @@ case "$1" in
         fi
         ;;
     --resolver)
-        network_socket="systemd-networkd.socket"
         if [ "$(systemctl is-active systemd-resolved.service)" = "active" ]; then
             service_toggle "systemd-resolved.service" \
                 && sleep .5 \
