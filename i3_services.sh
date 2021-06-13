@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-05-19T17:53:34+0200
+# date:   2021-06-13T19:52:11+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -58,6 +58,9 @@ message="
 
 <i>restart</i>
   [<b>d</b>]unst
+
+<i>toggle</i>
+  cpu p[<b>o</b>]licy $(cpu_policy.sh --status)
 
 <i>enable/disable</i>
   $(service_status xautolock.service user) - auto[<b>l</b>]ock
