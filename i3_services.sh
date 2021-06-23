@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-06-13T19:52:11+0200
+# date:   2021-06-23T09:53:13+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -70,6 +70,7 @@ message="
   $(service_status ufw.service) - [<b>f</b>]irewall
   $(service_status gestures.service user) - [<b>g</b>]estures
   $(service_status xbanish.service user) - [<b>m</b>]ousepointer
+  $(service_status polybar.service user) - polyb[<b>a</b>]r
   $(service_status cups.service) - [<b>p</b>]rinter
   $(service_status systemd-resolved.service) - re[<b>s</b>]olver
   $(service_status sshd.service) - ss[<b>h</b>]
@@ -114,6 +115,9 @@ case "$1" in
         ;;
     --mousepointer)
         service_toggle "xbanish.service" "user"
+        ;;
+    --polybar)
+        service_toggle "polybar.service" "user"
         ;;
     --printer)
         if [ "$(systemctl is-active cups.service)" = "active" ]; then
