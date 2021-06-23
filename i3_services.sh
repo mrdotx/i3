@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-06-23T09:53:13+0200
+# date:   2021-06-23T13:43:24+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -63,20 +63,22 @@ message="
   cpu p[<b>o</b>]licy $(cpu_policy.sh --status)
 
 <i>enable/disable</i>
+  $(service_status polybar.service user) - polyb[<b>a</b>]r
+
   $(service_status xautolock.service user) - auto[<b>l</b>]ock
   $(service_status i3_autotiling.service user) - auto[<b>t</b>]iling
-  $(service_status bluetooth.service) - [<b>b</b>]luetooth
   $(service_status picom.service user) - [<b>c</b>]ompositor
-  $(service_status ufw.service) - [<b>f</b>]irewall
   $(service_status gestures.service user) - [<b>g</b>]estures
   $(service_status xbanish.service user) - [<b>m</b>]ousepointer
-  $(service_status polybar.service user) - polyb[<b>a</b>]r
+  $(service_status bluetooth.service) - [<b>b</b>]luetooth
+  $(service_status ufw.service) - [<b>f</b>]irewall
   $(service_status cups.service) - [<b>p</b>]rinter
   $(service_status systemd-resolved.service) - re[<b>s</b>]olver
   $(service_status sshd.service) - ss[<b>h</b>]
-  $(service_status rss.timer user) - [<b>r</b>]ss
   $(service_status systemd-timesyncd.service) - times[<b>y</b>]nc
   $(service_status vpnc@hades.service) - [<b>v</b>]pn
+
+  $(service_status rss.timer user) - [<b>r</b>]ss
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 
