@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-06-23T13:43:24+0200
+# date:   2021-06-28T19:43:25+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -60,7 +60,7 @@ message="
   [<b>d</b>]unst
 
 <i>toggle</i>
-  cpu p[<b>o</b>]licy $(cpu_policy.sh --status)
+  cpu p[<b>o</b>]licy <b>$(cpu_policy.sh --status)</b>
 
 <i>enable/disable</i>
   $(service_status polybar.service user) - polyb[<b>a</b>]r
