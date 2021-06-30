@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-06-28T19:43:25+0200
+# date:   2021-06-30T20:07:44+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -68,8 +68,8 @@ message="
   $(service_status xautolock.service user) - auto[<b>l</b>]ock
   $(service_status i3_autotiling.service user) - auto[<b>t</b>]iling
   $(service_status picom.service user) - [<b>c</b>]ompositor
-  $(service_status gestures.service user) - [<b>g</b>]estures
   $(service_status xbanish.service user) - [<b>m</b>]ousepointer
+  $(service_status gestures.service user) - [<b>g</b>]estures
   $(service_status bluetooth.service) - [<b>b</b>]luetooth
   $(service_status ufw.service) - [<b>f</b>]irewall
   $(service_status cups.service) - [<b>p</b>]rinter
