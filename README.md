@@ -11,6 +11,10 @@ shell scripts for i3
 | i3_tmux.sh           | open applications in tmux windows                      |
 | i3_workspace_swap.sh | swap workspaces and focus(left,right,up,down)          |
 
+![screenshot container mode](screenshot_container.png)
+![screenshot exit mode](screenshot_exit.png)
+![screenshot services modes](screenshot_services.png)
+
 config files:
 
 - [dotfiles/i3](https://github.com/mrdotx/dotfiles/tree/master/.config/i3)
