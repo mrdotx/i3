@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_workspace_swap.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-01-15T13:36:49+0100
+# date:   2021-07-17T17:50:08+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- swap workspaces and focus
@@ -26,20 +26,15 @@ swap_workspaces() {
             | cut -d "\"" -f4
     )
 
-    printf "%s\n" "$current_workspaces" | {
-        while IFS= read -r line; do
-            [ -n "$line" ] \
-                && i3-msg -- workspace --no-auto-back-and-forth "$line" >/dev/null 2>&1 \
-                && i3-msg -- move workspace to output "$1" >/dev/null 2>&1
-        done
-    }
-    i3-msg -- focus "$1" >/dev/null 2>&1
+    for line in $current_workspaces; do
+        [ -n "$line" ] \
+            && i3-msg -q "workspace --no-auto-back-and-forth $line" \
+            && i3-msg -q "move workspace to output $1"
+    done
+    i3-msg -q "focus $1"
 }
 
 case "$1" in
-    -h | --help)
-        printf "%s\n" "$help"
-        ;;
     left | right | up | down)
         swap_workspaces "$1"
         ;;
