@@ -14,7 +14,8 @@ shell scripts for i3
 
 ![screenshot container mode](screenshot_container.png)
 ![screenshot exit mode](screenshot_exit.png)
-![screenshot services modes](screenshot_services.png)
+![screenshot services mode](screenshot_services.png)
+![screenshot ssh mode](screenshot_ssh.png)
 
 config files:
 
