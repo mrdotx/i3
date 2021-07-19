@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-07-18T09:19:14+0200
+# date:   2021-07-19T07:47:27+0200
 
 title="i3 ssh mode"
 message="
@@ -34,24 +34,19 @@ notification() {
 case "$1" in
     --hermes)
         i3_tmux.sh -o 21 "hermes" "ssh hermes"
-        i3-msg -q "workspace 3"
         ;;
     --prometheus)
         i3_tmux.sh -o 22 "prometheus" "ssh prometheus"
-        i3-msg -q "workspace 3"
         ;;
     --hera)
         i3_tmux.sh -o 23 "hera" "ssh hera"
-        i3-msg -q "workspace 3"
         ;;
     --artemis)
         i3_tmux.sh -o 24 "artemis" "ssh artemis"
-        i3-msg -q "workspace 3"
         ;;
     --herpro)
         i3_tmux.sh -o 21 "hermes" "ssh hermes"
         i3_tmux.sh -o 22 "prometheus" "ssh prometheus"
-        i3-msg -q "workspace 3"
         ;;
     --kill)
         notification 1
