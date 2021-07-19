@@ -3,10 +3,27 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macro.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-07-19T11:01:54+0200
+# date:   2021-07-19T20:44:09+0200
 
 terminal="i3_tmux.sh -o 1 'shell'"
 execute="dmenu_run -i"
+
+type_string() {
+    $1
+    sleep .5
+
+    # workaround for mismatched keyboard layouts
+    setxkbmap -synch
+
+    printf "%s" "$2" \
+        | xdotool type \
+            --delay 1 \
+            --clearmodifiers \
+            --file -
+
+    [ "$3" != false ] \
+        && xdotool key Return
+}
 
 title="i3 macro mode"
 message="
@@ -31,23 +48,6 @@ notification() {
         "$title" \
         "$message" \
         -h string:x-canonical-private-synchronous:"$title"
-}
-
-type_string() {
-    $1
-    sleep .5
-
-    # workaround for mismatched keyboard layouts
-    setxkbmap -synch
-
-    printf "%s" "$2" \
-        | xdotool type \
-            --delay 1 \
-            --clearmodifiers \
-            --file -
-
-    [ "$3" != false ] \
-        && xdotool key Return
 }
 
 # start and kill notification tooltip
