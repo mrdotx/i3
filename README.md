@@ -7,7 +7,6 @@ shell scripts for i3
 | i3_autotiling.sh     | optimal tilings for focused window                     |
 | i3_container.sh      | shows keybindings for container mode with notify-send  |
 | i3_exit.sh           | lock/suspend/logout/reboot/shutdown/switch user script |
-| i3_macro.sh          | shows keybindings for predefined macros                |
 | i3_services.sh       | shows keybindings for services mode with notify-send   |
 | i3_ssh.sh            | shows keybindings for ssh mode with notify-send        |
 | i3_tmux.sh           | open applications in tmux windows                      |
