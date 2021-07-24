@@ -3,10 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macro.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-07-19T20:44:09+0200
+# date:   2021-07-24T18:11:32+0200
 
 terminal="i3_tmux.sh -o 1 'shell'"
-execute="dmenu_run -i"
 
 type_string() {
     $1
@@ -53,9 +52,11 @@ notification() {
 # start and kill notification tooltip
 case "$1" in
     --keyboard)
-        type_string \
-            "$execute" \
-            " clear; setxkbmap -model pc105 -layout us,de -option grp:caps_switch; xset r rate 200 50"
+        setxkbmap \
+            -model pc105 \
+            -layout us,de \
+            -option grp:caps_switch
+        xset r rate 200 50
         ;;
     --bootnext)
         type_string \
@@ -84,7 +85,7 @@ case "$1" in
     --weather)
         type_string \
             "$terminal" \
-            " clear; curl 'wttr.in/?AFq2&lang=de'"
+            " clear; curl -s 'wttr.in/?AFq2&lang=de'"
         ;;
     --covid)
         type_string \
