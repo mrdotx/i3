@@ -28,5 +28,3 @@ config files:
 related projects:
 
 - [polybar](https://github.com/mrdotx/polybar)
-- [dmenu](https://github.com/mrdotx/dmenu)
-- [rclone](https://github.com/mrdotx/rclone)
