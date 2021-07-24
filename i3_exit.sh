@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-06-16T07:21:15+0200
+# date:   2021-07-24T18:36:12+0200
 
 # suckless simple lock
 lock_simple() {
@@ -54,6 +54,7 @@ notification() {
         -h string:x-canonical-private-synchronous:"$title"
 }
 
+# exit or start and kill notification tooltip
 case "$1" in
     --lock)
         case "$2" in

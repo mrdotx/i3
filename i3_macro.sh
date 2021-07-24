@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macro.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-07-24T18:11:32+0200
+# date:   2021-07-24T18:35:11+0200
 
 terminal="i3_tmux.sh -o 1 'shell'"
 
@@ -49,7 +49,7 @@ notification() {
         -h string:x-canonical-private-synchronous:"$title"
 }
 
-# start and kill notification tooltip
+# type string or start and kill notification tooltip
 case "$1" in
     --keyboard)
         setxkbmap \

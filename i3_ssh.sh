@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-07-19T07:47:27+0200
+# date:   2021-07-24T18:37:18+0200
 
 title="i3 ssh mode"
 message="
@@ -30,7 +30,7 @@ notification() {
         -h string:x-canonical-private-synchronous:"$title"
 }
 
-# start and kill notification tooltip
+# ssh or start and kill notification tooltip
 case "$1" in
     --hermes)
         i3_tmux.sh -o 21 "hermes" "ssh hermes"
