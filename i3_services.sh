@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-06-30T20:07:44+0200
+# date:   2021-09-02T12:11:01+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -71,7 +71,6 @@ message="
   $(service_status xbanish.service user) - [<b>m</b>]ousepointer
   $(service_status gestures.service user) - [<b>g</b>]estures
   $(service_status bluetooth.service) - [<b>b</b>]luetooth
-  $(service_status ufw.service) - [<b>f</b>]irewall
   $(service_status cups.service) - [<b>p</b>]rinter
   $(service_status systemd-resolved.service) - re[<b>s</b>]olver
   $(service_status sshd.service) - ss[<b>h</b>]
@@ -108,9 +107,6 @@ case "$1" in
         ;;
     --compositor)
         service_toggle "picom.service" "user"
-        ;;
-    --firewall)
-        service_toggle "ufw.service"
         ;;
     --gestures)
         service_toggle "gestures.service" "user"
