@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-06-22T18:32:12+0200
+# date:   2021-09-03T20:28:47+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling focused window
@@ -28,14 +28,14 @@ split() {
     window_geometry=$(xdotool getwindowfocus getwindowgeometry \
         | awk -F ': ' 'NR==3 {print $2}' \
     )
+
     window_x=${window_geometry%%x*}
     window_y=${window_geometry##*x}
 
-    if [ "$window_x" -ge "$window_y" ]; then
-        i3-msg -q split h
-    else
-        i3-msg -q split v
-    fi
+    [ "$window_x" -ge "$window_y" ] \
+        && i3-msg -q split h
+    [ "$window_x" -lt "$window_y" ] \
+        && i3-msg -q split v
 }
 
 case "$1" in
