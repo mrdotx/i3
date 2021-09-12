@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-09-02T12:11:01+0200
+# date:   2021-09-12T11:31:42+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -53,15 +53,6 @@ service_toggle() {
 
 title="i3 services mode"
 message="
-<i>kill</i>
-  [<b>u</b>]rxvtd
-
-<i>restart</i>
-  [<b>d</b>]unst
-
-<i>toggle</i>
-  cpu p[<b>o</b>]licy <b>$(cpu_policy.sh --status)</b>
-
 <i>enable/disable</i>
   $(service_status polybar.service user) - polyb[<b>a</b>]r
 
@@ -78,6 +69,18 @@ message="
   $(service_status vpnc@hades.service) - [<b>v</b>]pn
 
   $(service_status rss.timer user) - [<b>r</b>]ss
+
+<i>restart</i>
+  [<b>d</b>]unst
+
+<i>kill</i>
+  [<b>u</b>]rxvtd
+
+<i>toggle</i>
+  cpu p[<b>o</b>]licy <b>$(cpu_policy.sh --status)</b>
+
+<i>random</i>
+  [<b>w</b>]allpaper
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 
@@ -151,11 +154,11 @@ case "$1" in
     --tiling)
         service_toggle "i3_autotiling.service" "user"
         ;;
-    --vpn)
-        service_toggle "vpnc@hades.service"
-        ;;
     --timesync)
         service_toggle "systemd-timesyncd.service"
+        ;;
+    --vpn)
+        service_toggle "vpnc@hades.service"
         ;;
     --kill)
         notification 1
