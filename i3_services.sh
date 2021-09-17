@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-09-12T11:31:42+0200
+# date:   2021-09-17T10:17:20+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -79,8 +79,9 @@ message="
 <i>toggle</i>
   cpu p[<b>o</b>]licy <b>$(cpu_policy.sh --status)</b>
 
-<i>random</i>
-  [<b>w</b>]allpaper
+<i>set</i>
+  random [<b>w</b>]allpaper
+  wacom co[<b>n</b>]figuration
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 
