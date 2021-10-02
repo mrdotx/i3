@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-07-24T18:36:12+0200
+# date:   2021-10-02T20:28:37+0200
 
 # suckless simple lock
 lock_simple() {
@@ -20,7 +20,7 @@ lock_blur() {
     maim -B -u /tmp/screenshot.png
 
     # blur
-    convert -scale 10% -blur 0x2.5 -resize 1000% /tmp/screenshot.png /tmp/screenshot_blur.png
+    convert -scale 10% -blur 0x2.5 -resize 1018% /tmp/screenshot.png /tmp/screenshot_blur.png
 
     # lock the screen
     i3lock -i /tmp/screenshot_blur.png
