@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-10-02T15:10:29+0200
+# date:   2021-10-02T15:36:49+0200
 
 press_key() {
     i="$1"
@@ -38,7 +38,6 @@ open_tmux() {
         && press_key 8 ctrl+plus
 
     # clear prompt
-    sleep .1
     press_key 1 ctrl+c
     type_string " clear; $1"
     press_key 1 return
