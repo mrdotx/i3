@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-09-04T17:09:41+0200
+# date:   2021-10-03T19:26:56+0200
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling focused window
@@ -20,9 +20,6 @@ help="$script [-h/--help] -- script for optimal tiling focused window
     $script
     $script --tile firefox
     $script --tile $TERMINAL"
-
-window_x=0
-window_y=0
 
 split() {
     window_geometry=$(xdotool getwindowfocus getwindowgeometry \
@@ -49,11 +46,17 @@ case "$1" in
             && "$@" &
         ;;
     *)
-        while [ "$window_x" -ge 0 ] \
-            && [ "$window_y" -ge 0 ]; do
-            split \
-                && i3-msg -q -t subscribe '[ "window" ]'
+        while true; do
+            window_x=0
+            window_y=0
+
+            while [ "$window_x" -ge 0 ] \
+                && [ "$window_y" -ge 0 ]; do
+                split \
+                    && i3-msg -q -t subscribe '[ "window" ]'
+            done
+            printf "An error occurred. Wait 5 seconds and try again.\n"
+            sleep 5
         done
-        exit 1
         ;;
 esac
