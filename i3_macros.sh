@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-10-07T19:06:18+0200
+# date:   2021-10-09T20:41:43+0200
 
 press_key() {
     i="$1"
@@ -25,13 +25,9 @@ type_string() {
             --file -
 }
 
-change_workspace() {
-    i3-msg workspace "$1"
-}
-
 open_tmux() {
     i3_tmux.sh -o 1 'shell'
-    change_workspace 2
+    i3-msg workspace 2
 
     # increase font size
     [ "$2" = "true" ] \
@@ -45,7 +41,7 @@ open_tmux() {
 }
 
 open_autostart() {
-    change_workspace 1
+    i3-msg workspace 1
     # start web browser
     firefox-developer-edition &
 
@@ -63,10 +59,10 @@ open_autostart() {
     # start tmux
     open_tmux "cinfo" "true"
 
-    change_workspace 1
+    i3-msg workspace 1
     # change folder to repos in ranger
     press_key 1 apostrophe r
-    change_workspace 2
+    i3-msg workspace 2
 }
 
 title="i3 macros mode"
