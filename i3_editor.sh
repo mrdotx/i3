@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/dmenu
-# date:   2021-10-05T20:01:47+0200
+# date:   2021-10-12T13:15:11+0200
 
 open() {
     $TERMINAL -e "$EDITOR" "$1://$2/" -c ":call NetrwToggle()"
@@ -45,10 +45,10 @@ case "$1" in
     --notes)
         $TERMINAL -e "$EDITOR" -c ":VimwikiIndex"
         ;;
-    --pi)
+    --hermes)
         open "scp" "hermes"
         ;;
-    --pi2)
+    --prometheus)
         open "scp" "prometheus"
         ;;
     --middlefinger)
