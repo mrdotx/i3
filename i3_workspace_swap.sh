@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_workspace_swap.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-10-06T17:31:39+0200
+# date:   2021-10-14T21:01:55+0200
+
+# speed up script by not using unicode
+LC_ALL=C
+LANG=C
 
 script=$(basename "$0")
 help="$script [-h/--help] -- swap workspaces and focus

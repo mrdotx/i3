@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-10-09T11:43:33+0200
+# date:   2021-10-14T21:03:08+0200
+
+# speed up script by not using unicode
+LC_ALL=C
+LANG=C
 
 # suckless simple lock
 lock_simple() {
