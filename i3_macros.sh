@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-10-09T20:41:43+0200
+# date:   2021-11-02T10:52:02+0100
 
 press_key() {
     i="$1"
@@ -36,7 +36,7 @@ open_tmux() {
     # clear prompt
     sleep .1
     press_key 1 ctrl+c
-    type_string " clear; $1"
+    type_string " tput reset; $1"
     press_key 1 return
 }
 
@@ -47,7 +47,7 @@ open_autostart() {
 
     # start ranger
     $TERMINAL -e "$SHELL"
-    type_string " clear; ranger_cd"
+    type_string " tput reset; ranger_cd"
     press_key 1 return
 
     # wait for web browser window
