@@ -3,14 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-10-14T21:03:08+0200
+# date:   2021-11-20T20:23:24+0100
 
 # speed up script by not using unicode
 LC_ALL=C
 LANG=C
 
 # suckless simple lock
-lock_simple() {
+simple_lock() {
     # workaround (sleep -> https://github.com/i3/i3/issues/3298)
     sleep .5
 
@@ -18,32 +18,11 @@ lock_simple() {
     slock -m "$(cinfo -a)" &
 }
 
-# take screenshot, blur it and lock the screen with i3lock
-lock_blur() {
-    # take screenshot
-    sleep .1
-    maim -B -u /tmp/screenshot.png
-
-    # blur
-    convert /tmp/screenshot.png -scale 10% -blur 0x1.5 -resize 1000% /tmp/screenshot.png
-
-    # lock the screen
-    i3lock -i /tmp/screenshot.png
-}
-
 title="i3 exit mode"
 message="
-<i>simple</i>
-  l[<b>o</b>]ck
-  s[<b>u</b>]spend
-
-<i>blur</i>
-  lo[<b>c</b>]k
-  sus[<b>p</b>]end
-
-<i>general</i>
+  [<b>l</b>]ock
   [<b>s</b>]uspend
-  [<b>l</b>]ogout
+  log[<b>o</b>]ut
   [<b>r</b>]eboot
   shut[<b>d</b>]own
 
@@ -59,32 +38,13 @@ notification() {
         -h string:x-canonical-private-synchronous:"$title"
 }
 
-# exit or start and kill notification tooltip
 case "$1" in
     --lock)
-        case "$2" in
-            blur)
-                lock_blur
-                ;;
-            simple)
-                lock_simple
-                ;;
-        esac
+        simple_lock
         ;;
     --suspend)
-        case "$2" in
-            blur)
-                lock_blur \
-                    && systemctl suspend
-                ;;
-            simple)
-                lock_simple \
-                    && systemctl suspend
-                ;;
-            *)
-                systemctl suspend
-                ;;
-        esac
+        simple_lock \
+            && systemctl suspend
         ;;
     --logout)
         i3-msg exit
