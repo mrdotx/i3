@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-11-02T10:52:02+0100
+# date:   2021-11-20T09:35:05+0100
 
 press_key() {
     i="$1"
@@ -25,6 +25,20 @@ type_string() {
             --file -
 }
 
+wait_for() {
+    while ! wmctrl -l | grep -q "$1"; do
+        sleep .1
+    done
+    sleep .3
+}
+
+open_terminal() {
+    i3-msg workspace "$1"
+    $TERMINAL -e "$SHELL"
+    type_string " tput reset; $2"
+    press_key 1 return
+}
+
 open_tmux() {
     i3_tmux.sh -o 1 'shell'
     i3-msg workspace 2
@@ -38,31 +52,6 @@ open_tmux() {
     press_key 1 ctrl+c
     type_string " tput reset; $1"
     press_key 1 return
-}
-
-open_autostart() {
-    i3-msg workspace 1
-    # start web browser
-    firefox-developer-edition &
-
-    # start ranger
-    $TERMINAL -e "$SHELL"
-    type_string " tput reset; ranger_cd"
-    press_key 1 return
-
-    # wait for web browser window
-    while ! wmctrl -l | grep -q "Mozilla Firefox"; do
-        sleep .1
-    done
-    sleep .3
-
-    # start tmux
-    open_tmux "cinfo" "true"
-
-    i3-msg workspace 1
-    # change folder to repos in ranger
-    press_key 1 apostrophe r
-    i3-msg workspace 2
 }
 
 title="i3 macros mode"
@@ -91,6 +80,7 @@ notification() {
         "$message" \
         -h string:x-canonical-private-synchronous:"$title"
 }
+
 case "$1" in
     --weather)
         open_tmux \
@@ -123,7 +113,15 @@ case "$1" in
             "telnet towel.blinkenlights.nl"
         ;;
     --autostart)
-        open_autostart
+        # start web browser
+        firefox-developer-edition &
+        wait_for "Mozilla Firefox"
+
+        # start file manager
+        open_terminal "1" "cd $HOME/.local/share/repos; ranger_cd"
+
+        # start multiplexer
+        open_tmux "cinfo" "true"
         ;;
     --kill)
         notification 1
