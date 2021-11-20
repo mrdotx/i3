@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-11-20T09:35:05+0100
+# date:   2021-11-20T12:43:06+0100
 
 press_key() {
     i="$1"
@@ -113,15 +113,20 @@ case "$1" in
             "telnet towel.blinkenlights.nl"
         ;;
     --autostart)
-        # start web browser
+        message="\open web browser..." \
+            && notification 0
         firefox-developer-edition &
         wait_for "Mozilla Firefox"
 
-        # start file manager
+        message="$message\nopen file manager..." \
+            && notification 0
         open_terminal "1" "cd $HOME/.local/share/repos; ranger_cd"
 
-        # start multiplexer
+        message="$message\nopen multiplexer..." \
+            && notification 0
         open_tmux "cinfo" "true"
+
+        notification 1
         ;;
     --kill)
         notification 1
