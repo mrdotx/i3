@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-10-03T18:38:58+0200
+# date:   2021-12-15T10:39:02+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -62,7 +62,6 @@ message="
   $(service_status i3_autotiling.service user) - auto[<b>t</b>]iling
   $(service_status picom.service user) - [<b>c</b>]ompositor
   $(service_status xbanish.service user) - [<b>m</b>]ousepointer
-  $(service_status gestures.service user) - [<b>g</b>]estures
   $(service_status bluetooth.service) - [<b>b</b>]luetooth
   $(service_status cups.service) - [<b>p</b>]rinter
   $(service_status systemd-resolved.service) - re[<b>s</b>]olver
@@ -114,9 +113,6 @@ case "$1" in
         ;;
     --mousepointer)
         service_toggle "xbanish.service" "user"
-        ;;
-    --gestures)
-        service_toggle "gestures.service" "user"
         ;;
     --bluetooth)
         if lsmod | grep -q btusb; then
