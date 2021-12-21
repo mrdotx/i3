@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-12-15T10:39:02+0100
+# date:   2021-12-21T14:58:41+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -54,7 +54,11 @@ service_toggle() {
 title="i3 services mode"
 message="
 <i>enable/disable</i>
-  $(service_status polybar.service user) - polyb[<b>a</b>]r
+  $(if [ "$(service_status polybar.service user)" = "$active" ]; then \
+      printf "%s - polyb[<b>a</b>]r\n        cycl[<b>e</b>] bars" "$active"
+  else
+      printf "%s - polyb[<b>a</b>]r" "$inactive"
+  fi)
 
   $(service_status rss.timer user) - [<b>r</b>]ss
 
