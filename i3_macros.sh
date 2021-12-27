@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-11-20T12:43:06+0100
+# date:   2021-12-27T21:20:59+0100
 
 press_key() {
     i="$1"
@@ -29,7 +29,7 @@ wait_for() {
     while ! wmctrl -l | grep -q "$1"; do
         sleep .1
     done
-    sleep .3
+    sleep .5
 }
 
 open_terminal() {
