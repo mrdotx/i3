@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-12-28T14:08:56+0100
+# date:   2021-12-28T14:22:03+0100
 
 press_key() {
     i="$1"
@@ -26,10 +26,10 @@ type_string() {
 }
 
 wait_for() {
-    message="$message\nwait"
+    message="$message\n"
     while ! wmctrl -l | grep -q "$1"; do
         sleep .1
-        message="$message\."
+        message="$message\█"
         notification 0
     done
     sleep .5
