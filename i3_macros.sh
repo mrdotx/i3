@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-12-28T14:22:03+0100
+# date:   2021-12-28T18:57:39+0100
 
 press_key() {
     i="$1"
@@ -26,13 +26,21 @@ type_string() {
 }
 
 wait_for() {
-    message="$message\n"
-    while ! wmctrl -l | grep -q "$1"; do
+    after_wait="$2"
+
+    progress_bar() {
         sleep .1
         message="$message\█"
         notification 0
+    }
+
+    while ! wmctrl -l | grep -q "$1"; do
+        progress_bar
     done
-    sleep .5
+    while [ "$after_wait" -ge 1 ]; do
+        progress_bar
+        after_wait=$((after_wait - 1))
+    done
 }
 
 open_terminal() {
@@ -119,7 +127,8 @@ case "$1" in
         message="\open web browser..." \
             && notification 0
         firefox-developer-edition &
-        wait_for "Mozilla Firefox"
+        message="$message\n"
+        wait_for "Mozilla Firefox" 5
 
         message="$message\nopen file manager..." \
             && notification 0
