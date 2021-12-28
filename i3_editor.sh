@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/dmenu
-# date:   2021-10-12T13:15:11+0200
+# github: https://github.com/mrdotx/i3
+# date:   2021-12-28T19:14:32+0100
 
 open() {
     $TERMINAL -e "$EDITOR" "$1://$2/" -c ":call NetrwToggle()"
