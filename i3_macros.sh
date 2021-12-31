@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-12-28T18:57:39+0100
+# date:   2021-12-31T18:35:05+0100
 
 press_key() {
     i="$1"
@@ -26,7 +26,9 @@ type_string() {
 }
 
 wait_for() {
-    after_wait="$2"
+    ds="$2"
+    message_tmp="$message"
+    message="$message\n"
 
     progress_bar() {
         sleep .1
@@ -37,10 +39,12 @@ wait_for() {
     while ! wmctrl -l | grep -q "$1"; do
         progress_bar
     done
-    while [ "$after_wait" -ge 1 ]; do
+    while [ "$ds" -ge 1 ]; do
         progress_bar
-        after_wait=$((after_wait - 1))
+        ds=$((ds - 1))
     done
+
+    message="$message_tmp"
 }
 
 open_terminal() {
@@ -124,10 +128,9 @@ case "$1" in
             "telnet towel.blinkenlights.nl"
         ;;
     --autostart)
-        message="\open web browser..." \
+        message="open web browser..." \
             && notification 0
         firefox-developer-edition &
-        message="$message\n"
         wait_for "Mozilla Firefox" 5
 
         message="$message\nopen file manager..." \
