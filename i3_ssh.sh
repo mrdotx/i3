@@ -3,20 +3,20 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-07-24T18:37:18+0200
+# date:   2022-01-14T14:53:36+0100
 
 title="i3 ssh mode"
 message="
 <i>server</i>
-  [<b>h</b>]ermes
-  [<b>p</b>]rometheus
-  h[<b>e</b>]ra
+  [<b>p</b>]i
+  pi[<b>2</b>]
+  [<b>n</b>]as
 
 <i>client</i>
-  [<b>a</b>]rtemis
+  [<b>m</b>]acbook
 
 <i>other</i>
-  her[<b>m</b>]es + prometheus
+  p[<b>i</b>] + pi2
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+h</b>]"
 
@@ -32,21 +32,21 @@ notification() {
 
 # ssh or start and kill notification tooltip
 case "$1" in
-    --hermes)
-        i3_tmux.sh -o 21 "hermes" "ssh hermes"
+    --pi)
+        i3_tmux.sh -o 21 "pi" "ssh pi"
         ;;
-    --prometheus)
-        i3_tmux.sh -o 22 "prometheus" "ssh prometheus"
+    --pi2)
+        i3_tmux.sh -o 22 "pi2" "ssh pi2"
         ;;
-    --hera)
-        i3_tmux.sh -o 23 "hera" "ssh hera"
+    --nas)
+        i3_tmux.sh -o 23 "nas" "ssh nas"
         ;;
-    --artemis)
-        i3_tmux.sh -o 24 "artemis" "ssh artemis"
+    --macbook)
+        i3_tmux.sh -o 24 "macbook" "ssh macbook"
         ;;
-    --herpro)
-        i3_tmux.sh -o 21 "hermes" "ssh hermes"
-        i3_tmux.sh -o 22 "prometheus" "ssh prometheus"
+    --pipi)
+        i3_tmux.sh -o 21 "pi" "ssh pi"
+        i3_tmux.sh -o 22 "pi2" "ssh pi2"
         ;;
     --kill)
         notification 1

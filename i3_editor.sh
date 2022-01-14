@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-12-28T19:14:32+0100
+# date:   2022-01-14T13:43:25+0100
 
 open() {
     $TERMINAL -e "$EDITOR" "$1://$2/" -c ":call NetrwToggle()"
@@ -16,8 +16,8 @@ message="
   [<b>n</b>]otes
 
 <i>remote</i>
-  [<b>h</b>]ermes
-  [<b>p</b>]rometheus
+  [<b>p</b>]i
+  pi[<b>2</b>]
   [<b>m</b>]iddlefinger
   prin[<b>z</b>]ipal
   [<b>k</b>]lassiker
@@ -45,11 +45,11 @@ case "$1" in
     --notes)
         $TERMINAL -e "$EDITOR" -c ":VimwikiIndex"
         ;;
-    --hermes)
-        open "scp" "hermes"
+    --pi)
+        open "scp" "pi"
         ;;
-    --prometheus)
-        open "scp" "prometheus"
+    --pi2)
+        open "scp" "pi2"
         ;;
     --middlefinger)
         open "scp" "middlefinger"
