@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-12-31T18:35:05+0100
+# date:   2022-01-16T10:54:42+0100
 
 press_key() {
     i="$1"
@@ -32,7 +32,7 @@ wait_for() {
 
     progress_bar() {
         sleep .1
-        message="$message\█"
+        message="$message█"
         notification 0
     }
 
