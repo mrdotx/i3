@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-01-06T11:57:26+0100
+# date:   2022-01-17T18:21:40+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -70,8 +70,8 @@ message="
   $(service_status bluetooth.service) - [<b>b</b>]luetooth
   $(service_status cups.service) - [<b>p</b>]rinter
   $(service_status systemd-resolved.service) - re[<b>s</b>]olver
-  $(service_status sshd.service) - ss[<b>h</b>]
   $(service_status systemd-timesyncd.service) - times[<b>y</b>]nc
+  $(service_status sshd.service) - ss[<b>h</b>]
   $(service_status vpnc@hades.service) - [<b>v</b>]pn
 
 <i>restart</i>
@@ -143,11 +143,11 @@ case "$1" in
     --resolver)
         service_toggle "systemd-resolved.service"
         ;;
-    --ssh)
-        service_toggle "sshd.service"
-        ;;
     --timesync)
         service_toggle "systemd-timesyncd.service"
+        ;;
+    --ssh)
+        service_toggle "sshd.service"
         ;;
     --vpn)
         service_toggle "vpnc@hades.service"
