@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-01-16T10:54:42+0100
+# date:   2022-01-20T17:55:51+0100
 
 press_key() {
     i="$1"
@@ -79,7 +79,6 @@ message="
   [<b>b</b>]oot next
   [<b>v</b>]entoy
   [<b>t</b>]erminal colors
-  [<b>n</b>]eofetch
 
 <i>others</i>
   [<b>s</b>]tarwars
@@ -118,10 +117,6 @@ case "$1" in
     --terminalcolors)
         open_tmux \
             "terminal_colors.sh"
-        ;;
-    --neofetch)
-        open_tmux \
-            "neofetch"
         ;;
     --starwars)
         open_tmux \
