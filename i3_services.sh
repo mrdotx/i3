@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-01-23T17:26:20+0100
+# date:   2022-02-01T12:45:51+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -132,12 +132,9 @@ case "$1" in
         if [ "$(systemctl is-active cups.service)" = "active" ]; then
             service_toggle "cups.service" \
                 && sleep .5 \
-                && service_toggle "avahi-daemon.service" \
-                && service_toggle "avahi-daemon.socket" \
                 && service_toggle "colord.service"
         else
-            service_toggle "cups.service" \
-                && service_toggle "avahi-daemon.service"
+            service_toggle "cups.service"
         fi
         ;;
     --resolver)
