@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-01-14T13:43:25+0100
+# date:   2022-02-05T09:16:02+0100
 
 open() {
     $TERMINAL -e "$EDITOR" "$1://$2/" -c ":call NetrwToggle()"
@@ -12,12 +12,12 @@ open() {
 title="i3 editor mode"
 message="
 <i>vimwiki</i>
-  [<b>i</b>]deas
+  i[<b>d</b>]eas
   [<b>n</b>]otes
 
 <i>remote</i>
   [<b>p</b>]i
-  pi[<b>2</b>]
+  p[<b>i</b>]2
   [<b>m</b>]iddlefinger
   prin[<b>z</b>]ipal
   [<b>k</b>]lassiker
