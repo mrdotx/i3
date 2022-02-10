@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-01-20T17:55:51+0100
+# date:   2022-02-10T17:56:53+0100
 
 press_key() {
     i="$1"
@@ -57,10 +57,6 @@ open_terminal() {
 open_tmux() {
     i3_tmux.sh -o 1 'shell'
     i3-msg workspace 2
-
-    # increase font size
-    [ "$2" = "true" ] \
-        && press_key 8 ctrl+plus
 
     # clear prompt
     sleep .1
@@ -134,7 +130,7 @@ case "$1" in
 
         message="$message\nopen multiplexer..." \
             && notification 0
-        open_tmux "cinfo" "true"
+        open_tmux "cinfo"
 
         notification 1
         ;;
