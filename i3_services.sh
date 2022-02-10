@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-02-01T12:45:51+0100
+# date:   2022-02-09T16:19:47+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -79,9 +79,6 @@ message="
 
 <i>kill</i>
   [<b>u</b>]rxvtd
-
-<i>toggle</i>
-  cpu p[<b>o</b>]licy <b>$(cpu_policy.sh --status)</b>
 
 <i>set</i>
   random [<b>w</b>]allpaper
