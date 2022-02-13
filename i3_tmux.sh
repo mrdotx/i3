@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-12-17T10:49:50+0100
+# date:   2022-02-13T19:41:32+0100
 
-session="mi"
+session="$(hostname)"
 attach="tmux attach -d -t $session"
 term="$TERMINAL -T 'i3 tmux' -e"
 kill_window=1
