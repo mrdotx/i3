@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-02-10T17:56:53+0100
+# date:   2022-02-13T18:55:29+0100
 
 press_key() {
     i="$1"
@@ -108,7 +108,7 @@ case "$1" in
         open_tmux \
             "lsblk; ventoy -h"
         type_string \
-            "doas ventoy -u /dev/sdb"
+            "doas ventoy -u /dev/sd"
         ;;
     --terminalcolors)
         open_tmux \
