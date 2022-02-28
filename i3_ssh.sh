@@ -3,15 +3,21 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-02-05T08:48:23+0100
+# date:   2022-02-28T09:05:03+0100
 
 title="i3 ssh mode"
 message="
+<i>server</i>
   [<b>p</b>]i
   p[<b>i</b>]2
-  pi[<b>s</b>] (pi + pi2)
   [<b>n</b>]as
-  [<b>m</b>]acbook
+
+<i>client</i>
+  [<b>m</b>]i
+  mac[<b>b</b>]ook
+
+<i>other</i>
+  pi[<b>s</b>] (pi + pi2)
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+h</b>]"
 
@@ -36,8 +42,11 @@ case "$1" in
     --nas)
         i3_tmux.sh -o 23 "nas" "ssh nas"
         ;;
+    --mi)
+        i3_tmux.sh -o 24 "mi" "ssh mi"
+        ;;
     --macbook)
-        i3_tmux.sh -o 24 "macbook" "ssh macbook"
+        i3_tmux.sh -o 25 "macbook" "ssh macbook"
         ;;
     --pipi2)
         i3_tmux.sh -o 21 "pi" "ssh pi"
