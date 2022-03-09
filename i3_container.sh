@@ -3,13 +3,12 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-01-15T13:36:22+0100
+# date:   2022-03-09T19:05:15+0100
 
 title="i3 container mode"
 message="
-<i>resize</i>
-  [<b>←,→,↑,↓</b>] - container
-  [<b>-,+,=</b>]   - gaps
+<i>swap</i>
+  [<b>←,→,↑,↓</b>] - workspaces
 
 <i>scratchpad</i>
   [<b>m</b>]ove to
