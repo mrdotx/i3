@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-03-07T13:23:01+0100
+# date:   2022-03-10T13:31:07+0100
 
 press_key() {
     i="$1"
@@ -51,7 +51,7 @@ open_terminal() {
     i3-msg workspace "$1"
     $TERMINAL -e "$SHELL"
     type_string " tput reset; $2"
-    press_key 1 return
+    press_key 1 Return
 }
 
 exec_terminal() {
@@ -65,9 +65,9 @@ open_tmux() {
 
     # clear prompt
     sleep .1
-    press_key 1 ctrl+c
+    press_key 1 Ctrl+c
     type_string "$2"
-    press_key 1 return
+    press_key 1 Return
 }
 
 title="i3 macros mode"
@@ -134,13 +134,15 @@ case "$1" in
         open_terminal "1" "cd $HOME/.local/share/repos; ranger_cd"
 
         message="$message\nopen btop..." \
+            && notification 0
         exec_terminal "2" "btop"
 
         message="$message\nopen multiplexer..." \
             && notification 0
         open_tmux "1" " tput reset; cinfo"
+        press_key 3 Super+Ctrl+Up
 
-        notification 1
+        notification 2000
         ;;
     --kill)
         notification 1
