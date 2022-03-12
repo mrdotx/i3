@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-03-10T13:31:07+0100
+# date:   2022-03-12T17:51:52+0100
 
 press_key() {
     i="$1"
@@ -66,7 +66,7 @@ open_tmux() {
     # clear prompt
     sleep .1
     press_key 1 Ctrl+c
-    type_string "$2"
+    type_string " tput reset; $2"
     press_key 1 Return
 }
 
@@ -98,29 +98,29 @@ notification() {
 
 case "$1" in
     --weather)
-        open_tmux \
-            "curl -s 'wttr.in/?AFq2&lang=de'"
+        open_tmux "1" \
+            "curl -s 'wttr.in/?AFq2&format=v2&lang=de'"
         ;;
     --coronastats)
-        open_tmux \
+        open_tmux "1" \
             "curl -s 'https://corona-stats.online?top=30&source=2&minimal=true' | head -n32"
         ;;
     --bootnext)
-        open_tmux \
+        open_tmux "1" \
             "doas efistub.sh -b"
         ;;
     --ventoy)
-        open_tmux \
+        open_tmux "1" \
             "lsblk; ventoy -h"
         type_string \
             "doas ventoy -u /dev/sd"
         ;;
     --terminalcolors)
-        open_tmux \
+        open_tmux "1" \
             "terminal_colors.sh"
         ;;
     --starwars)
-        open_tmux \
+        open_tmux "1" \
             "telnet towel.blinkenlights.nl"
         ;;
     --autostart)
@@ -139,7 +139,7 @@ case "$1" in
 
         message="$message\nopen multiplexer..." \
             && notification 0
-        open_tmux "1" " tput reset; cinfo"
+        open_tmux "1" "cinfo"
         press_key 3 Super+Ctrl+Up
 
         notification 2000
