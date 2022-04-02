@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-03-09T13:37:46+0100
+# date:   2022-04-02T09:21:48+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -61,8 +61,6 @@ message="
       printf "%s - polyb[<b>a</b>]r" "$inactive"
   fi)
 
-  $(service_status rss.timer user) - [<b>r</b>]ss
-
   $(service_status xautolock.service user) - auto[<b>l</b>]ock
   $(service_status i3_autotiling.service user) - auto[<b>t</b>]iling
   $(service_status picom.service user) - [<b>c</b>]ompositor
@@ -99,10 +97,6 @@ notification() {
 case "$1" in
     --polybar)
         service_toggle "polybar.service" "user"
-        ;;
-    --rss)
-        service_toggle "rss.timer" "user" \
-            && polybar_rss.sh --update
         ;;
     --autolock)
         service_toggle "xautolock.service" "user"
