@@ -3,13 +3,20 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-04T12:22:51+0200
+# date:   2022-04-04T20:28:55+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 active="[X]"
 inactive="[ ]"
+
+# get xresources
+xrdb_query() {
+    xrdb -query \
+        | grep "$1:" \
+        | cut -f2
+}
 
 service_status() {
     case "$2" in
@@ -55,12 +62,15 @@ title="i3 services mode"
 message="
 <i>enable/disable</i>
   $(if [ "$(service_status polybar.service user)" = "$active" ]; then \
-      printf "%s - polyb[<b>a</b>]r\n        %s\n        %s" \
+    printf "%s - polyb[<b>a</b>]r »%s«\n        %s\n        %s" \
         "$active" \
-        "cycl[<b>e</b>]" \
-        "[<b>r</b>]eload"
+        "$(xrdb_query "Polybar.type")" \
+        "[<b>r</b>]eload" \
+        "cycl[<b>e</b>]"
   else
-      printf "%s - polyb[<b>a</b>]r" "$inactive"
+    printf "%s - polyb[<b>a</b>]r »%s«" \
+        "$inactive" \
+        "$(xrdb_query "Polybar.type")"
   fi)
 
   $(service_status xautolock.service user) - auto[<b>l</b>]ock
