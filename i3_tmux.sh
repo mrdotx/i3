@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-02-13T19:41:32+0100
+# date:   2022-04-05T17:22:30+0200
 
 session="$(hostname)"
 attach="tmux attach -d -t $session"
@@ -54,13 +54,12 @@ tmux_open() {
         shift
         cmd="$*"
 
-        if ! tmux lsw 2>/dev/null | grep -q "^$window:"; then
-            if printf "%s" "$title" | grep -q "^shell$"; then
+        ! tmux lsw 2>/dev/null | grep -q "^$window:" \
+            && if printf "%s" "$title" | grep -q "^shell$"; then
                 tmux neww -t "$session:$window" -c "$cmd"
             else
                 tmux neww -t "$session:$window" -n "$title" "$cmd"
             fi
-        fi
 
         tmux selectw -t "$session:$window"
     fi
@@ -70,15 +69,14 @@ if [ "$(tmux ls 2>/dev/null | cut -d ':' -f1)" = "$session" ]; then
     tmux_open "$@"
 else
     tmux new -d -s "$session"
-    # tmux_open 7 "htop"
+    # tmux_open 15 "htop"
     tmux_open "$@"
-    if [ -n "$kill_window" ] \
+
+    [ -n "$kill_window" ] \
         && [ -n "$window" ] \
-        && ! [ "$window" -eq "$kill_window" ]; then
-            tmux killw -t "$session:$kill_window"
-    fi
+        && [ ! "$window" -eq "$kill_window" ] \
+        && tmux killw -t "$session:$kill_window"
 fi
 
-if ! [ "$(pgrep -fx "$attach")" ]; then
-    eval "$open"
-fi
+[ ! "$(pgrep -fx "$attach")" ] \
+    && eval "$open"
