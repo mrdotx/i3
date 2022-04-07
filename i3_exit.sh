@@ -3,19 +3,16 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-11-20T20:23:24+0100
+# date:   2022-04-07T11:29:00+0200
 
 # speed up script by not using unicode
 LC_ALL=C
 LANG=C
 
-# suckless simple lock
 simple_lock() {
     # workaround (sleep -> https://github.com/i3/i3/issues/3298)
-    sleep .5
-
-    # lock the screen
-    slock -m "$(cinfo -a)" &
+    sleep .5 \
+    && slock -m "$(cinfo -a)" &
 }
 
 title="i3 exit mode"
