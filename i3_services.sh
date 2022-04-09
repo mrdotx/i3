@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-08T19:31:27+0200
+# date:   2022-04-09T08:01:55+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -21,14 +21,14 @@ xrdb_query() {
 service_status() {
     case "$2" in
         user)
-            if [ "$(systemctl --user is-active "$1")" = "active" ]; then
+            if systemctl --user -q is-active "$1"; then
                 printf "%s" "$active"
             else
                 printf "%s" "$inactive"
             fi
             ;;
         *)
-            if [ "$(systemctl is-active "$1")" = "active" ]; then
+            if systemctl -q is-active "$1"; then
                 printf "%s" "$active"
             else
                 printf "%s" "$inactive"
@@ -40,14 +40,14 @@ service_status() {
 service_toggle() {
     case "$2" in
         user)
-            if [ "$(systemctl --user is-active "$1")" = "active" ]; then
+            if systemctl --user -q is-active "$1"; then
                 systemctl --user disable "$1" --now
             else
                 systemctl --user enable "$1" --now
             fi
             ;;
         *)
-            if [ "$(systemctl is-active "$1")" = "active" ]; then
+            if systemctl -q is-active "$1"; then
                 $auth systemctl disable "$1" --now
             else
                 $auth systemctl enable "$1" --now
@@ -134,7 +134,7 @@ case "$1" in
         fi
         ;;
     --printer)
-        if [ "$(systemctl is-active cups.service)" = "active" ]; then
+        if systemctl -q is-active cups.service; then
             service_toggle "cups.service" \
                 && sleep .5 \
                 && service_toggle "colord.service"
