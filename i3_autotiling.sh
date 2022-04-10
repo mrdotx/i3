@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2021-10-14T21:01:14+0200
+# date:   2022-04-10T08:20:37+0200
 
 # speed up script by not using unicode
 LC_ALL=C
@@ -30,14 +30,18 @@ split() {
         | grep -oE '[0-9]{1,4}x[0-9]{1,4}' \
     )
 
-    window_x=${window_geometry%%x*}
-    window_y=${window_geometry##*x}
+    case $? in
+        0)
+            window_x=${window_geometry%%x*}
+            window_y=${window_geometry##*x}
 
-    if [ "$window_x" -ge "$window_y" ]; then
-        i3-msg -q split h
-    else
-        i3-msg -q split v
-    fi
+            if [ "$window_x" -ge "$window_y" ]; then
+                i3-msg -q split h
+            else
+                i3-msg -q split v
+            fi
+            ;;
+    esac
 }
 
 case "$1" in
@@ -51,17 +55,8 @@ case "$1" in
         ;;
     *)
         while true; do
-            window_x=0
-            window_y=0
-
-            while [ "$window_x" -ge 0 ] \
-                && [ "$window_y" -ge 0 ]; do
-                split \
-                    && i3-msg -q -t subscribe '[ "window" ]'
-            done
-
-            printf "An error occurred. Wait 5 seconds and try again.\n"
-            sleep 5
+            split \
+                && i3-msg -q -t subscribe '[ "window" ]'
         done
         ;;
 esac
