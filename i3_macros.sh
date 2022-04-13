@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-03-12T17:51:52+0100
+# date:   2022-04-13T10:42:33+0200
 
 press_key() {
     i="$1"
@@ -66,7 +66,11 @@ open_tmux() {
     # clear prompt
     sleep .1
     press_key 1 Ctrl+c
-    type_string " tput reset; $2"
+    if [ "$3" -eq 1 ]; then
+        type_string "$2"
+    else
+        type_string " tput reset; $2"
+    fi
     press_key 1 Return
 }
 
@@ -77,6 +81,7 @@ message="
   [<b>c</b>]orona stats
 
 <i>system</i>
+  t[<b>r</b>]ash
   [<b>b</b>]oot next
   [<b>v</b>]entoy
   [<b>t</b>]erminal colors
@@ -98,29 +103,34 @@ notification() {
 
 case "$1" in
     --weather)
-        open_tmux "1" \
+        open_tmux 1 \
             "curl -s 'wttr.in/?AFq2&format=v2&lang=de'"
         ;;
     --coronastats)
-        open_tmux "1" \
+        open_tmux 1 \
             "curl -s 'https://corona-stats.online?top=30&source=2&minimal=true' | head -n32"
         ;;
     --bootnext)
-        open_tmux "1" \
-            "doas efistub.sh -b"
+        open_tmux 1 \
+            "$EXEC_AS_USER efistub.sh -b"
         ;;
+    --trash)
+        open_tmux 1 \
+            "fzf_trash.sh" \
+            1
+            ;;
     --ventoy)
-        open_tmux "1" \
+        open_tmux 1 \
             "lsblk; ventoy -h"
         type_string \
-            "doas ventoy -u /dev/sd"
+            "$EXEC_AS_USER ventoy -u /dev/sd"
         ;;
     --terminalcolors)
-        open_tmux "1" \
+        open_tmux 1 \
             "terminal_colors.sh"
         ;;
     --starwars)
-        open_tmux "1" \
+        open_tmux 1 \
             "telnet towel.blinkenlights.nl"
         ;;
     --autostart)
