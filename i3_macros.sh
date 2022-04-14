@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-14T13:24:03+0200
+# date:   2022-04-14T15:28:04+0200
 
 press_key() {
     i="$1"
@@ -66,11 +66,14 @@ open_tmux() {
     # clear prompt
     sleep .5
     press_key 1 Ctrl+c
-    if [ "$3" -eq 1 ]; then
-        type_string "$2"
-    else
-        type_string " tput reset; $2"
-    fi
+    case "$3" in
+        1)
+            type_string "$2"
+            ;;
+        *)
+            type_string " tput reset; $2"
+            ;;
+    esac
     press_key 1 Return
 }
 
