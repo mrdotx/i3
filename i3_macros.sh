@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-14T15:28:04+0200
+# date:   2022-04-14T21:17:07+0200
 
 press_key() {
     i="$1"
@@ -107,11 +107,11 @@ notification() {
 case "$1" in
     --weather)
         open_tmux 1 \
-            "curl -s 'wttr.in/?AFq2&format=v2d&lang=de'"
+            "curl -fsS 'wttr.in/?AFq2&format=v2d&lang=de'"
         ;;
     --coronastats)
         open_tmux 1 \
-            "curl -s 'https://corona-stats.online?top=30&source=2&minimal=true' | head -n32"
+            "curl -fsS 'https://corona-stats.online?top=30&source=2&minimal=true' | head -n32"
         ;;
     --bootnext)
         open_tmux 1 \
