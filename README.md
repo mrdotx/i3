@@ -5,6 +5,7 @@ shell scripts for i3
 | name                 | comment                                                |
 | :------------------- | :----------------------------------------------------- |
 | i3_autotiling.sh     | optimal tilings for focused window                     |
+| i3_backlight.sh      | change backlight brightness                            |
 | i3_container.sh      | shows keybindings for container mode with notify-send  |
 | i3_editor.sh         | shows keybindings for editor mode with notify-send     |
 | i3_exit.sh           | lock/suspend/logout/reboot/shutdown/switch user script |
