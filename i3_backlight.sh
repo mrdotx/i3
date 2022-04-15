@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_backlight.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/backlight
-# date:   2022-04-15T10:37:57+0200
+# date:   2022-04-15T10:50:30+0200
 
 # speed up script by not using unicode
 LC_ALL=C
@@ -14,7 +14,7 @@ auth="${EXEC_AS_USER:-sudo}"
 message_title="Brightness"
 
 script=$(basename "$0")
-help="$script [-h/--help] -- script to change intel backlight
+help="$script [-h/--help] -- script to change backlight
   Usage:
     $script [-inc/-dec] [percent]
 
