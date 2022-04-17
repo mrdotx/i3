@@ -4,6 +4,7 @@ shell scripts for i3
 
 | name                 | comment                                                |
 | :------------------- | :----------------------------------------------------- |
+| i3_alsa.sh           | control volume                                         |
 | i3_autotiling.sh     | optimal tilings for focused window                     |
 | i3_backlight.sh      | change backlight brightness                            |
 | i3_container.sh      | shows keybindings for container mode with notify-send  |
