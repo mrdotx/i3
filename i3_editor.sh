@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-20T17:18:35+0200
+# date:   2022-04-20T18:41:56+0200
 
 open() {
     $TERMINAL -e "$EDITOR" "$1://$2/" -c ":call NetrwToggle()"
@@ -37,6 +37,7 @@ notification() {
 
 case "$1" in
     --vim)
+        cd Desktop || exit 1
         $TERMINAL -e "$EDITOR"
         ;;
     --wiki)
