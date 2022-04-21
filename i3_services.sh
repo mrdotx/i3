@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-13T13:55:12+0200
+# date:   2022-04-21T12:38:22+0200
+
+# speed up script by using posix
+LC_ALL=C
+LANG=C
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements

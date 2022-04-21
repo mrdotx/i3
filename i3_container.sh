@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-03-19T11:23:04+0100
+# date:   2022-04-21T12:39:29+0200
+
+# speed up script by using posix
+LC_ALL=C
+LANG=C
 
 title="i3 container mode"
 message="
