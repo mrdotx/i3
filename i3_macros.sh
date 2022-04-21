@@ -3,7 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-14T21:17:07+0200
+# date:   2022-04-21T18:56:05+0200
+
+# auth can be something like sudo -A, doas -- or nothing,
+# depending on configuration requirements
+auth="${EXEC_AS_USER:-sudo}"
 
 press_key() {
     i="$1"
@@ -115,7 +119,7 @@ case "$1" in
         ;;
     --bootnext)
         open_tmux 1 \
-            "$EXEC_AS_USER efistub.sh -b"
+            "$auth efistub.sh -b"
         ;;
     --trash)
         open_tmux 1 \
@@ -126,7 +130,7 @@ case "$1" in
         open_tmux 1 \
             "lsblk; ventoy -h"
         type_string \
-            "$EXEC_AS_USER ventoy -u /dev/sd"
+            "$auth ventoy -u /dev/sd"
         ;;
     --terminalcolors)
         open_tmux 1 \
