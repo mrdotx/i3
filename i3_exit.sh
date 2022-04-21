@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-07T11:29:00+0200
+# date:   2022-04-21T10:47:41+0200
 
-# speed up script by not using unicode
+# speed up script by using posix
 LC_ALL=C
 LANG=C
 
