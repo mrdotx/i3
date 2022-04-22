@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-21T12:38:22+0200
+# date:   2022-04-22T09:05:07+0200
 
 # speed up script by using posix
 LC_ALL=C
@@ -94,9 +94,6 @@ message="
 
 <i>kill</i>
   [<b>u</b>]rxvtd
-
-<i>set</i>
-  random [<b>w</b>]allpaper
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 
