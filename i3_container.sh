@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-24T08:05:46+0200
+# date:   2022-04-27T08:29:06+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -11,13 +11,18 @@ LANG=C
 
 title="i3 container mode"
 message="
+<i>layout</i>
+  [<b>s</b>]tacking
+  [<b>t</b>]abbed
+  s[<b>p</b>]lit
+
+<i>split</i>
+  [<b>h</b>]orizontal
+  [<b>v</b>]ertical
+
 <i>scratchpad</i>
   [<b>m</b>]ove to
   [<b>c</b>]ycle
-
-<i>tile</i>
-  [<b>h</b>]orizontal
-  [<b>v</b>]ertical
 
 <i>wallpaper</i>
   r[<b>a</b>]ndom
