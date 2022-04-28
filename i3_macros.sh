@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-21T18:56:05+0200
+# date:   2022-04-28T10:42:30+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -29,8 +29,9 @@ type_string() {
             --file -
 }
 
-wait_for() {
-    ds="$2"
+wait_for_max() {
+    max_ds="$1"
+    after_ds="$3"
     message_tmp="$message"
     message="$message\n"
 
@@ -40,12 +41,14 @@ wait_for() {
         notification 0
     }
 
-    while ! wmctrl -l | grep -q "$1"; do
-        progress_bar
+    while ! wmctrl -l | grep -q "$2" \
+        && [ "$max_ds" -ge 1 ]; do
+            progress_bar
+            max_ds=$((max_ds - 1))
     done
-    while [ "$ds" -ge 1 ]; do
+    while [ "$after_ds" -ge 1 ]; do
         progress_bar
-        ds=$((ds - 1))
+        after_ds=$((after_ds - 1))
     done
 
     message="$message_tmp"
@@ -144,7 +147,7 @@ case "$1" in
         message="open web browser..." \
             && notification 0
         firefox-developer-edition &
-        wait_for "Mozilla Firefox" 5
+        wait_for_max 45 "Mozilla Firefox" 5
 
         message="$message\nopen file manager..." \
             && notification 0
