@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-24T08:06:07+0200
+# date:   2022-05-03T21:05:41+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -82,12 +82,12 @@ message="
   $(service_status i3_autotiling.service user) - auto[<b>t</b>]iling
   $(service_status picom.service user) - [<b>c</b>]ompositor
   $(service_status xbanish.service user) - [<b>m</b>]ousepointer
-  $(service_status bluetooth.service) - [<b>b</b>]luetooth
-  $(service_status cups.service) - [<b>p</b>]rinter
   $(service_status systemd-resolved.service) - re[<b>s</b>]olver
   $(service_status systemd-timesyncd.service) - times[<b>y</b>]nc
   $(service_status sshd.service) - ss[<b>h</b>]
   $(service_status vpnc@hades.service) - [<b>v</b>]pn
+  $(service_status cups.service) - [<b>p</b>]rinter
+  $(service_status bluetooth.service) - [<b>b</b>]luetooth
 
 <i>restart</i>
   [<b>d</b>]unst
