@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-25T10:29:20+0200
+# date:   2022-05-10T15:28:29+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -29,36 +29,25 @@ help="$script [-h/--help] -- script for optimal tiling focused window
 split() {
     window_geometry=$(xdotool getwindowfocus getwindowgeometry \
         | grep -oE '[0-9]{1,4}x[0-9]{1,4}' \
-    )
-
-    case $? in
-        0)
-            window_x=${window_geometry%%x*}
-            window_y=${window_geometry##*x}
-
-            if [ "$window_x" -ge "$window_y" ]; then
-                i3-msg -q split h
-            else
-                i3-msg -q split v
-            fi
-            ;;
-    esac
+    ) \
+        && window_x=${window_geometry%%x*} \
+        && window_y=${window_geometry##*x} \
+        && if [ "$window_x" -ge "$window_y" ]; then
+            i3-msg -q split h
+        else
+            i3-msg -q split v
+        fi
 }
 
 autotiling() {
     active_workspace=$(wmctrl -d \
         | awk '$2=="*" {print $9}' \
-    )
-
-    case $? in
-        0)
-            for workspace in "$@"; do
-                [ "$active_workspace" -eq "$workspace" ] \
-                    && printf 1 \
-                    && break
-            done
-            ;;
-    esac
+    ) \
+        && for workspace in "$@"; do
+            [ "$active_workspace" -eq "$workspace" ] \
+                && printf 1 \
+                && break
+        done
 }
 
 case "$1" in
