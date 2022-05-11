@@ -3,25 +3,43 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-20T18:41:56+0200
+# date:   2022-05-11T15:59:48+0200
 
 open() {
     $TERMINAL -e "$EDITOR" "$1://$2/" -c ":call NetrwToggle()"
 }
 
+table_line() {
+    divider=" │ "
+
+    case "$1" in
+        header)
+            printf "<i>%s</i>\n" "$2"
+            printf "───┬─────────────────────────────────"
+            ;;
+        *)
+            printf " <b>%s</b>%s%s %s" \
+                "$1" \
+                "$divider" \
+                "$2" \
+                "$3"
+            ;;
+    esac
+}
+
 title="i3 editor mode"
 message="
-<i>[<b>v</b>]im</i>
-  [<b>w</b>]iki
-  i[<b>d</b>]eas
+$(table_line "header" "local")
+$(table_line "v" "vim")
+$(table_line "w" "vimwiki")
 
-<i>remote</i>
-  [<b>p</b>]i
-  p[<b>i</b>]2
-  [<b>m</b>]iddlefinger
-  prin[<b>z</b>]ipal
-  [<b>k</b>]lassiker
-  m[<b>a</b>]rcus
+$(table_line "header" "remote")
+$(table_line "p" "pi")
+$(table_line "i" "pi2")
+$(table_line "m" "middlefinger")
+$(table_line "z" "prinzipal")
+$(table_line "k" "klassiker")
+$(table_line "a" "marcus")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+e</b>]"
 
@@ -29,7 +47,7 @@ notification() {
     notify-send \
         -u low  \
         -t "$1" \
-        -i "dialog-question" \
+        -i "dialog-information" \
         "$title" \
         "$message" \
         -h string:x-canonical-private-synchronous:"$title"
@@ -40,11 +58,8 @@ case "$1" in
         cd Desktop || exit 1
         $TERMINAL -e "$EDITOR"
         ;;
-    --wiki)
+    --vimwiki)
         $TERMINAL -e "$EDITOR" -c ":VimwikiIndex"
-        ;;
-    --ideas)
-        $TERMINAL -e "$EDITOR" -c ":VimwikiIndex" -c ":VimwikiGoto ideas"
         ;;
     --pi)
         open "scp" "pi"

@@ -3,21 +3,39 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-02-28T09:05:03+0100
+# date:   2022-05-11T15:49:11+0200
+
+table_line() {
+    divider=" │ "
+
+    case "$1" in
+        header)
+            printf "<i>%s</i>\n" "$2"
+            printf "───┬─────────────────────────────────"
+            ;;
+        *)
+            printf " <b>%s</b>%s%s %s" \
+                "$1" \
+                "$divider" \
+                "$2" \
+                "$3"
+            ;;
+    esac
+}
 
 title="i3 ssh mode"
 message="
-<i>server</i>
-  [<b>p</b>]i
-  p[<b>i</b>]2
-  [<b>n</b>]as
+$(table_line "header" "server")
+$(table_line "p" "pi")
+$(table_line "i" "pi2")
+$(table_line "n" "nas")
 
-<i>client</i>
-  [<b>m</b>]i
-  mac[<b>b</b>]ook
+$(table_line "header" "client")
+$(table_line "m" "mi")
+$(table_line "b" "macbook")
 
-<i>other</i>
-  pi[<b>s</b>] (pi + pi2)
+$(table_line "header" "other")
+$(table_line "s" "pi + pi2")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+h</b>]"
 
@@ -25,7 +43,7 @@ notification() {
     notify-send \
         -u low  \
         -t "$1" \
-        -i "dialog-question" \
+        -i "dialog-information" \
         "$title" \
         "$message" \
         -h string:x-canonical-private-synchronous:"$title"

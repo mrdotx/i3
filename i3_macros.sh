@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-11T08:06:29+0200
+# date:   2022-05-11T15:51:13+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -84,20 +84,38 @@ open_tmux() {
     press_key 1 Return
 }
 
+table_line() {
+    divider=" │ "
+
+    case "$1" in
+        header)
+            printf "<i>%s</i>\n" "$2"
+            printf "───┬─────────────────────────────────────"
+            ;;
+        *)
+            printf " <b>%s</b>%s%s %s" \
+                "$1" \
+                "$divider" \
+                "$2" \
+                "$3"
+            ;;
+    esac
+}
+
 title="i3 macros mode"
 message="
-<i>info</i>
-  [<b>w</b>]eather
-  [<b>c</b>]orona stats
+$(table_line "header" "info")
+$(table_line "w" "weather")
+$(table_line "c" "corona stats")
 
-<i>system</i>
-  t[<b>r</b>]ash
-  [<b>b</b>]oot next
-  [<b>v</b>]entoy
-  [<b>t</b>]erminal colors
+$(table_line "header" "system")
+$(table_line "r" "trash")
+$(table_line "b" "boot next")
+$(table_line "v" "ventoy")
+$(table_line "t" "terminal colors")
 
-<i>others</i>
-  [<b>s</b>]tarwars
+$(table_line "header" "other")
+$(table_line "s" "starwars")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+print</b>]"
 
@@ -105,7 +123,7 @@ notification() {
     notify-send \
         -u low  \
         -t "$1" \
-        -i "dialog-question" \
+        -i "dialog-information" \
         "$title" \
         "$message" \
         -h string:x-canonical-private-synchronous:"$title"

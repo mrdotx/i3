@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-03T21:05:41+0200
+# date:   2022-05-11T15:49:40+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -12,8 +12,8 @@ LANG=C
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
-active="[X]"
-inactive="[ ]"
+active="蘒"
+inactive="﨡"
 
 # get xresources
 xrdb_query() {
@@ -62,38 +62,58 @@ service_toggle() {
         && polybar_services.sh --update
 }
 
+table_line() {
+    divider=" │ "
+
+    case "$1" in
+        header)
+            printf "<i>%s</i>\n" "$2"
+            printf "───┬───────────────────────────────────"
+            ;;
+        *)
+            printf " <b>%s</b>%s%s %s" \
+                "$1" \
+                "$divider" \
+                "$2" \
+                "$3"
+            ;;
+    esac
+}
+
+table_polybar() {
+    if [ "$(service_status polybar.service user)" = "$active" ]; then
+        printf "%s\n%s»%s«\n%s»%s«" \
+            "$(table_line "a" "$active" "polybar [<b>r</b>]eload")" \
+            "$(table_line " " "          [<b>1</b>]")" \
+            "$(xrdb_query "Polybar.type.monitor1")" \
+            "$(table_line " " "          [<b>2</b>]")" \
+            "$(xrdb_query "Polybar.type.monitor2")"
+    else
+        printf "%s" \
+            "$(table_line "a" "$inactive" "polybar")"
+    fi
+}
+
 title="i3 services mode"
 message="
-<i>enable/disable</i>
-  $(if [ "$(service_status polybar.service user)" = "$active" ]; then \
-    printf "%s - polyb[<b>a</b>]r %s\n%s »%s«\n%s »%s«" \
-        "$active" \
-        "[<b>r</b>]eload" \
-        "        polyb[<b>a</b>]r [<b>1</b>]" \
-        "$(xrdb_query "Polybar.type.monitor1")" \
-        "        polyb[<b>a</b>]r [<b>2</b>]" \
-        "$(xrdb_query "Polybar.type.monitor2")"
-  else
-    printf "%s - polyb[<b>a</b>]r" \
-        "$inactive"
-  fi)
+$(table_line "header" "enable/disable")
+$(table_polybar)
+$(table_line "l" "$(service_status xautolock.service user)" "autolock")
+$(table_line "t" "$(service_status i3_autotiling.service user)" "autotiling")
+$(table_line "c" "$(service_status picom.service user)" "compositor")
+$(table_line "m" "$(service_status xbanish.service user)" "mousepointer")
+$(table_line "s" "$(service_status systemd-resolved.service)" "resolver")
+$(table_line "y" "$(service_status systemd-timesyncd.service)" "timesync")
+$(table_line "h" "$(service_status sshd.service)" "ssh")
+$(table_line "v" "$(service_status vpnc@hades.service)" "vpn")
+$(table_line "p" "$(service_status cups.service)" "printer")
+$(table_line "b" "$(service_status bluetooth.service)" "bluetooth")
 
-  $(service_status xautolock.service user) - auto[<b>l</b>]ock
-  $(service_status i3_autotiling.service user) - auto[<b>t</b>]iling
-  $(service_status picom.service user) - [<b>c</b>]ompositor
-  $(service_status xbanish.service user) - [<b>m</b>]ousepointer
-  $(service_status systemd-resolved.service) - re[<b>s</b>]olver
-  $(service_status systemd-timesyncd.service) - times[<b>y</b>]nc
-  $(service_status sshd.service) - ss[<b>h</b>]
-  $(service_status vpnc@hades.service) - [<b>v</b>]pn
-  $(service_status cups.service) - [<b>p</b>]rinter
-  $(service_status bluetooth.service) - [<b>b</b>]luetooth
+$(table_line "header" "restart")
+$(table_line "d" "dunst")
 
-<i>restart</i>
-  [<b>d</b>]unst
-
-<i>kill</i>
-  [<b>u</b>]rxvtd
+$(table_line "header" "kill")
+$(table_line "u" "urxvt")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 
@@ -101,7 +121,7 @@ notification() {
     notify-send \
         -u low  \
         -t "$1" \
-        -i "dialog-question" \
+        -i "dialog-information" \
         "$title" \
         "$message" \
         -h string:x-canonical-private-synchronous:"$title"
