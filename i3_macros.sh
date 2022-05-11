@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-28T10:42:30+0200
+# date:   2022-05-11T08:06:29+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -31,7 +31,7 @@ type_string() {
 
 wait_for_max() {
     max_ds="$1"
-    after_ds="$3"
+    after_ds="5"
     message_tmp="$message"
     message="$message\n"
 
@@ -41,7 +41,7 @@ wait_for_max() {
         notification 0
     }
 
-    while ! wmctrl -l | grep -q "$2" \
+    while ! wmctrl -l | grep -iq "$2" \
         && [ "$max_ds" -ge 1 ]; do
             progress_bar
             max_ds=$((max_ds - 1))
@@ -147,20 +147,23 @@ case "$1" in
         message="open web browser..." \
             && notification 0
         firefox-developer-edition &
-        wait_for_max 45 "Mozilla Firefox" 5
+        wait_for_max 45 "firefox"
 
         message="$message\nopen file manager..." \
             && notification 0
         open_terminal "1" "cd $HOME/.local/share/repos; ranger_cd"
+        wait_for_max 35 "ranger"
 
         message="$message\nopen btop..." \
             && notification 0
         exec_terminal "2" "btop"
+        wait_for_max 25 "btop"
 
         message="$message\nopen multiplexer..." \
             && notification 0
         open_tmux "1" "cinfo"
         press_key 3 Super+Ctrl+Up
+        wait_for_max 25 "tmux"
 
         notification 2000
         ;;
