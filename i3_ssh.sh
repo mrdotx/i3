@@ -3,53 +3,25 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-11T15:49:11+0200
-
-table_line() {
-    divider=" │ "
-
-    case "$1" in
-        header)
-            printf "<i>%s</i>\n" "$2"
-            printf "───┬─────────────────────────────────"
-            ;;
-        *)
-            printf " <b>%s</b>%s%s %s" \
-                "$1" \
-                "$divider" \
-                "$2" \
-                "$3"
-            ;;
-    esac
-}
+# date:   2022-05-11T20:09:53+0200
 
 title="i3 ssh mode"
+table_width=33
 message="
-$(table_line "header" "server")
-$(table_line "p" "pi")
-$(table_line "i" "pi2")
-$(table_line "n" "nas")
+$(i3_helper_table.sh "header" "$table_width" "server")
+$(i3_helper_table.sh "p" "pi")
+$(i3_helper_table.sh "i" "pi2")
+$(i3_helper_table.sh "n" "nas")
 
-$(table_line "header" "client")
-$(table_line "m" "mi")
-$(table_line "b" "macbook")
+$(i3_helper_table.sh "header" "$table_width" "client")
+$(i3_helper_table.sh "m" "mi")
+$(i3_helper_table.sh "b" "macbook")
 
-$(table_line "header" "other")
-$(table_line "s" "pi + pi2")
+$(i3_helper_table.sh "header" "$table_width" "other")
+$(i3_helper_table.sh "s" "pi + pi2")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+h</b>]"
 
-notification() {
-    notify-send \
-        -u low  \
-        -t "$1" \
-        -i "dialog-information" \
-        "$title" \
-        "$message" \
-        -h string:x-canonical-private-synchronous:"$title"
-}
-
-# ssh or start and kill notification tooltip
 case "$1" in
     --pi)
         i3_tmux.sh -o 21 "pi" "ssh pi"
@@ -71,9 +43,9 @@ case "$1" in
         i3_tmux.sh -o 22 "pi2" "ssh pi2"
         ;;
     --kill)
-        notification 1
+        i3_helper_notify.sh 1 "$title"
         ;;
     *)
-        notification 0
+        i3_helper_notify.sh 0 "$title" "$message"
         ;;
 esac

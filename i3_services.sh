@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-11T15:49:40+0200
+# date:   2022-05-11T20:16:02+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -62,72 +62,44 @@ service_toggle() {
         && polybar_services.sh --update
 }
 
-table_line() {
-    divider=" │ "
-
-    case "$1" in
-        header)
-            printf "<i>%s</i>\n" "$2"
-            printf "───┬───────────────────────────────────"
-            ;;
-        *)
-            printf " <b>%s</b>%s%s %s" \
-                "$1" \
-                "$divider" \
-                "$2" \
-                "$3"
-            ;;
-    esac
-}
-
 table_polybar() {
     if [ "$(service_status polybar.service user)" = "$active" ]; then
         printf "%s\n%s»%s«\n%s»%s«" \
-            "$(table_line "a" "$active" "polybar [<b>r</b>]eload")" \
-            "$(table_line " " "          [<b>1</b>]")" \
+            "$(i3_helper_table.sh "a" "$active" "polybar [<b>r</b>]eload")" \
+            "$(i3_helper_table.sh " " "          [<b>1</b>]")" \
             "$(xrdb_query "Polybar.type.monitor1")" \
-            "$(table_line " " "          [<b>2</b>]")" \
+            "$(i3_helper_table.sh " " "          [<b>2</b>]")" \
             "$(xrdb_query "Polybar.type.monitor2")"
     else
         printf "%s" \
-            "$(table_line "a" "$inactive" "polybar")"
+            "$(i3_helper_table.sh "a" "$inactive" "polybar")"
     fi
 }
 
 title="i3 services mode"
+table_width=35
 message="
-$(table_line "header" "enable/disable")
+$(i3_helper_table.sh "header" "$table_width" "enable/disable")
 $(table_polybar)
-$(table_line "l" "$(service_status xautolock.service user)" "autolock")
-$(table_line "t" "$(service_status i3_autotiling.service user)" "autotiling")
-$(table_line "c" "$(service_status picom.service user)" "compositor")
-$(table_line "m" "$(service_status xbanish.service user)" "mousepointer")
-$(table_line "s" "$(service_status systemd-resolved.service)" "resolver")
-$(table_line "y" "$(service_status systemd-timesyncd.service)" "timesync")
-$(table_line "h" "$(service_status sshd.service)" "ssh")
-$(table_line "v" "$(service_status vpnc@hades.service)" "vpn")
-$(table_line "p" "$(service_status cups.service)" "printer")
-$(table_line "b" "$(service_status bluetooth.service)" "bluetooth")
+$(i3_helper_table.sh "l" "$(service_status xautolock.service user)" "autolock")
+$(i3_helper_table.sh "t" "$(service_status i3_autotiling.service user)" "autotiling")
+$(i3_helper_table.sh "c" "$(service_status picom.service user)" "compositor")
+$(i3_helper_table.sh "m" "$(service_status xbanish.service user)" "mousepointer")
+$(i3_helper_table.sh "s" "$(service_status systemd-resolved.service)" "resolver")
+$(i3_helper_table.sh "y" "$(service_status systemd-timesyncd.service)" "timesync")
+$(i3_helper_table.sh "h" "$(service_status sshd.service)" "ssh")
+$(i3_helper_table.sh "v" "$(service_status vpnc@hades.service)" "vpn")
+$(i3_helper_table.sh "p" "$(service_status cups.service)" "printer")
+$(i3_helper_table.sh "b" "$(service_status bluetooth.service)" "bluetooth")
 
-$(table_line "header" "restart")
-$(table_line "d" "dunst")
+$(i3_helper_table.sh "header" "$table_width" "restart")
+$(i3_helper_table.sh "d" "dunst")
 
-$(table_line "header" "kill")
-$(table_line "u" "urxvt")
+$(i3_helper_table.sh "header" "$table_width" "kill")
+$(i3_helper_table.sh "u" "urxvt")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 
-notification() {
-    notify-send \
-        -u low  \
-        -t "$1" \
-        -i "dialog-information" \
-        "$title" \
-        "$message" \
-        -h string:x-canonical-private-synchronous:"$title"
-}
-
-# toggle service or start and kill notification tooltip
 case "$1" in
     --polybar)
         service_toggle "polybar.service" "user"
@@ -175,9 +147,9 @@ case "$1" in
         service_toggle "vpnc@hades.service"
         ;;
     --kill)
-        notification 1
+        i3_helper_notify.sh 1 "$title"
         ;;
     *)
-        notification 0
+        i3_helper_notify.sh 0 "$title" "$message"
         ;;
 esac

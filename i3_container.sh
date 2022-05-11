@@ -3,67 +3,39 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-11T15:54:19+0200
+# date:   2022-05-11T20:17:23+0200
 
 # speed up script by using standard c
 LC_ALL=C
 LANG=C
 
-table_line() {
-    divider=" │ "
-
-    case "$1" in
-        header)
-            printf "<i>%s</i>\n" "$2"
-            printf "───┬─────────────────────────────────────"
-            ;;
-        *)
-            printf " <b>%s</b>%s%s %s" \
-                "$1" \
-                "$divider" \
-                "$2" \
-                "$3"
-            ;;
-    esac
-}
-
 title="i3 container mode"
+table_width=37
 message="
-$(table_line "header" "layout")
-$(table_line "s" "stacking")
-$(table_line "t" "tabbed")
-$(table_line "p" "split")
+$(i3_helper_table.sh "header" "$table_width" "layout")
+$(i3_helper_table.sh "s" "stacking")
+$(i3_helper_table.sh "t" "tabbed")
+$(i3_helper_table.sh "p" "split")
 
-$(table_line "header" "split")
-$(table_line "h" "horizontal")
-$(table_line "v" "vertical")
+$(i3_helper_table.sh "header" "$table_width" "split")
+$(i3_helper_table.sh "h" "horizontal")
+$(i3_helper_table.sh "v" "vertical")
 
-$(table_line "header" "scratchpad")
-$(table_line "m" "move to")
-$(table_line "c" "cycle")
+$(i3_helper_table.sh "header" "$table_width" "scratchpad")
+$(i3_helper_table.sh "m" "move to")
+$(i3_helper_table.sh "c" "cycle")
 
-$(table_line "header" "wallpaper")
-$(table_line "a" "random")
-$(table_line "e" "reset")
+$(i3_helper_table.sh "header" "$table_width" "wallpaper")
+$(i3_helper_table.sh "a" "random")
+$(i3_helper_table.sh "e" "reset")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+space</b>]"
 
-notification() {
-    notify-send \
-        -u low  \
-        -t "$1" \
-        -i "dialog-information" \
-        "$title" \
-        "$message" \
-        -h string:x-canonical-private-synchronous:"$title"
-}
-
-# start and kill notification tooltip
 case "$1" in
     --kill)
-        notification 1
+        i3_helper_notify.sh 1 "$title"
         ;;
     *)
-        notification 0
+        i3_helper_notify.sh 0 "$title" "$message"
         ;;
 esac

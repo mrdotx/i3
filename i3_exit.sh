@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-11T15:52:19+0200
+# date:   2022-05-11T20:10:12+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -15,46 +15,19 @@ simple_lock() {
     && slock -m "$(cinfo -a)" &
 }
 
-table_line() {
-    divider=" │ "
-
-    case "$1" in
-        header)
-            printf "<i>%s</i>\n" "$2"
-            printf "───┬─────────────────────────────────────────"
-            ;;
-        *)
-            printf " <b>%s</b>%s%s %s" \
-                "$1" \
-                "$divider" \
-                "$2" \
-                "$3"
-            ;;
-    esac
-}
-
 title="i3 exit mode"
+table_width=41
 message="
-$(table_line "header" "power")
-$(table_line "s" "suspend")
-$(table_line "r" "reboot")
-$(table_line "d" "shutdown")
+$(i3_helper_table.sh "header" "$table_width" "power")
+$(i3_helper_table.sh "s" "suspend")
+$(i3_helper_table.sh "r" "reboot")
+$(i3_helper_table.sh "d" "shutdown")
 
-$(table_line "header" "other")
-$(table_line "l" "lock")
-$(table_line "o" "logout")
+$(i3_helper_table.sh "header" "$table_width" "other")
+$(i3_helper_table.sh "l" "lock")
+$(i3_helper_table.sh "o" "logout")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>ctrl+alt+delete</b>]"
-
-notification() {
-    notify-send \
-        -u low  \
-        -t "$1" \
-        -i "dialog-information" \
-        "$title" \
-        "$message" \
-        -h string:x-canonical-private-synchronous:"$title"
-}
 
 case "$1" in
     --lock)
@@ -74,9 +47,9 @@ case "$1" in
         systemctl poweroff
         ;;
     --kill)
-        notification 1
+        i3_helper_notify.sh 1 "$title"
         ;;
     *)
-        notification 0
+        i3_helper_notify.sh 0 "$title" "$message"
         ;;
 esac

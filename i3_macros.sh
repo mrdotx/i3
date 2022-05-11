@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-11T18:32:24+0200
+# date:   2022-05-11T20:14:01+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -38,7 +38,7 @@ wait_for_max() {
     progress_bar() {
         sleep .1
         message="$message█"
-        notification 0
+        i3_helper_notify.sh 0 "$title" "$message"
     }
 
     while ! wmctrl -l | grep -iq "$2" \
@@ -84,50 +84,23 @@ open_tmux() {
     press_key 1 Return
 }
 
-table_line() {
-    divider=" │ "
-
-    case "$1" in
-        header)
-            printf "<i>%s</i>\n" "$2"
-            printf "───┬─────────────────────────────────────"
-            ;;
-        *)
-            printf " <b>%s</b>%s%s %s" \
-                "$1" \
-                "$divider" \
-                "$2" \
-                "$3"
-            ;;
-    esac
-}
-
 title="i3 macros mode"
+table_width=37
 message="
-$(table_line "header" "info")
-$(table_line "w" "weather")
-$(table_line "c" "corona stats")
+$(i3_helper_table.sh "header" "$table_width" "info")
+$(i3_helper_table.sh "w" "weather")
+$(i3_helper_table.sh "c" "corona stats")
 
-$(table_line "header" "system")
-$(table_line "r" "trash")
-$(table_line "b" "boot next")
-$(table_line "v" "ventoy")
-$(table_line "t" "terminal colors")
+$(i3_helper_table.sh "header" "$table_width" "system")
+$(i3_helper_table.sh "r" "trash")
+$(i3_helper_table.sh "b" "boot next")
+$(i3_helper_table.sh "v" "ventoy")
+$(i3_helper_table.sh "t" "terminal colors")
 
-$(table_line "header" "other")
-$(table_line "s" "starwars")
+$(i3_helper_table.sh "header" "$table_width" "other")
+$(i3_helper_table.sh "s" "starwars")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+print</b>]"
-
-notification() {
-    notify-send \
-        -u low  \
-        -t "$1" \
-        -i "dialog-information" \
-        "$title" \
-        "$message" \
-        -h string:x-canonical-private-synchronous:"$title"
-}
 
 case "$1" in
     --weather)
@@ -163,32 +136,32 @@ case "$1" in
         ;;
     --autostart)
         message="open web browser..." \
-            && notification 0
+            && i3_helper_notify.sh 0 "$title" "$message"
         firefox-developer-edition &
         wait_for_max 45 "firefox"
 
         message="$message\nopen file manager..." \
-            && notification 0
+            && i3_helper_notify.sh 0 "$title" "$message"
         open_terminal "1" "cd $HOME/.local/share/repos; ranger_cd"
         wait_for_max 35 "ranger"
 
         message="$message\nopen btop..." \
-            && notification 0
+            && i3_helper_notify.sh 0 "$title" "$message"
         exec_terminal "2" "btop"
         wait_for_max 25 "btop"
 
         message="$message\nopen multiplexer..." \
-            && notification 0
+            && i3_helper_notify.sh 0 "$title" "$message"
         open_tmux "1" "cinfo"
         wait_for_max 25 "tmux"
         press_key 3 Super+Ctrl+Up
 
-        notification 2500
+        i3_helper_notify.sh 2500 "$title" "$message"
         ;;
     --kill)
-        notification 1
+        i3_helper_notify.sh 1 "$title"
         ;;
     *)
-        notification 0
+        i3_helper_notify.sh 0 "$title" "$message"
         ;;
 esac
