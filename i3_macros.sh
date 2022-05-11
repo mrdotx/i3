@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-11T15:51:13+0200
+# date:   2022-05-11T18:32:24+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -180,10 +180,10 @@ case "$1" in
         message="$message\nopen multiplexer..." \
             && notification 0
         open_tmux "1" "cinfo"
-        press_key 3 Super+Ctrl+Up
         wait_for_max 25 "tmux"
+        press_key 3 Super+Ctrl+Up
 
-        notification 2000
+        notification 2500
         ;;
     --kill)
         notification 1
