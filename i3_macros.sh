@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-11T20:14:01+0200
+# date:   2022-05-12T16:26:43+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -31,7 +31,7 @@ type_string() {
 
 wait_for_max() {
     max_ds="$1"
-    after_ds="5"
+    after_ds="${3:-0}"
     message_tmp="$message"
     message="$message\n"
 
@@ -138,7 +138,7 @@ case "$1" in
         message="open web browser..." \
             && i3_helper_notify.sh 0 "$title" "$message"
         firefox-developer-edition &
-        wait_for_max 45 "firefox"
+        wait_for_max 45 "firefox" 5
 
         message="$message\nopen file manager..." \
             && i3_helper_notify.sh 0 "$title" "$message"
