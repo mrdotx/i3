@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-12T16:26:43+0200
+# date:   2022-05-13T14:41:22+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -85,20 +85,20 @@ open_tmux() {
 }
 
 title="i3 macros mode"
-table_width=37
+table_width=41
 message="
-$(i3_helper_table.sh "header" "$table_width" "info")
-$(i3_helper_table.sh "w" "weather")
-$(i3_helper_table.sh "c" "corona stats")
+$(i3_helper_table.sh "$table_width" "header" "info")
+$(i3_helper_table.sh "$table_width" "w" "weather")
+$(i3_helper_table.sh "$table_width" "c" "corona stats")
 
-$(i3_helper_table.sh "header" "$table_width" "system")
-$(i3_helper_table.sh "r" "trash")
-$(i3_helper_table.sh "b" "boot next")
-$(i3_helper_table.sh "v" "ventoy")
-$(i3_helper_table.sh "t" "terminal colors")
+$(i3_helper_table.sh "$table_width" "header" "system")
+$(i3_helper_table.sh "$table_width" "r" "trash")
+$(i3_helper_table.sh "$table_width" "b" "boot next")
+$(i3_helper_table.sh "$table_width" "v" "ventoy")
+$(i3_helper_table.sh "$table_width" "t" "terminal colors")
 
-$(i3_helper_table.sh "header" "$table_width" "other")
-$(i3_helper_table.sh "s" "starwars")
+$(i3_helper_table.sh "$table_width" "header" "other")
+$(i3_helper_table.sh "$table_width" "s" "starwars")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+print</b>]"
 

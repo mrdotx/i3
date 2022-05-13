@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-11T20:16:02+0200
+# date:   2022-05-13T16:26:39+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -62,41 +62,56 @@ service_toggle() {
         && polybar_services.sh --update
 }
 
-table_polybar() {
-    if [ "$(service_status polybar.service user)" = "$active" ]; then
-        printf "%s\n%s»%s«\n%s»%s«" \
-            "$(i3_helper_table.sh "a" "$active" "polybar [<b>r</b>]eload")" \
-            "$(i3_helper_table.sh " " "          [<b>1</b>]")" \
-            "$(xrdb_query "Polybar.type.monitor1")" \
-            "$(i3_helper_table.sh " " "          [<b>2</b>]")" \
-            "$(xrdb_query "Polybar.type.monitor2")"
-    else
-        printf "%s" \
-            "$(i3_helper_table.sh "a" "$inactive" "polybar")"
-    fi
-}
-
 title="i3 services mode"
-table_width=35
+table_width=39
+table_width1=$((table_width + 2))
+table_width2=$((table_width + 4))
 message="
-$(i3_helper_table.sh "header" "$table_width" "enable/disable")
-$(table_polybar)
-$(i3_helper_table.sh "l" "$(service_status xautolock.service user)" "autolock")
-$(i3_helper_table.sh "t" "$(service_status i3_autotiling.service user)" "autotiling")
-$(i3_helper_table.sh "c" "$(service_status picom.service user)" "compositor")
-$(i3_helper_table.sh "m" "$(service_status xbanish.service user)" "mousepointer")
-$(i3_helper_table.sh "s" "$(service_status systemd-resolved.service)" "resolver")
-$(i3_helper_table.sh "y" "$(service_status systemd-timesyncd.service)" "timesync")
-$(i3_helper_table.sh "h" "$(service_status sshd.service)" "ssh")
-$(i3_helper_table.sh "v" "$(service_status vpnc@hades.service)" "vpn")
-$(i3_helper_table.sh "p" "$(service_status cups.service)" "printer")
-$(i3_helper_table.sh "b" "$(service_status bluetooth.service)" "bluetooth")
+$(i3_helper_table.sh "$table_width" "header" "enable/disable")
+$(if [ "$(service_status polybar.service user)" = "$active" ]; then
+    printf "%s\n" \
+        "$(i3_helper_table.sh "$table_width1" "a" \
+            "$active polybar")"
+    printf "%s\n" \
+        "$(i3_helper_table.sh "$table_width2" "r" \
+            "├─ reload")"
+    printf "%s\n" \
+        "$(i3_helper_table.sh "$table_width2" "1" \
+            "├─ primary bar   -> $(xrdb_query "Polybar.type.monitor1")")"
+    printf "%s\n" \
+        "$(i3_helper_table.sh "$table_width2" "2" \
+            "└─ secondary bar -> $(xrdb_query 'Polybar.type.monitor2')")"
+else
+    printf "%s" \
+        "$(i3_helper_table.sh "$table_width1" "a" \
+            "$inactive polybar")"
+fi)
+$(i3_helper_table.sh "$table_width1" "l" \
+    "$(service_status xautolock.service user) autolock")
+$(i3_helper_table.sh "$table_width1" "t" \
+    "$(service_status i3_autotiling.service user) autotiling")
+$(i3_helper_table.sh "$table_width1" "c" \
+    "$(service_status picom.service user) compositor")
+$(i3_helper_table.sh "$table_width1" "m" \
+    "$(service_status xbanish.service user) mousepointer")
+$(i3_helper_table.sh "$table_width1" "s" \
+    "$(service_status systemd-resolved.service) resolver")
+$(i3_helper_table.sh "$table_width1" "y" \
+    "$(service_status systemd-timesyncd.service) timesync")
+$(i3_helper_table.sh "$table_width1" "h" \
+    "$(service_status sshd.service) ssh")
+$(i3_helper_table.sh "$table_width1" "v" \
+    "$(service_status vpnc@hades.service) vpn")
+$(i3_helper_table.sh "$table_width1" "p" \
+    "$(service_status cups.service) printer")
+$(i3_helper_table.sh "$table_width1" "b" \
+    "$(service_status bluetooth.service) bluetooth")
 
-$(i3_helper_table.sh "header" "$table_width" "restart")
-$(i3_helper_table.sh "d" "dunst")
+$(i3_helper_table.sh "$table_width" "header" "restart")
+$(i3_helper_table.sh "$table_width" "d" "dunst")
 
-$(i3_helper_table.sh "header" "$table_width" "kill")
-$(i3_helper_table.sh "u" "urxvt")
+$(i3_helper_table.sh "$table_width" "header" "kill")
+$(i3_helper_table.sh "$table_width" "u" "urxvt")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 
