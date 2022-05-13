@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_helper_table.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-13T15:43:49+0200
+# date:   2022-05-13T19:18:33+0200
 
 table_line="─"
 table_divider="┬"
@@ -26,17 +26,16 @@ set_spacer() {
 
 case "$key" in
     header)
-        printf "<i>%s</i>\n" "$description"
-        printf "%s%s%s" \
+        printf "<i>%s</i>\n%s%s%s" \
+            "$description" \
             "$(set_spacer "$variable_column" "$table_line")" \
             "$table_divider" \
             "$(set_spacer "$fixed_column" "$table_line")"
         ;;
     *)
-        variable_len="$((${#description} + 2))"
         printf " %s %s%s <b>%s</b>" \
             "$description" \
-            "$(set_spacer "$((variable_column - variable_len))")" \
+            "$(set_spacer "$((variable_column - ${#description} - 2))")" \
             "$line_divider" \
             "$key"
         ;;
