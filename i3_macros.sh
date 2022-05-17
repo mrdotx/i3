@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-13T14:41:22+0200
+# date:   2022-05-17T14:05:37+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -29,29 +29,36 @@ type_string() {
             --file -
 }
 
+progress_notification() {
+    message="$message$2"
+
+    notify-send \
+        -u low  \
+        -t "$1" \
+        -i "dialog-information" \
+        "$title" \
+        "$message" \
+        -h string:x-canonical-private-synchronous:"$title" \
+        -h int:value:"$3"
+}
+
 wait_for_max() {
     max_ds="$1"
-    after_ds="${3:-0}"
-    message_tmp="$message"
-    message="$message\n"
-
-    progress_bar() {
-        sleep .1
-        message="$message█"
-        i3_helper_notify.sh 0 "$title" "$message"
-    }
+    after_ds="$3"
+    progress="$4"
 
     while ! wmctrl -l | grep -iq "$2" \
         && [ "$max_ds" -ge 1 ]; do
-            progress_bar
+            sleep .1
             max_ds=$((max_ds - 1))
     done
+    progress_notification 0 "" "$((progress-5))"
+
     while [ "$after_ds" -ge 1 ]; do
-        progress_bar
+        sleep .1
         after_ds=$((after_ds - 1))
     done
-
-    message="$message_tmp"
+    progress_notification 0 "$finished_symbol" "$progress"
 }
 
 open_terminal() {
@@ -135,28 +142,30 @@ case "$1" in
             "telnet towel.blinkenlights.nl"
         ;;
     --autostart)
-        message="open web browser..." \
-            && i3_helper_notify.sh 0 "$title" "$message"
+        table_width=24
+        message="\n$(i3_helper_table.sh "$table_width" "header" "autostart")"
+        line_divider="│"
+        finished_symbol=""
+
+        progress_notification 0 "\n open web browser   $line_divider " 10
         firefox-developer-edition &
-        wait_for_max 45 "firefox" 5
+        wait_for_max 45 "firefox" 5 20
 
-        message="$message\nopen file manager..." \
-            && i3_helper_notify.sh 0 "$title" "$message"
-        open_terminal "1" "cd $HOME/.local/share/repos; ranger_cd"
-        wait_for_max 35 "ranger"
+        progress_notification 0 "\n open file manager  $line_divider " 30
+        open_terminal 1 "cd $HOME/.local/share/repos; ranger_cd"
+        wait_for_max 35 "ranger" 0 40
 
-        message="$message\nopen btop..." \
-            && i3_helper_notify.sh 0 "$title" "$message"
-        exec_terminal "2" "btop"
-        wait_for_max 25 "btop"
+        progress_notification 0 "\n open system info   $line_divider " 50
+        exec_terminal 2 "btop"
+        wait_for_max 25 "btop" 0 60
 
-        message="$message\nopen multiplexer..." \
-            && i3_helper_notify.sh 0 "$title" "$message"
-        open_tmux "1" "cinfo"
-        wait_for_max 25 "tmux"
+        progress_notification 0 "\n open multiplexer   $line_divider " 70
+        open_tmux 1 "cinfo"
+        wait_for_max 25 "tmux" 1 80
+
+        progress_notification 0 "\n resize multiplexer $line_divider " 90
         press_key 3 Super+Ctrl+Up
-
-        i3_helper_notify.sh 2500 "$title" "$message"
+        progress_notification 2500 "$finished_symbol" 100
         ;;
     --kill)
         i3_helper_notify.sh 1 "$title"
