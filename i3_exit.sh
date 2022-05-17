@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-13T14:40:12+0200
+# date:   2022-05-17T21:18:02+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -30,21 +30,20 @@ $(i3_helper_table.sh "$table_width" "o" "logout")
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>ctrl+alt+delete</b>]"
 
 case "$1" in
-    --lock)
-        simple_lock
-        ;;
     --suspend)
-        simple_lock \
-            && systemctl suspend
-        ;;
-    --logout)
-        i3-msg exit
+        systemctl suspend
         ;;
     --reboot)
         systemctl reboot
         ;;
     --shutdown)
         systemctl poweroff
+        ;;
+    --lock)
+        simple_lock
+        ;;
+    --logout)
+        i3-msg exit
         ;;
     --kill)
         i3_helper_notify.sh 1 "$title"
