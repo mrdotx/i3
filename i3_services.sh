@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-20T15:00:56+0200
+# date:   2022-05-20T19:42:36+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -66,53 +66,52 @@ title="i3 services mode"
 table_width=39
 table_width1=$((table_width + 2))
 table_width2=$((table_width + 4))
-table_width3=$((table_width + 6))
 message="
 $(i3_helper_table.sh "$table_width" "header" "enable/disable")
 $(if [ "$(service_status polybar.service user)" = "$active" ]; then
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width2" "a" "" \
+        "$(i3_helper_table.sh "$table_width1" "a" "" \
             "$active polybar")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width3" "1" "" \
+        "$(i3_helper_table.sh "$table_width2" "1" "" \
             "├─ primary   -> $(xrdb_query "Polybar.type.monitor1")")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width3" "2" "" \
+        "$(i3_helper_table.sh "$table_width2" "2" "" \
             "├─ secondary -> $(xrdb_query 'Polybar.type.monitor2')")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width3" "r" "勒" \
+        "$(i3_helper_table.sh "$table_width2" "r" "勒" \
             "└─ reload")"
 else
     printf "%s" \
-        "$(i3_helper_table.sh "$table_width2" "a" "" \
+        "$(i3_helper_table.sh "$table_width1" "a" "" \
             "$inactive polybar")"
 fi)
-$(i3_helper_table.sh "$table_width2" "l" "ﱱ" \
+$(i3_helper_table.sh "$table_width1" "l" "ﱱ" \
     "$(service_status xautolock.service user) autolock")
-$(i3_helper_table.sh "$table_width2" "t" "侀" \
+$(i3_helper_table.sh "$table_width1" "t" "侀" \
     "$(service_status i3_autotiling.service user) autotiling")
-$(i3_helper_table.sh "$table_width2" "c" "頋" \
+$(i3_helper_table.sh "$table_width1" "c" "頋" \
     "$(service_status picom.service user) compositor")
-$(i3_helper_table.sh "$table_width2" "m" "" \
+$(i3_helper_table.sh "$table_width1" "m" "" \
     "$(service_status xbanish.service user) mousepointer")
-$(i3_helper_table.sh "$table_width2" "s" "" \
+$(i3_helper_table.sh "$table_width1" "s" "" \
     "$(service_status systemd-resolved.service) resolver")
-$(i3_helper_table.sh "$table_width2" "y" "祥" \
+$(i3_helper_table.sh "$table_width1" "y" "祥" \
     "$(service_status systemd-timesyncd.service) timesync")
-$(i3_helper_table.sh "$table_width2" "h" "撚" \
+$(i3_helper_table.sh "$table_width1" "h" "撚" \
     "$(service_status sshd.service) ssh")
-$(i3_helper_table.sh "$table_width2" "v" "旅" \
+$(i3_helper_table.sh "$table_width1" "v" "旅" \
     "$(service_status vpnc@hades.service) vpn")
-$(i3_helper_table.sh "$table_width2" "p" "朗" \
+$(i3_helper_table.sh "$table_width1" "p" "朗" \
     "$(service_status cups.service) printer")
-$(i3_helper_table.sh "$table_width2" "b" "" \
+$(i3_helper_table.sh "$table_width1" "b" "" \
     "$(service_status bluetooth.service) bluetooth")
 
 $(i3_helper_table.sh "$table_width" "header" "restart")
-$(i3_helper_table.sh "$table_width1" "d" "" "dunst")
+$(i3_helper_table.sh "$table_width" "d" "" "dunst")
 
 $(i3_helper_table.sh "$table_width" "header" "kill")
-$(i3_helper_table.sh "$table_width1" "u" "" "urxvt")
+$(i3_helper_table.sh "$table_width" "u" "" "urxvt")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 

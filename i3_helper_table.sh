@@ -3,13 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_helper_table.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-20T14:11:03+0200
+# date:   2022-05-20T20:04:50+0200
 
 table_line="─"
 table_divider="┬"
 line_divider="│"
 
 fixed_column=3
+icon_variance=2
 variable_column=$(($1 - 1 - fixed_column - 1 - fixed_column))
 shift
 
@@ -34,7 +35,7 @@ case "$1" in
     *)
         printf " %s %s%s %s %s <b>%s</b>" \
             "$3" \
-            "$(set_spacer "$((variable_column - ${#3} - 4))")" \
+            "$(set_spacer "$((variable_column - ${#3} - icon_variance))")" \
             "$line_divider" \
             "$2" \
             "$line_divider" \
