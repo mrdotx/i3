@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-13T14:39:30+0200
+# date:   2022-05-20T13:19:41+0200
 
 open() {
     $TERMINAL -e "$EDITOR" "$1://$2/" -c ":call NetrwToggle()"
@@ -11,18 +11,19 @@ open() {
 
 title="i3 editor mode"
 table_width=37
+table_width1=$((table_width + 2))
 message="
 $(i3_helper_table.sh "$table_width" "header" "local")
-$(i3_helper_table.sh "$table_width" "v" "vim")
-$(i3_helper_table.sh "$table_width" "w" "vimwiki")
+$(i3_helper_table.sh "$table_width1" "v" "" "vim")
+$(i3_helper_table.sh "$table_width1" "w" "ﴬ" "vimwiki")
 
 $(i3_helper_table.sh "$table_width" "header" "remote")
-$(i3_helper_table.sh "$table_width" "p" "pi")
-$(i3_helper_table.sh "$table_width" "i" "pi2")
-$(i3_helper_table.sh "$table_width" "m" "middlefinger")
-$(i3_helper_table.sh "$table_width" "z" "prinzipal")
-$(i3_helper_table.sh "$table_width" "k" "klassiker")
-$(i3_helper_table.sh "$table_width" "a" "marcus")
+$(i3_helper_table.sh "$table_width1" "p" "菉" "pi")
+$(i3_helper_table.sh "$table_width1" "i" "菉" "pi2")
+$(i3_helper_table.sh "$table_width1" "m" "力" "middlefinger")
+$(i3_helper_table.sh "$table_width1" "z" "力" "prinzipal")
+$(i3_helper_table.sh "$table_width1" "k" "力" "klassiker")
+$(i3_helper_table.sh "$table_width1" "a" "力" "marcus")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+e</b>]"
 

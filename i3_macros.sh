@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-17T14:05:37+0200
+# date:   2022-05-20T13:49:32+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -93,19 +93,20 @@ open_tmux() {
 
 title="i3 macros mode"
 table_width=41
+table_width1=$((table_width + 2))
 message="
 $(i3_helper_table.sh "$table_width" "header" "info")
-$(i3_helper_table.sh "$table_width" "w" "weather")
-$(i3_helper_table.sh "$table_width" "c" "corona stats")
+$(i3_helper_table.sh "$table_width1" "w" "" "weather")
+$(i3_helper_table.sh "$table_width1" "c" "" "corona stats")
 
 $(i3_helper_table.sh "$table_width" "header" "system")
-$(i3_helper_table.sh "$table_width" "r" "trash")
-$(i3_helper_table.sh "$table_width" "b" "boot next")
-$(i3_helper_table.sh "$table_width" "v" "ventoy")
-$(i3_helper_table.sh "$table_width" "t" "terminal colors")
+$(i3_helper_table.sh "$table_width1" "r" "" "trash")
+$(i3_helper_table.sh "$table_width1" "b" "襤" "boot next")
+$(i3_helper_table.sh "$table_width1" "v" "禍" "ventoy")
+$(i3_helper_table.sh "$table_width1" "t" "" "terminal colors")
 
 $(i3_helper_table.sh "$table_width" "header" "other")
-$(i3_helper_table.sh "$table_width" "s" "starwars")
+$(i3_helper_table.sh "$table_width1" "s" "" "starwars")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+print</b>]"
 
@@ -142,29 +143,34 @@ case "$1" in
             "telnet towel.blinkenlights.nl"
         ;;
     --autostart)
-        table_width=24
+        table_width=28
+        table_width1=$((table_width + 2))
         message="\n$(i3_helper_table.sh "$table_width" "header" "autostart")"
-        line_divider="│"
         finished_symbol=""
 
-        progress_notification 0 "\n open web browser   $line_divider " 10
-        firefox-developer-edition &
+        progress_notification 0 \
+            "\n$(i3_helper_table.sh "$table_width1" "" "" "open web browser")" 10
+        # firefox-developer-edition &
         wait_for_max 45 "firefox" 5 20
 
-        progress_notification 0 "\n open file manager  $line_divider " 30
-        open_terminal 1 "cd $HOME/.local/share/repos; ranger_cd"
+        progress_notification 0 \
+            "\n$(i3_helper_table.sh "$table_width1" "" "" "open file manager")" 30
+        # open_terminal 1 "cd $HOME/.local/share/repos; ranger_cd"
         wait_for_max 35 "ranger" 0 40
 
-        progress_notification 0 "\n open system info   $line_divider " 50
-        exec_terminal 2 "btop"
+        progress_notification 0 \
+            "\n$(i3_helper_table.sh "$table_width1" "" "" "open system info")" 50
+        # exec_terminal 2 "btop"
         wait_for_max 25 "btop" 0 60
 
-        progress_notification 0 "\n open multiplexer   $line_divider " 70
-        open_tmux 1 "cinfo"
+        progress_notification 0 \
+            "\n$(i3_helper_table.sh "$table_width1" "" "" "open multiplexer")" 70
+        # open_tmux 1 "cinfo"
         wait_for_max 25 "tmux" 1 80
 
-        progress_notification 0 "\n resize multiplexer $line_divider " 90
-        press_key 3 Super+Ctrl+Up
+        progress_notification 0 \
+            "\n$(i3_helper_table.sh "$table_width1" "" "" "resize multiplexer")" 90
+        # press_key 3 Super+Ctrl+Up
         progress_notification 2500 "$finished_symbol" 100
         ;;
     --kill)
