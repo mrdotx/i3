@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-20T13:49:32+0200
+# date:   2022-05-20T15:49:30+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -150,27 +150,27 @@ case "$1" in
 
         progress_notification 0 \
             "\n$(i3_helper_table.sh "$table_width1" "" "" "open web browser")" 10
-        # firefox-developer-edition &
+        firefox-developer-edition &
         wait_for_max 45 "firefox" 5 20
 
         progress_notification 0 \
             "\n$(i3_helper_table.sh "$table_width1" "" "" "open file manager")" 30
-        # open_terminal 1 "cd $HOME/.local/share/repos; ranger_cd"
+        open_terminal 1 "cd $HOME/.local/share/repos; ranger_cd"
         wait_for_max 35 "ranger" 0 40
 
         progress_notification 0 \
             "\n$(i3_helper_table.sh "$table_width1" "" "" "open system info")" 50
-        # exec_terminal 2 "btop"
+        exec_terminal 2 "btop"
         wait_for_max 25 "btop" 0 60
 
         progress_notification 0 \
             "\n$(i3_helper_table.sh "$table_width1" "" "" "open multiplexer")" 70
-        # open_tmux 1 "cinfo"
+        open_tmux 1 "cinfo"
         wait_for_max 25 "tmux" 1 80
 
         progress_notification 0 \
             "\n$(i3_helper_table.sh "$table_width1" "" "" "resize multiplexer")" 90
-        # press_key 3 Super+Ctrl+Up
+        press_key 3 Super+Ctrl+Up
         progress_notification 2500 "$finished_symbol" 100
         ;;
     --kill)
