@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-20T19:42:36+0200
+# date:   2022-05-21T09:48:26+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -74,13 +74,25 @@ $(if [ "$(service_status polybar.service user)" = "$active" ]; then
             "$active polybar")"
     printf "%s\n" \
         "$(i3_helper_table.sh "$table_width2" "1" "" \
-            "├─ primary   -> $(xrdb_query "Polybar.type.monitor1")")"
+            "  ├─ primary   -> $(xrdb_query "Polybar.type.monitor1")")"
     printf "%s\n" \
         "$(i3_helper_table.sh "$table_width2" "2" "" \
-            "├─ secondary -> $(xrdb_query 'Polybar.type.monitor2')")"
+            "  ├─ secondary -> $(xrdb_query 'Polybar.type.monitor2')")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width2" "r" "勒" \
-            "└─ reload")"
+        "$(i3_helper_table.sh "$table_width2" "0" "" \
+            "  └─ reload")"
+    printf "%s\n" \
+        "$(i3_helper_table.sh "$table_width2" "i" "索" \
+            "     ├─ inoreader")"
+    printf "%s\n" \
+        "$(i3_helper_table.sh "$table_width2" "o" "" \
+            "     ├─ openweathermap")"
+    printf "%s\n" \
+        "$(i3_helper_table.sh "$table_width2" "n" "" \
+            "     ├─ pacman")"
+    printf "%s\n" \
+        "$(i3_helper_table.sh "$table_width2" "r" "" \
+            "     └─ trash-cli")"
 else
     printf "%s" \
         "$(i3_helper_table.sh "$table_width1" "a" "" \
