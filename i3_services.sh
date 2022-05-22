@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-21T09:48:26+0200
+# date:   2022-05-22T09:09:00+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -123,7 +123,7 @@ $(i3_helper_table.sh "$table_width" "header" "restart")
 $(i3_helper_table.sh "$table_width" "d" "" "dunst")
 
 $(i3_helper_table.sh "$table_width" "header" "kill")
-$(i3_helper_table.sh "$table_width" "u" "" "urxvt")
+$(i3_helper_table.sh "$table_width" "u" "" "urxvtd")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 
