@@ -3,17 +3,11 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-20T19:35:24+0200
+# date:   2022-05-24T21:22:12+0200
 
 # speed up script by using standard c
 LC_ALL=C
 LANG=C
-
-simple_lock() {
-    # workaround (sleep -> https://github.com/i3/i3/issues/3298)
-    sleep .5 \
-    && slock -m "$(cinfo -a)" &
-}
 
 title="i3 exit mode"
 table_width=45
@@ -40,7 +34,9 @@ case "$1" in
         systemctl poweroff
         ;;
     --lock)
-        simple_lock
+        # workaround (sleep -> https://github.com/i3/i3/issues/3298)
+        sleep .5 \
+        && slock -m "$(cinfo -a)" &
         ;;
     --logout)
         i3-msg exit
