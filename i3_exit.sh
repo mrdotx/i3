@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-24T21:22:12+0200
+# date:   2022-05-25T09:40:26+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -25,13 +25,13 @@ $(i3_helper_table.sh "$table_width" "o" "" "logout")
 
 case "$1" in
     --suspend)
-        systemctl suspend
+        systemctl suspend --no-wall
         ;;
     --reboot)
-        systemctl reboot
+        systemctl reboot --no-wall
         ;;
     --shutdown)
-        systemctl poweroff
+        systemctl poweroff --no-wall
         ;;
     --lock)
         # workaround (sleep -> https://github.com/i3/i3/issues/3298)
