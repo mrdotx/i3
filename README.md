@@ -33,6 +33,7 @@ config files:
 - [dotfiles/i3](https://github.com/mrdotx/dotfiles/tree/master/.config/i3)
 - [dotfiles/polybar](https://github.com/mrdotx/dotfiles/tree/master/.config/polybar)
 - [dotfiles/tmux](https://github.com/mrdotx/dotfiles/tree/master/.config/tmux)
+- [dotfiles/dunst](https://github.com/mrdotx/dotfiles/tree/master/.config/dunst)
 
 related projects:
 
