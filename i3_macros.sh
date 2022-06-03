@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-31T07:55:02+0200
+# date:   2022-06-03T09:47:24+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -172,9 +172,16 @@ case "$1" in
         progress_notification 2500 "$finished_icon" 100
         ;;
     --mouseaway)
-        x="3840"
-        y="2160"
-        xdotool mousemove $x $y
+        resolution=$( \
+            xrandr \
+                | head -n1 \
+                | cut -d" " -f8,10 \
+                | tr -d ","
+        )
+        x="${resolution%% *}"
+        y="${resolution##* }"
+
+        xdotool mousemove "$x" "$y"
         i3_helper_notify.sh 2500 "$title" "mouse pointer moved to ${x}x${y}"
         ;;
     --kill)
