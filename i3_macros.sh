@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-03T09:47:24+0200
+# date:   2022-06-05T18:02:19+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -33,9 +33,8 @@ progress_notification() {
     message="$message$2"
 
     notify-send \
-        -u low  \
         -t "$1" \
-        -i "dialog-information" \
+        -u low  \
         "$title" \
         "$message" \
         -h string:x-canonical-private-synchronous:"$title" \
