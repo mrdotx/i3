@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-25T09:40:26+0200
+# date:   2022-06-07T16:31:30+0200
 
 # speed up script by using standard c
 LC_ALL=C
 LANG=C
 
-title="i3 exit mode"
+title="exit"
 table_width=45
 message="
 $(i3_helper_table.sh "$table_width" "header" "power")

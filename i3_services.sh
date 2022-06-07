@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-22T09:09:00+0200
+# date:   2022-06-07T16:32:07+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -62,7 +62,7 @@ service_toggle() {
         && polybar_services.sh --update
 }
 
-title="i3 services mode"
+title="services"
 table_width=39
 table_width1=$((table_width + 2))
 table_width2=$((table_width + 4))

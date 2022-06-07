@@ -3,9 +3,9 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-20T19:37:19+0200
+# date:   2022-06-07T16:32:39+0200
 
-title="i3 ssh mode"
+title="ssh"
 table_width=37
 message="
 $(i3_helper_table.sh "$table_width" "header" "server")

@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-20T19:36:53+0200
+# date:   2022-06-07T16:30:55+0200
 
 # speed up script by using standard c
 LC_ALL=C
 LANG=C
 
-title="i3 container mode"
+title="container"
 table_width=41
 message="
 $(i3_helper_table.sh "$table_width" "header" "layout")

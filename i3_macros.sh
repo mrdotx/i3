@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-07T08:12:15+0200
+# date:   2022-06-07T16:31:54+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -90,7 +90,7 @@ open_tmux() {
     press_key 1 Return
 }
 
-title="i3 macros mode"
+title="macros"
 table_width=41
 message="
 $(i3_helper_table.sh "$table_width" "header" "info")

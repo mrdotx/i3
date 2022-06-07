@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-20T19:35:52+0200
+# date:   2022-06-07T16:31:10+0200
 
 open() {
     $TERMINAL -e "$EDITOR" "$1://$2/" -c ":call NetrwToggle()"
 }
 
-title="i3 editor mode"
+title="editor"
 table_width=37
 message="
 $(i3_helper_table.sh "$table_width" "header" "local")
