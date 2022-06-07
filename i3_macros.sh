@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-05T18:02:19+0200
+# date:   2022-06-07T08:12:15+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -156,18 +156,19 @@ case "$1" in
         wait_for_max 35 "ranger" 0 40
 
         progress_notification 0 \
-            "\n$(i3_helper_table.sh "$table_width" "" "" "open system info")" 50
-        exec_terminal 2 "btop"
-        wait_for_max 25 "btop" 0 60
-
-        progress_notification 0 \
             "\n$(i3_helper_table.sh "$table_width" "" "" "open multiplexer")" 70
         open_tmux 1 "cinfo"
         wait_for_max 25 "tmux" 1 80
 
         progress_notification 0 \
+            "\n$(i3_helper_table.sh "$table_width" "" "" "open system info")" 50
+        exec_terminal 2 "btop"
+        wait_for_max 25 "btop" 0 60
+
+        progress_notification 0 \
             "\n$(i3_helper_table.sh "$table_width" "" "" "resize multiplexer")" 90
-        press_key 3 Super+Ctrl+Up
+        press_key 3 Super+Ctrl+Down
+        press_key 1 Super+Up
         progress_notification 2500 "$finished_icon" 100
         ;;
     --mouseaway)
