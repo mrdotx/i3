@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-07T16:32:07+0200
+# date:   2022-06-18T13:50:54+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -98,12 +98,14 @@ else
         "$(i3_helper_table.sh "$table_width1" "a" "" \
             "$inactive polybar")"
 fi)
-$(i3_helper_table.sh "$table_width1" "l" "ﱱ" \
+$(i3_helper_table.sh "$table_width1" "l" "" \
     "$(service_status xautolock.service user) autolock")
 $(i3_helper_table.sh "$table_width1" "t" "侀" \
     "$(service_status i3_autotiling.service user) autotiling")
 $(i3_helper_table.sh "$table_width1" "c" "頋" \
     "$(service_status picom.service user) compositor")
+$(i3_helper_table.sh "$table_width1" "w" "" \
+    "$(service_status wacom.service user) wacom")
 $(i3_helper_table.sh "$table_width1" "m" "" \
     "$(service_status xbanish.service user) mousepointer")
 $(i3_helper_table.sh "$table_width1" "s" "" \
@@ -139,6 +141,9 @@ case "$1" in
         ;;
     --compositor)
         service_toggle "picom.service" "user"
+        ;;
+    --wacom)
+        service_toggle "wacom.service" "user"
         ;;
     --mousepointer)
         service_toggle "xbanish.service" "user"
