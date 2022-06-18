@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-18T13:50:54+0200
+# date:   2022-06-18T14:23:32+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -106,7 +106,7 @@ $(i3_helper_table.sh "$table_width1" "c" "頋" \
     "$(service_status picom.service user) compositor")
 $(i3_helper_table.sh "$table_width1" "w" "" \
     "$(service_status wacom.service user) wacom")
-$(i3_helper_table.sh "$table_width1" "m" "" \
+$(i3_helper_table.sh "$table_width1" "m" "" \
     "$(service_status xbanish.service user) mousepointer")
 $(i3_helper_table.sh "$table_width1" "s" "" \
     "$(service_status systemd-resolved.service) resolver")
