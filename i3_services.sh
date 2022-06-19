@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-18T14:23:32+0200
+# date:   2022-06-19T19:12:31+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -82,7 +82,7 @@ $(if [ "$(service_status polybar.service user)" = "$active" ]; then
         "$(i3_helper_table.sh "$table_width2" "0" "" \
             "  └─ reload")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width2" "i" "索" \
+        "$(i3_helper_table.sh "$table_width2" "i" "參" \
             "     ├─ inoreader")"
     printf "%s\n" \
         "$(i3_helper_table.sh "$table_width2" "o" "" \
@@ -98,7 +98,7 @@ else
         "$(i3_helper_table.sh "$table_width1" "a" "" \
             "$inactive polybar")"
 fi)
-$(i3_helper_table.sh "$table_width1" "l" "" \
+$(i3_helper_table.sh "$table_width1" "l" "" \
     "$(service_status xautolock.service user) autolock")
 $(i3_helper_table.sh "$table_width1" "t" "侀" \
     "$(service_status i3_autotiling.service user) autotiling")
@@ -110,7 +110,7 @@ $(i3_helper_table.sh "$table_width1" "m" "" \
     "$(service_status xbanish.service user) mousepointer")
 $(i3_helper_table.sh "$table_width1" "s" "" \
     "$(service_status systemd-resolved.service) resolver")
-$(i3_helper_table.sh "$table_width1" "y" "祥" \
+$(i3_helper_table.sh "$table_width1" "y" "ﮮ" \
     "$(service_status systemd-timesyncd.service) timesync")
 $(i3_helper_table.sh "$table_width1" "h" "撚" \
     "$(service_status sshd.service) ssh")
