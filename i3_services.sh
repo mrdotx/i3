@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-19T19:12:31+0200
+# date:   2022-06-19T20:16:35+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -12,8 +12,8 @@ LANG=C
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
-active="蘒"
-inactive="﨡"
+icon_active="蘒"
+icon_inactive="﨡"
 
 # get xresources
 xrdb_query() {
@@ -26,16 +26,16 @@ service_status() {
     case "$2" in
         user)
             if systemctl --user -q is-active "$1"; then
-                printf "%s" "$active"
+                printf "%s" "$icon_active"
             else
-                printf "%s" "$inactive"
+                printf "%s" "$icon_inactive"
             fi
             ;;
         *)
             if systemctl -q is-active "$1"; then
-                printf "%s" "$active"
+                printf "%s" "$icon_active"
             else
-                printf "%s" "$inactive"
+                printf "%s" "$icon_inactive"
             fi
             ;;
     esac
@@ -68,10 +68,10 @@ table_width1=$((table_width + 2))
 table_width2=$((table_width + 4))
 message="
 $(i3_helper_table.sh "$table_width" "header" "enable/disable")
-$(if [ "$(service_status polybar.service user)" = "$active" ]; then
+$(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
     printf "%s\n" \
         "$(i3_helper_table.sh "$table_width1" "a" "" \
-            "$active polybar")"
+            "$icon_active polybar")"
     printf "%s\n" \
         "$(i3_helper_table.sh "$table_width2" "1" "" \
             "  ├─ primary   -> $(xrdb_query "Polybar.type.monitor1")")"
@@ -96,7 +96,7 @@ $(if [ "$(service_status polybar.service user)" = "$active" ]; then
 else
     printf "%s" \
         "$(i3_helper_table.sh "$table_width1" "a" "" \
-            "$inactive polybar")"
+            "$icon_inactive polybar")"
 fi)
 $(i3_helper_table.sh "$table_width1" "l" "" \
     "$(service_status xautolock.service user) autolock")
