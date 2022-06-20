@@ -2,10 +2,10 @@
 
 general helper scripts for i3
 
-| name                | comment                         |
-| :------------------ | :------------------------------ |
-| i3_helper_notify.sh | general config for notification |
-| i3_helper_table.sh  | table format for notification   |
+| name         | comment                         |
+| :----------- | :------------------------------ |
+| i3_notify.sh | general config for notification |
+| i3_table.sh  | table format for notification   |
 
 shell scripts for i3
 

@@ -3,22 +3,25 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-07T16:32:39+0200
+# date:   2022-06-20T18:27:58+0200
+
+basename=${0##*/}
+path=${0%"$basename"}
 
 title="ssh"
 table_width=37
 message="
-$(i3_helper_table.sh "$table_width" "header" "server")
-$(i3_helper_table.sh "$table_width" "p" "菉" "pi")
-$(i3_helper_table.sh "$table_width" "i" "菉" "pi2")
-$(i3_helper_table.sh "$table_width" "n" "力" "nas")
+$("$path"helper/i3_table.sh "$table_width" "header" "server")
+$("$path"helper/i3_table.sh "$table_width" "p" "菉" "pi")
+$("$path"helper/i3_table.sh "$table_width" "i" "菉" "pi2")
+$("$path"helper/i3_table.sh "$table_width" "n" "力" "nas")
 
-$(i3_helper_table.sh "$table_width" "header" "client")
-$(i3_helper_table.sh "$table_width" "m" "" "mi")
-$(i3_helper_table.sh "$table_width" "b" "" "macbook")
+$("$path"helper/i3_table.sh "$table_width" "header" "client")
+$("$path"helper/i3_table.sh "$table_width" "m" "" "mi")
+$("$path"helper/i3_table.sh "$table_width" "b" "" "macbook")
 
-$(i3_helper_table.sh "$table_width" "header" "other")
-$(i3_helper_table.sh "$table_width" "s" "菉" "pi + pi2")
+$("$path"helper/i3_table.sh "$table_width" "header" "other")
+$("$path"helper/i3_table.sh "$table_width" "s" "菉" "pi + pi2")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+h</b>]"
 
@@ -43,9 +46,9 @@ case "$1" in
         i3_tmux.sh -o 22 "pi2" "ssh pi2"
         ;;
     --kill)
-        i3_helper_notify.sh 1 "$title"
+        "$path"helper/i3_notify.sh 1 "$title"
         ;;
     *)
-        i3_helper_notify.sh 0 "$title" "$message"
+        "$path"helper/i3_notify.sh 0 "$title" "$message"
         ;;
 esac

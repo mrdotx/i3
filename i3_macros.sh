@@ -3,11 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-08T09:12:55+0200
+# date:   2022-06-20T18:32:41+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
+
+basename=${0##*/}
+path=${0%"$basename"}
 
 press_key() {
     i="$1"
@@ -32,7 +35,7 @@ type_string() {
 progress_notification() {
     message="$message$2"
 
-    i3_helper_notify.sh "$1" "$title" "$message" "$3"
+    "$path"helper/i3_notify.sh "$1" "$title" "$message" "$3"
 }
 
 wait_for_max() {
@@ -87,29 +90,31 @@ open_tmux() {
 title="macros"
 table_width=41
 message="
-$(i3_helper_table.sh "$table_width" "header" "info")
-$(i3_helper_table.sh "$table_width" "w" "" "weather")
-$(i3_helper_table.sh "$table_width" "c" "" "corona stats")
+$("$path"helper/i3_table.sh "$table_width" "header" "info")
+$("$path"helper/i3_table.sh "$table_width" "w" "" "weather")
+$("$path"helper/i3_table.sh "$table_width" "c" "" "corona stats")
 
-$(i3_helper_table.sh "$table_width" "header" "system")
-$(i3_helper_table.sh "$table_width" "r" "" "trash")
-$(i3_helper_table.sh "$table_width" "b" "襤" "boot next")
-$(i3_helper_table.sh "$table_width" "v" "禍" "ventoy")
-$(i3_helper_table.sh "$table_width" "t" "" "terminal colors")
+$("$path"helper/i3_table.sh "$table_width" "header" "system")
+$("$path"helper/i3_table.sh "$table_width" "r" "" "trash")
+$("$path"helper/i3_table.sh "$table_width" "b" "襤" "boot next")
+$("$path"helper/i3_table.sh "$table_width" "v" "禍" "ventoy")
+$("$path"helper/i3_table.sh "$table_width" "t" "" "terminal colors")
 
-$(i3_helper_table.sh "$table_width" "header" "other")
-$(i3_helper_table.sh "$table_width" "s" "" "starwars")
+$("$path"helper/i3_table.sh "$table_width" "header" "other")
+$("$path"helper/i3_table.sh "$table_width" "s" "" "starwars")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+print</b>]"
 
 case "$1" in
     --weather)
+        url="wttr.in/?AFq2&format=v2d&lang=de"
         open_tmux 1 \
-            "curl -fsS 'wttr.in/?AFq2&format=v2d&lang=de'"
+            "curl -fsS '$url'"
         ;;
     --coronastats)
+        url="https://corona-stats.online?top=30&source=2&minimal=true"
         open_tmux 1 \
-            "curl -fsS 'https://corona-stats.online?top=30&source=2&minimal=true' | head -n32"
+            "curl -fsS '$url' | head -n32"
         ;;
     --bootnext)
         open_tmux 1 \
@@ -137,30 +142,36 @@ case "$1" in
     --autostart)
         table_width=28
         finished_icon=""
-        message="\n$(i3_helper_table.sh "$table_width" "header" "autostart")"
+        message="\n$("$path"helper/i3_table.sh \
+                    "$table_width" "header" "autostart")"
 
         progress_notification 0 \
-            "\n$(i3_helper_table.sh "$table_width" "" "" "open web browser")" 10
+            "\n$("$path"helper/i3_table.sh \
+                "$table_width" "" "" "open web browser")" 10
         firefox-developer-edition &
         wait_for_max 45 "firefox" 5 20
 
         progress_notification 0 \
-            "\n$(i3_helper_table.sh "$table_width" "" "" "open file manager")" 30
+            "\n$("$path"helper/i3_table.sh \
+                "$table_width" "" "" "open file manager")" 30
         open_terminal 1 "cd $HOME/.local/share/repos; ranger_cd"
         wait_for_max 35 "ranger" 0 40
 
         progress_notification 0 \
-            "\n$(i3_helper_table.sh "$table_width" "" "" "open multiplexer")" 70
+            "\n$("$path"helper/i3_table.sh \
+                "$table_width" "" "" "open multiplexer")" 70
         open_tmux 1 "cinfo"
         wait_for_max 25 "tmux" 1 80
 
         progress_notification 0 \
-            "\n$(i3_helper_table.sh "$table_width" "" "" "open system info")" 50
+            "\n$("$path"helper/i3_table.sh \
+                "$table_width" "" "" "open system info")" 50
         exec_terminal 2 "btop"
         wait_for_max 25 "btop" 0 60
 
         progress_notification 0 \
-            "\n$(i3_helper_table.sh "$table_width" "" "" "resize multiplexer")" 90
+            "\n$("$path"helper/i3_table.sh \
+                "$table_width" "" "" "resize multiplexer")" 90
         press_key 3 Super+Ctrl+Down
         press_key 1 Super+Up
         progress_notification 2500 "$finished_icon" 100
@@ -197,13 +208,13 @@ case "$1" in
         esac
 
         xdotool mousemove "$x" "$y"
-        i3_helper_notify.sh 2500 "$title" \
+        "$path"helper/i3_notify.sh 2500 "$title" \
             "mouse pointer moved to ${x}x${y} [$position_icon]"
         ;;
     --kill)
-        i3_helper_notify.sh 1 "$title"
+        "$path"helper/i3_notify.sh 1 "$title"
         ;;
     *)
-        i3_helper_notify.sh 0 "$title" "$message"
+        "$path"helper/i3_notify.sh 0 "$title" "$message"
         ;;
 esac

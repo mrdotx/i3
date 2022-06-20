@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/i3/i3_helper_table.sh
+# path:   /home/klassiker/.local/share/repos/i3/helper/i3_table.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-05-20T20:04:50+0200
+# date:   2022-06-20T18:14:42+0200
 
 table_line="─"
 table_divider="┬"

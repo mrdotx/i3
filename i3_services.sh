@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-19T20:16:35+0200
+# date:   2022-06-20T18:26:04+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -14,6 +14,9 @@ LANG=C
 auth="${EXEC_AS_USER:-sudo}"
 icon_active="蘒"
 icon_inactive="﨡"
+
+basename=${0##*/}
+path=${0%"$basename"}
 
 # get xresources
 xrdb_query() {
@@ -67,65 +70,65 @@ table_width=39
 table_width1=$((table_width + 2))
 table_width2=$((table_width + 4))
 message="
-$(i3_helper_table.sh "$table_width" "header" "enable/disable")
+$("$path"helper/i3_table.sh "$table_width" "header" "enable/disable")
 $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width1" "a" "" \
+        "$("$path"helper/i3_table.sh "$table_width1" "a" "" \
             "$icon_active polybar")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width2" "1" "" \
+        "$("$path"helper/i3_table.sh "$table_width2" "1" "" \
             "  ├─ primary   -> $(xrdb_query "Polybar.type.monitor1")")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width2" "2" "" \
+        "$("$path"helper/i3_table.sh "$table_width2" "2" "" \
             "  ├─ secondary -> $(xrdb_query 'Polybar.type.monitor2')")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width2" "0" "" \
+        "$("$path"helper/i3_table.sh "$table_width2" "0" "" \
             "  └─ reload")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width2" "i" "參" \
+        "$("$path"helper/i3_table.sh "$table_width2" "i" "參" \
             "     ├─ inoreader")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width2" "o" "" \
+        "$("$path"helper/i3_table.sh "$table_width2" "o" "" \
             "     ├─ openweathermap")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width2" "n" "" \
+        "$("$path"helper/i3_table.sh "$table_width2" "n" "" \
             "     ├─ pacman")"
     printf "%s\n" \
-        "$(i3_helper_table.sh "$table_width2" "r" "" \
+        "$("$path"helper/i3_table.sh "$table_width2" "r" "" \
             "     └─ trash-cli")"
 else
     printf "%s" \
-        "$(i3_helper_table.sh "$table_width1" "a" "" \
+        "$("$path"helper/i3_table.sh "$table_width1" "a" "" \
             "$icon_inactive polybar")"
 fi)
-$(i3_helper_table.sh "$table_width1" "l" "" \
+$("$path"helper/i3_table.sh "$table_width1" "l" "" \
     "$(service_status xautolock.service user) autolock")
-$(i3_helper_table.sh "$table_width1" "t" "侀" \
+$("$path"helper/i3_table.sh "$table_width1" "t" "侀" \
     "$(service_status i3_autotiling.service user) autotiling")
-$(i3_helper_table.sh "$table_width1" "c" "頋" \
+$("$path"helper/i3_table.sh "$table_width1" "c" "頋" \
     "$(service_status picom.service user) compositor")
-$(i3_helper_table.sh "$table_width1" "w" "" \
+$("$path"helper/i3_table.sh "$table_width1" "w" "" \
     "$(service_status wacom.service user) wacom")
-$(i3_helper_table.sh "$table_width1" "m" "" \
+$("$path"helper/i3_table.sh "$table_width1" "m" "" \
     "$(service_status xbanish.service user) mousepointer")
-$(i3_helper_table.sh "$table_width1" "s" "" \
+$("$path"helper/i3_table.sh "$table_width1" "s" "" \
     "$(service_status systemd-resolved.service) resolver")
-$(i3_helper_table.sh "$table_width1" "y" "ﮮ" \
+$("$path"helper/i3_table.sh "$table_width1" "y" "ﮮ" \
     "$(service_status systemd-timesyncd.service) timesync")
-$(i3_helper_table.sh "$table_width1" "h" "撚" \
+$("$path"helper/i3_table.sh "$table_width1" "h" "撚" \
     "$(service_status sshd.service) ssh")
-$(i3_helper_table.sh "$table_width1" "v" "旅" \
+$("$path"helper/i3_table.sh "$table_width1" "v" "旅" \
     "$(service_status vpnc@hades.service) vpn")
-$(i3_helper_table.sh "$table_width1" "p" "朗" \
+$("$path"helper/i3_table.sh "$table_width1" "p" "朗" \
     "$(service_status cups.service) printer")
-$(i3_helper_table.sh "$table_width1" "b" "" \
+$("$path"helper/i3_table.sh "$table_width1" "b" "" \
     "$(service_status bluetooth.service) bluetooth")
 
-$(i3_helper_table.sh "$table_width" "header" "restart")
-$(i3_helper_table.sh "$table_width" "d" "" "dunst")
+$("$path"helper/i3_table.sh "$table_width" "header" "restart")
+$("$path"helper/i3_table.sh "$table_width" "d" "" "dunst")
 
-$(i3_helper_table.sh "$table_width" "header" "kill")
-$(i3_helper_table.sh "$table_width" "u" "" "urxvtd")
+$("$path"helper/i3_table.sh "$table_width" "header" "kill")
+$("$path"helper/i3_table.sh "$table_width" "u" "" "urxvtd")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
 
@@ -179,9 +182,9 @@ case "$1" in
         service_toggle "vpnc@hades.service"
         ;;
     --kill)
-        i3_helper_notify.sh 1 "$title"
+        "$path"helper/i3_notify.sh 1 "$title"
         ;;
     *)
-        i3_helper_notify.sh 0 "$title" "$message"
+        "$path"helper/i3_notify.sh 0 "$title" "$message"
         ;;
 esac

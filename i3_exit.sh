@@ -3,23 +3,26 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-07T16:31:30+0200
+# date:   2022-06-20T18:14:19+0200
 
 # speed up script by using standard c
 LC_ALL=C
 LANG=C
 
+basename=${0##*/}
+path=${0%"$basename"}
+
 title="exit"
 table_width=45
 message="
-$(i3_helper_table.sh "$table_width" "header" "power")
-$(i3_helper_table.sh "$table_width" "s" "鈴" "suspend")
-$(i3_helper_table.sh "$table_width" "r" "累" "reboot")
-$(i3_helper_table.sh "$table_width" "d" "襤" "shutdown")
+$("$path"helper/i3_table.sh "$table_width" "header" "power")
+$("$path"helper/i3_table.sh "$table_width" "s" "鈴" "suspend")
+$("$path"helper/i3_table.sh "$table_width" "r" "累" "reboot")
+$("$path"helper/i3_table.sh "$table_width" "d" "襤" "shutdown")
 
-$(i3_helper_table.sh "$table_width" "header" "other")
-$(i3_helper_table.sh "$table_width" "l" "" "lock")
-$(i3_helper_table.sh "$table_width" "o" "" "logout")
+$("$path"helper/i3_table.sh "$table_width" "header" "other")
+$("$path"helper/i3_table.sh "$table_width" "l" "" "lock")
+$("$path"helper/i3_table.sh "$table_width" "o" "" "logout")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>ctrl+alt+delete</b>]"
 
@@ -42,9 +45,9 @@ case "$1" in
         i3-msg exit
         ;;
     --kill)
-        i3_helper_notify.sh 1 "$title"
+        "$path"helper/i3_notify.sh 1 "$title"
         ;;
     *)
-        i3_helper_notify.sh 0 "$title" "$message"
+        "$path"helper/i3_notify.sh 0 "$title" "$message"
         ;;
 esac
