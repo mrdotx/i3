@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-27T19:01:37+0200
+# date:   2022-07-03T13:18:17+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -175,6 +175,17 @@ case "$1" in
         press_key 3 Super+Ctrl+Down
         press_key 1 Super+Up
         progress_notification 2500 "$finished_icon" 100
+        ;;
+    --xkeymou)
+        "$path"helper/i3_notify.sh 0 "$title" "xkeymou active"
+        if systemctl --user -q is-active xbanish.service; then
+            systemctl --user stop xbanish.service \
+                && xkeymou \
+                && systemctl --user start xbanish.service
+        else
+            xkeymou
+        fi
+        "$path"helper/i3_notify.sh 2500 "$title" "xkeymou deactivated"
         ;;
     --mousemove)
         resolution=$( \
