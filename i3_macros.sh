@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-06T14:32:04+0200
+# date:   2022-07-07T11:34:13+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -140,7 +140,7 @@ case "$1" in
             "telnet towel.blinkenlights.nl"
         ;;
     --autostart)
-        table_width=28
+        table_width=33
         finished_icon=""
         message="\n$("$path"helper/i3_table.sh \
                     "$table_width" "header" "autostart")"
@@ -159,21 +159,27 @@ case "$1" in
 
         progress_notification 0 \
             "\n$("$path"helper/i3_table.sh \
-                "$table_width" "" "" "open multiplexer")" 70
+                "$table_width" "" "" "open multiplexer")" 50
         open_tmux 1 "cinfo"
-        wait_for_max 25 "tmux" 1 80
+        wait_for_max 25 "tmux" 1 60
 
         progress_notification 0 \
             "\n$("$path"helper/i3_table.sh \
-                "$table_width" "" "" "open system info")" 50
+                "$table_width" "" "" "open system info")" 70
         exec_terminal 2 "btop"
-        wait_for_max 25 "btop" 0 60
+        wait_for_max 25 "btop" 0 80
 
         progress_notification 0 \
             "\n$("$path"helper/i3_table.sh \
-                "$table_width" "" "" "resize multiplexer")" 90
+                "$table_width" "" "" "resize multiplexer")" 85
         press_key 3 Super+Ctrl+Down
         press_key 1 Super+Up
+        progress_notification 1 "$finished_icon" 90
+
+        progress_notification 0 \
+            "\n$("$path"helper/i3_table.sh \
+                "$table_width" "" "禍" "unbind usb port [wacom]")" 95
+        dmenu_usb.sh --unbind "Wacom Co., Ltd CTH-480"
         progress_notification 2500 "$finished_icon" 100
         ;;
     --mousemove)
