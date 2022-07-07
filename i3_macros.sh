@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-07T11:34:13+0200
+# date:   2022-07-07T18:23:47+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -174,7 +174,7 @@ case "$1" in
                 "$table_width" "" "" "resize multiplexer")" 85
         press_key 3 Super+Ctrl+Down
         press_key 1 Super+Up
-        progress_notification 1 "$finished_icon" 90
+        progress_notification 0 "$finished_icon" 90
 
         progress_notification 0 \
             "\n$("$path"helper/i3_table.sh \
