@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-20T18:27:58+0200
+# date:   2022-07-08T09:39:19+0200
 
 basename=${0##*/}
 path=${0%"$basename"}
@@ -25,25 +25,30 @@ $("$path"helper/i3_table.sh "$table_width" "s" "菉" "pi + pi2")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+h</b>]"
 
+connect () {
+    host="${1##*--}"
+    i3_tmux.sh -o "$2" "$host" "ssh $host"
+}
+
 case "$1" in
     --pi)
-        i3_tmux.sh -o 21 "pi" "ssh pi"
+        connect "$1" 21
         ;;
     --pi2)
-        i3_tmux.sh -o 22 "pi2" "ssh pi2"
+        connect "$1" 22
         ;;
     --nas)
-        i3_tmux.sh -o 23 "nas" "ssh nas"
+        connect "$1" 23
         ;;
     --mi)
-        i3_tmux.sh -o 24 "mi" "ssh mi"
+        connect "$1" 24
         ;;
     --macbook)
-        i3_tmux.sh -o 25 "macbook" "ssh macbook"
+        connect "$1" 25
         ;;
     --pipi2)
-        i3_tmux.sh -o 21 "pi" "ssh pi"
-        i3_tmux.sh -o 22 "pi2" "ssh pi2"
+        connect "pi" 21
+        connect "pi2" 22
         ;;
     --kill)
         "$path"helper/i3_notify.sh 1 "$title"
