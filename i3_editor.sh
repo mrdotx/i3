@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-08T08:53:55+0200
+# date:   2022-07-08T09:40:16+0200
 
 basename=${0##*/}
 path=${0%"$basename"}
@@ -23,6 +23,8 @@ $("$path"helper/i3_table.sh "$table_width" "header" "remote")
 $("$path"helper/i3_table.sh "$table_width" "p" "菉" "pi")
 $("$path"helper/i3_table.sh "$table_width" "i" "菉" "pi2")
 $("$path"helper/i3_table.sh "$table_width" "m" "" "mi")
+$("$path"helper/i3_table.sh "$table_width" "b" "" "macbook")
+$("$path"helper/i3_table.sh "$table_width" "n" "力" "nas")
 $("$path"helper/i3_table.sh "$table_width" "f" "力" "middlefinger")
 $("$path"helper/i3_table.sh "$table_width" "z" "力" "prinzipal")
 $("$path"helper/i3_table.sh "$table_width" "k" "力" "klassiker")
@@ -38,21 +40,6 @@ case "$1" in
     --vimwiki)
         $TERMINAL -e "$EDITOR" -c ":VimwikiIndex"
         ;;
-    --pi)
-        open "scp" "pi"
-        ;;
-    --pi2)
-        open "scp" "pi2"
-        ;;
-    --mi)
-        open "scp" "mi"
-        ;;
-    --middlefinger)
-        open "scp" "middlefinger"
-        ;;
-    --prinzipal)
-        open "scp" "prinzipal"
-        ;;
     --klassiker)
         open "ftp" "klassiker.online.de"
         ;;
@@ -61,6 +48,10 @@ case "$1" in
         ;;
     --kill)
         "$path"helper/i3_notify.sh 1 "$title"
+        ;;
+    --*)
+        # scp as default
+        open "scp" "${1##*--}"
         ;;
     *)
         "$path"helper/i3_notify.sh 0 "$title" "$message"
