@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-07T18:23:47+0200
+# date:   2022-07-09T14:18:45+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -179,7 +179,7 @@ case "$1" in
         progress_notification 0 \
             "\n$("$path"helper/i3_table.sh \
                 "$table_width" "" "禍" "unbind usb port [wacom]")" 95
-        dmenu_usb.sh --unbind "Wacom Co., Ltd CTH-480"
+        dmenu_usb.sh --unbind "^usb3:"
         progress_notification 2500 "$finished_icon" 100
         ;;
     --mousemove)
