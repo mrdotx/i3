@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-10T09:52:23+0200
+# date:   2022-07-10T18:31:18+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -164,7 +164,7 @@ autostart() {
     progress_notification 0 \
         "\n$("$path"helper/i3_table.sh \
             "$table_width" "" "禍" "unbind usb3 port")" 85
-    dmenu_usb.sh --unbind "^usb3:"
+    dmenu_usb.sh --unbind "Bus 003 Device 001"
     progress_notification 0 "$finished_icon" 90
 
     progress_notification 0 \
