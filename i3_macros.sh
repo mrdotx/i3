@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-09T14:18:45+0200
+# date:   2022-07-10T09:52:23+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -87,6 +87,94 @@ open_tmux() {
     press_key 1 Return
 }
 
+mouse_move() {
+    resolution=$( \
+        xrandr \
+            | head -n1 \
+            | cut -d" " -f8,10 \
+            | tr -d ","
+    )
+
+    case $1 in
+        topleft)
+            position_icon=""
+            x=0
+            y=0
+            ;;
+        topright)
+            position_icon=""
+            x="${resolution%% *}"
+            y=0
+            ;;
+        bottomleft)
+            position_icon=""
+            x=0
+            y="${resolution##* }"
+            ;;
+        bottomright)
+            position_icon=""
+            x="${resolution%% *}"
+            y="${resolution##* }"
+            ;;
+    esac
+
+    xdotool mousemove "$x" "$y"
+    [ -z "$2" ] \
+        && "$path"helper/i3_notify.sh 2500 "$title" \
+            "mouse pointer moved to [$position_icon]\npixel coordinates ${x}x${y}"
+}
+
+autostart() {
+    table_width=28
+    finished_icon=""
+    message="\n$("$path"helper/i3_table.sh \
+                "$table_width" "header" "autostart")"
+
+    progress_notification 0 \
+        "\n$("$path"helper/i3_table.sh \
+            "$table_width" "" "" "open web browser")" 10
+    firefox-developer-edition &
+    wait_for_max 45 "firefox" 5 20
+
+    progress_notification 0 \
+        "\n$("$path"helper/i3_table.sh \
+            "$table_width" "" "" "open file manager")" 30
+    open_terminal 1 "cd $HOME/.local/share/repos; ranger_cd"
+    wait_for_max 35 "ranger" 0 40
+
+    progress_notification 0 \
+        "\n$("$path"helper/i3_table.sh \
+            "$table_width" "" "" "open multiplexer")" 50
+    open_tmux 1 "cinfo"
+    wait_for_max 25 "tmux" 1 60
+
+    progress_notification 0 \
+        "\n$("$path"helper/i3_table.sh \
+            "$table_width" "" "" "open system info")" 65
+    exec_terminal 2 "btop"
+    wait_for_max 25 "btop" 0 70
+
+    progress_notification 0 \
+        "\n$("$path"helper/i3_table.sh \
+            "$table_width" "" "" "resize multiplexer")" 75
+    press_key 3 Super+Ctrl+Down
+    press_key 1 Super+Up
+    progress_notification 0 "$finished_icon" 80
+
+    progress_notification 0 \
+        "\n$("$path"helper/i3_table.sh \
+            "$table_width" "" "禍" "unbind usb3 port")" 85
+    dmenu_usb.sh --unbind "^usb3:"
+    progress_notification 0 "$finished_icon" 90
+
+    progress_notification 0 \
+        "\n$("$path"helper/i3_table.sh \
+            "$table_width" "" "" "move mouse pointer")" 95
+    mouse_move "topright" 0
+    xdotool click 1
+    progress_notification 2500 "$finished_icon" 100
+}
+
 title="macros"
 table_width=41
 message="
@@ -122,8 +210,7 @@ case "$1" in
         ;;
     --trash)
         open_tmux 1 \
-            "fzf_trash.sh" \
-            1
+            "fzf_trash.sh" 1
             ;;
     --ventoy)
         open_tmux 1 \
@@ -140,82 +227,10 @@ case "$1" in
             "telnet towel.blinkenlights.nl"
         ;;
     --autostart)
-        table_width=33
-        finished_icon=""
-        message="\n$("$path"helper/i3_table.sh \
-                    "$table_width" "header" "autostart")"
-
-        progress_notification 0 \
-            "\n$("$path"helper/i3_table.sh \
-                "$table_width" "" "" "open web browser")" 10
-        firefox-developer-edition &
-        wait_for_max 45 "firefox" 5 20
-
-        progress_notification 0 \
-            "\n$("$path"helper/i3_table.sh \
-                "$table_width" "" "" "open file manager")" 30
-        open_terminal 1 "cd $HOME/.local/share/repos; ranger_cd"
-        wait_for_max 35 "ranger" 0 40
-
-        progress_notification 0 \
-            "\n$("$path"helper/i3_table.sh \
-                "$table_width" "" "" "open multiplexer")" 50
-        open_tmux 1 "cinfo"
-        wait_for_max 25 "tmux" 1 60
-
-        progress_notification 0 \
-            "\n$("$path"helper/i3_table.sh \
-                "$table_width" "" "" "open system info")" 70
-        exec_terminal 2 "btop"
-        wait_for_max 25 "btop" 0 80
-
-        progress_notification 0 \
-            "\n$("$path"helper/i3_table.sh \
-                "$table_width" "" "" "resize multiplexer")" 85
-        press_key 3 Super+Ctrl+Down
-        press_key 1 Super+Up
-        progress_notification 0 "$finished_icon" 90
-
-        progress_notification 0 \
-            "\n$("$path"helper/i3_table.sh \
-                "$table_width" "" "禍" "unbind usb port [wacom]")" 95
-        dmenu_usb.sh --unbind "^usb3:"
-        progress_notification 2500 "$finished_icon" 100
+        autostart
         ;;
     --mousemove)
-        resolution=$( \
-            xrandr \
-                | head -n1 \
-                | cut -d" " -f8,10 \
-                | tr -d ","
-        )
-
-        case $2 in
-            topleft)
-                position_icon=""
-                x=0
-                y=0
-                ;;
-            topright)
-                position_icon=""
-                x="${resolution%% *}"
-                y=0
-                ;;
-            bottomleft)
-                position_icon=""
-                x=0
-                y="${resolution##* }"
-                ;;
-            bottomright)
-                position_icon=""
-                x="${resolution%% *}"
-                y="${resolution##* }"
-                ;;
-        esac
-
-        xdotool mousemove "$x" "$y"
-        "$path"helper/i3_notify.sh 2500 "$title" \
-            "mouse pointer moved to [$position_icon]\npixel coordinates ${x}x${y}"
+        mouse_move "$2" "$3"
         ;;
     --kill)
         "$path"helper/i3_notify.sh 1 "$title"
