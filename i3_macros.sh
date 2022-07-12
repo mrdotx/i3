@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-10T20:49:24+0200
+# date:   2022-07-12T10:54:24+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -17,7 +17,7 @@ press_key() {
     shift
     while [ "$i" -ge 1 ]; do
         xdotool key --delay 15 "$@"
-        i=$((i-1))
+        i=$((i - 1))
     done
 }
 
@@ -48,7 +48,7 @@ wait_for_max() {
             sleep .1
             max_ds=$((max_ds - 1))
     done
-    progress_notification 0 "" "$((progress-5))"
+    progress_notification 0 "" "$((progress - 5))"
 
     while [ "$after_ds" -ge 1 ]; do
         sleep .1

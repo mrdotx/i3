@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/helper/i3_table.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-22T09:36:13+0200
+# date:   2022-07-12T10:48:07+0200
 
 table_line="─"
 table_divider="┬"
@@ -17,7 +17,7 @@ set_spacer() {
     i=$1
     while [ "$i" -gt 0 ]; do
         printf "%s" "${2:-" "}"
-        i=$((i -1))
+        i=$((i - 1))
     done
 }
 
