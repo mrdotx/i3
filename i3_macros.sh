@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-12T10:54:24+0200
+# date:   2022-07-14T13:31:59+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -95,6 +95,11 @@ mouse_move() {
             | tr -d ","
     )
 
+    get_mouse_location() {
+        eval "$(xdotool getmouselocation --shell)"
+        printf "%sx%s" "$X" "$Y"
+    }
+
     case $1 in
         topleft)
             position_icon=""
@@ -121,7 +126,7 @@ mouse_move() {
     xdotool mousemove "$x" "$y"
     [ -z "$2" ] \
         && "$path"helper/i3_notify.sh 2500 "$title" \
-            "mouse pointer moved to [$position_icon]\npixel coordinates ${x}x${y}"
+            "mouse pointer moved to $(get_mouse_location) [$position_icon]"
 }
 
 autostart() {
