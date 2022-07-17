@@ -11,7 +11,7 @@ shell scripts for i3
 
 | name                 | comment                                                |
 | :------------------- | :----------------------------------------------------- |
-| i3_autotiling.sh     | optimal tilings for focused window                     |
+| i3_autotiling.sh     | automatic optimal tilings for windows                  |
 | i3_container.sh      | shows keybindings for container mode with notify-send  |
 | i3_editor.sh         | shows keybindings for editor mode with notify-send     |
 | i3_exit.sh           | lock/suspend/logout/reboot/shutdown/switch user script |
@@ -34,6 +34,7 @@ config files:
 - [dotfiles/polybar](https://github.com/mrdotx/dotfiles/tree/master/.config/polybar)
 - [dotfiles/tmux](https://github.com/mrdotx/dotfiles/tree/master/.config/tmux)
 - [dotfiles/dunst](https://github.com/mrdotx/dotfiles/tree/master/.config/dunst)
+- [dotfiles/systemd](https://github.com/mrdotx/dotfiles/tree/master/.config/systemd/user)
 
 related projects:
 
