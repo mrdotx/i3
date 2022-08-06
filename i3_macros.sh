@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-14T13:31:59+0200
+# date:   2022-07-30T12:19:34+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -183,15 +183,15 @@ autostart() {
 title="macros"
 table_width=41
 message="
-$("$path"helper/i3_table.sh "$table_width" "header" "info")
-$("$path"helper/i3_table.sh "$table_width" "w" "" "weather")
-$("$path"helper/i3_table.sh "$table_width" "c" "" "corona stats")
-
 $("$path"helper/i3_table.sh "$table_width" "header" "system")
 $("$path"helper/i3_table.sh "$table_width" "r" "" "trash")
 $("$path"helper/i3_table.sh "$table_width" "b" "襤" "boot next")
 $("$path"helper/i3_table.sh "$table_width" "v" "禍" "ventoy")
 $("$path"helper/i3_table.sh "$table_width" "t" "" "terminal colors")
+
+$("$path"helper/i3_table.sh "$table_width" "header" "info")
+$("$path"helper/i3_table.sh "$table_width" "w" "" "weather")
+$("$path"helper/i3_table.sh "$table_width" "c" "" "corona stats")
 
 $("$path"helper/i3_table.sh "$table_width" "header" "other")
 $("$path"helper/i3_table.sh "$table_width" "s" "" "starwars")
@@ -199,16 +199,6 @@ $("$path"helper/i3_table.sh "$table_width" "s" "" "starwars")
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+print</b>]"
 
 case "$1" in
-    --weather)
-        url="wttr.in/?AFq2&format=v2d&lang=de"
-        open_tmux 1 \
-            "curl -fsS '$url'"
-        ;;
-    --coronastats)
-        url="https://corona-stats.online?top=30&source=2&minimal=true"
-        open_tmux 1 \
-            "curl -fsS '$url' | head -n32"
-        ;;
     --bootnext)
         open_tmux 1 \
             "$auth efistub.sh -b"
@@ -227,9 +217,20 @@ case "$1" in
         open_tmux 1 \
             "terminal_colors.sh"
         ;;
-    --starwars)
+    --weather)
+        url="wttr.in/?AFq2&format=v2d&lang=de"
         open_tmux 1 \
-            "telnet towel.blinkenlights.nl"
+            "curl -fsS '$url'"
+        ;;
+    --coronastats)
+        url="https://corona-stats.online?top=30&source=2&minimal=true"
+        open_tmux 1 \
+            "curl -fsS '$url' | head -n32"
+        ;;
+    --starwars)
+        url="https://asciitv.fr"
+        open_tmux 1 \
+            "curl -fsS '$url'"
         ;;
     --autostart)
         autostart
