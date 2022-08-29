@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/helper/i3_notify.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-04T13:06:14+0200
+# date:   2022-08-29T09:24:58+0200
 
 timer="$1"
 title="$2 [i3 mode]"
@@ -24,7 +24,7 @@ notification() {
 }
 
 case "$message" in
-    "mouse pointer moved to"*)
+    "mouse pointer moved"*)
         notification low
         ;;
     *)

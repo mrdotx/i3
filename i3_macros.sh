@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-30T12:19:34+0200
+# date:   2022-08-29T11:46:54+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -88,6 +88,9 @@ open_tmux() {
 }
 
 mouse_move() {
+    [ -z "$1" ] \
+        && return 1
+
     resolution=$( \
         xrandr \
             | head -n1 \
@@ -100,7 +103,7 @@ mouse_move() {
         printf "%sx%s" "$X" "$Y"
     }
 
-    case $1 in
+    case "$1" in
         topleft)
             position_icon=""
             x=0
@@ -123,10 +126,24 @@ mouse_move() {
             ;;
     esac
 
-    xdotool mousemove "$x" "$y"
-    [ -z "$2" ] \
-        && "$path"helper/i3_notify.sh 2500 "$title" \
-            "mouse pointer moved to $(get_mouse_location) [$position_icon]"
+    case "$2" in
+        "")
+            message="mouse pointer moved [$position_icon]"
+            message="$message\nfrom $(get_mouse_location)"
+
+            "$path"helper/i3_notify.sh 0 "$title" \
+                "$message"
+
+            xdotool mousemove "$x" "$y"
+            sleep .5
+
+            "$path"helper/i3_notify.sh 2500 "$title" \
+                "$message to $(get_mouse_location)"
+            ;;
+        *)
+            xdotool mousemove "$x" "$y"
+            ;;
+    esac
 }
 
 autostart() {
