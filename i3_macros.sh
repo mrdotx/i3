@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-08-29T17:34:26+0200
+# date:   2022-08-30T11:33:50+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -201,7 +201,6 @@ title="macros"
 table_width=41
 message="
 $("$path"helper/i3_table.sh "$table_width" "header" "system")
-$("$path"helper/i3_table.sh "$table_width" "r" "" "trash")
 $("$path"helper/i3_table.sh "$table_width" "b" "襤" "boot next")
 $("$path"helper/i3_table.sh "$table_width" "v" "禍" "ventoy")
 $("$path"helper/i3_table.sh "$table_width" "t" "" "terminal colors")
@@ -220,10 +219,6 @@ case "$1" in
         open_tmux 1 \
             "$auth efistub.sh -b"
         ;;
-    --trash)
-        open_tmux 1 \
-            "fzf_trash.sh" 1
-            ;;
     --ventoy)
         open_tmux 1 \
             "lsblk; ventoy -h"
