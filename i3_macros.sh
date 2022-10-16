@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-10-16T09:15:03+0200
+# date:   2022-10-16T10:25:56+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -167,7 +167,7 @@ autostart() {
     progress_notification 0 \
         "\n$("$path"helper/i3_table.sh \
             "$table_width" "" "" "open file manager")" 30
-    open_terminal 1 "cd $HOME/.local/share/repos; ranger_cd"
+    open_terminal 1 " cd $HOME/.local/share/repos; ranger_cd"
     wait_for_max 35 "ranger" 0 40
 
     progress_notification 0 \
