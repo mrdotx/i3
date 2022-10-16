@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-08-30T11:33:50+0200
+# date:   2022-10-16T09:15:03+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -60,7 +60,8 @@ wait_for_max() {
 open_terminal() {
     i3-msg workspace "$1"
     $TERMINAL -e "$SHELL"
-    type_string " tput reset; $2"
+    sleep .5
+    type_string "$2"
     press_key 1 Return
 }
 
@@ -70,6 +71,11 @@ exec_terminal() {
 }
 
 open_tmux() {
+    i3_tmux.sh -o "$1" 'shell'
+    i3-msg workspace 2
+}
+
+exec_tmux() {
     i3_tmux.sh -o "$1" 'shell'
     i3-msg workspace 2
 
@@ -167,7 +173,7 @@ autostart() {
     progress_notification 0 \
         "\n$("$path"helper/i3_table.sh \
             "$table_width" "" "" "open multiplexer")" 50
-    open_tmux 1 "cinfo"
+    open_tmux 1
     wait_for_max 25 "tmux" 1 60
 
     progress_notification 0 \
@@ -216,32 +222,32 @@ $("$path"helper/i3_table.sh "$table_width" "s" "" "starwars")
 
 case "$1" in
     --bootnext)
-        open_tmux 1 \
+        exec_tmux 1 \
             "$auth efistub.sh -b"
         ;;
     --ventoy)
-        open_tmux 1 \
+        exec_tmux 1 \
             "lsblk; ventoy -h"
         type_string \
             "$auth ventoy -u /dev/sd"
         ;;
     --terminalcolors)
-        open_tmux 1 \
+        exec_tmux 1 "" \
             "terminal_colors.sh"
         ;;
     --weather)
         url="wttr.in/?AFq2&format=v2d&lang=de"
-        open_tmux 1 \
+        exec_tmux 1 \
             "curl -fsS '$url'"
         ;;
     --coronastats)
         url="https://corona-stats.online?top=30&source=2&minimal=true"
-        open_tmux 1 \
+        exec_tmux 1 \
             "curl -fsS '$url' | head -n32"
         ;;
     --starwars)
         url="https://asciitv.fr"
-        open_tmux 1 \
+        exec_tmux 1 \
             "curl -fsS '$url'"
         ;;
     --autostart)
