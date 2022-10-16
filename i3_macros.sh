@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-10-16T10:25:56+0200
+# date:   2022-10-16T18:03:37+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -57,17 +57,17 @@ wait_for_max() {
     progress_notification 0 "$finished_icon" "$progress"
 }
 
-open_terminal() {
-    i3-msg workspace "$1"
-    $TERMINAL -e "$SHELL"
-    sleep .5
-    type_string "$2"
-    press_key 1 Return
-}
-
 exec_terminal() {
     i3-msg workspace "$1"
     $TERMINAL -e "$2"
+}
+
+open_terminal() {
+    exec_terminal "$1" "$SHELL"
+
+    sleep .5
+    type_string " $2"
+    press_key 1 Return
 }
 
 open_tmux() {
@@ -76,24 +76,15 @@ open_tmux() {
 }
 
 exec_tmux() {
-    i3_tmux.sh -o "$1" 'shell'
-    i3-msg workspace 2
+    open_tmux "$1"
 
-    # clear prompt
     sleep .5
     press_key 1 Ctrl+c
-    case "$3" in
-        1)
-            type_string "$2"
-            ;;
-        *)
-            type_string " tput reset; $2"
-            ;;
-    esac
+    type_string " tput reset; $2"
     press_key 1 Return
 }
 
-mouse_move() {
+move_mouse() {
     [ -z "$1" ] \
         && return 1
 
@@ -167,7 +158,7 @@ autostart() {
     progress_notification 0 \
         "\n$("$path"helper/i3_table.sh \
             "$table_width" "" "" "open file manager")" 30
-    open_terminal 1 " cd $HOME/.local/share/repos; ranger_cd"
+    open_terminal 1 "cd $HOME/.local/share/repos; ranger_cd"
     wait_for_max 35 "ranger" 0 40
 
     progress_notification 0 \
@@ -198,7 +189,7 @@ autostart() {
     progress_notification 0 \
         "\n$("$path"helper/i3_table.sh \
             "$table_width" "" "" "move mouse pointer")" 95
-    mouse_move "topright" 0
+    move_mouse "topright" 0
     xdotool click 1
     progress_notification 2500 "$finished_icon" 100
 }
@@ -232,7 +223,7 @@ case "$1" in
             "$auth ventoy -u /dev/sd"
         ;;
     --terminalcolors)
-        exec_tmux 1 "" \
+        exec_tmux 1 \
             "terminal_colors.sh"
         ;;
     --weather)
@@ -253,8 +244,8 @@ case "$1" in
     --autostart)
         autostart
         ;;
-    --mousemove)
-        mouse_move "$2" "$3"
+    --movemouse)
+        move_mouse "$2" "$3"
         ;;
     --kill)
         "$path"helper/i3_notify.sh 1 "$title"
