@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-04-05T20:16:47+0200
+# date:   2022-10-16T09:37:15+0200
 
 session="$(hostname)"
 attach="tmux attach -d -t $session"
@@ -80,5 +80,6 @@ else
     tmux_kill 1
 fi
 
-[ ! "$(pgrep -fx "$attach")" ] \
-    && eval "$open"
+if [ ! "$(pgrep -fx "$attach")" ]; then
+    eval "$open"
+fi
