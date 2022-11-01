@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-06-26T20:56:12+0200
+# date:   2022-11-01T09:10:54+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -24,6 +24,12 @@ $("$path"helper/i3_table.sh "$table_width" "header" "other")
 $("$path"helper/i3_table.sh "$table_width" "z" "鈴" "sleep (lock + suspend)")
 $("$path"helper/i3_table.sh "$table_width" "l" "" "lock")
 $("$path"helper/i3_table.sh "$table_width" "o" "" "logout")
+
+$("$path"helper/i3_table.sh "$table_width" "header" "restart")
+$("$path"helper/i3_table.sh "$table_width" "n" "" "notification daemon")
+
+$("$path"helper/i3_table.sh "$table_width" "header" "kill")
+$("$path"helper/i3_table.sh "$table_width" "x" "类" "select window")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>ctrl+alt+delete</b>]"
 
