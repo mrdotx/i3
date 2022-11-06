@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-11-01T09:53:55+0100
+# date:   2022-11-06T12:32:16+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -87,8 +87,6 @@ $("$path"helper/i3_table.sh "$table_width1" "y" "ﮮ" \
     "$(service_status systemd-timesyncd.service) timesync")
 $("$path"helper/i3_table.sh "$table_width1" "h" "撚" \
     "$(service_status sshd.service) ssh")
-$("$path"helper/i3_table.sh "$table_width1" "v" "旅" \
-    "$(service_status vpnc@hades.service) vpn")
 $("$path"helper/i3_table.sh "$table_width1" "p" "朗" \
     "$(service_status cups.service) printer")
 $("$path"helper/i3_table.sh "$table_width1" "b" "" \
@@ -173,9 +171,6 @@ case "$1" in
         ;;
     --ssh)
         service_toggle "sshd.service"
-        ;;
-    --vpn)
-        service_toggle "vpnc@hades.service"
         ;;
     --kill)
         "$path"helper/i3_notify.sh 1 "$title"
