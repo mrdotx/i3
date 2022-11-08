@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-11-06T12:32:16+0100
+# date:   2022-11-08T18:44:11+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -27,6 +27,13 @@ xrdb_query() {
 
 service_status() {
     case "$2" in
+        wireguard)
+            if [ "$(wireguard_toggle.sh -s "$1")" = "$1 is enabled" ]; then
+                printf "%s" "$icon_active"
+            else
+                printf "%s" "$icon_inactive"
+            fi
+            ;;
         user)
             if systemctl --user -q is-active "$1"; then
                 printf "%s" "$icon_active"
@@ -46,6 +53,9 @@ service_status() {
 
 service_toggle() {
     case "$2" in
+        wireguard)
+            "$auth" wireguard_toggle.sh "$1"
+            ;;
         user)
             if systemctl --user -q is-active "$1"; then
                 systemctl --user disable "$1" --now
@@ -87,6 +97,8 @@ $("$path"helper/i3_table.sh "$table_width1" "y" "ﮮ" \
     "$(service_status systemd-timesyncd.service) timesync")
 $("$path"helper/i3_table.sh "$table_width1" "h" "撚" \
     "$(service_status sshd.service) ssh")
+$("$path"helper/i3_table.sh "$table_width1" "v" "旅" \
+    "$(service_status wg0 wireguard) vpn")
 $("$path"helper/i3_table.sh "$table_width1" "p" "朗" \
     "$(service_status cups.service) printer")
 $("$path"helper/i3_table.sh "$table_width1" "b" "" \
@@ -171,6 +183,9 @@ case "$1" in
         ;;
     --ssh)
         service_toggle "sshd.service"
+        ;;
+    --vpn)
+        service_toggle "wg0" "wireguard"
         ;;
     --kill)
         "$path"helper/i3_notify.sh 1 "$title"
