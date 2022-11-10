@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-11-08T18:44:11+0100
+# date:   2022-11-10T12:33:05+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -71,7 +71,7 @@ service_toggle() {
             fi
             ;;
     esac \
-        && $0 \
+        && "$0" \
         && polybar_services.sh --update
 }
 
