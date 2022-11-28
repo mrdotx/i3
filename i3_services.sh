@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-11-10T12:33:05+0100
+# date:   2022-11-28T10:49:25+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -119,8 +119,8 @@ $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
         "$("$path"helper/i3_table.sh "$table_width2" "0" "" \
             "  └─ reload")"
     printf "%s\n" \
-        "$("$path"helper/i3_table.sh "$table_width2" "i" "參" \
-            "     ├─ inoreader")"
+        "$("$path"helper/i3_table.sh "$table_width2" "f" "參" \
+            "     ├─ freshrss")"
     printf "%s\n" \
         "$("$path"helper/i3_table.sh "$table_width2" "o" "" \
             "     ├─ openweathermap")"
