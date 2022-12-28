@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-11-28T10:49:25+0100
+# date:   2022-12-28T10:19:44+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -111,10 +111,10 @@ $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
             "$icon_active bar")"
     printf "%s\n" \
         "$("$path"helper/i3_table.sh "$table_width2" "1" "" \
-            "  ├─ primary   -> $(xrdb_query "Polybar.type.monitor1")")"
+            "  ├─ primary   -> $(xrdb_query "Polybar.monitor1")")"
     printf "%s\n" \
         "$("$path"helper/i3_table.sh "$table_width2" "2" "" \
-            "  ├─ secondary -> $(xrdb_query 'Polybar.type.monitor2')")"
+            "  ├─ secondary -> $(xrdb_query 'Polybar.monitor2')")"
     printf "%s\n" \
         "$("$path"helper/i3_table.sh "$table_width2" "0" "" \
             "  └─ reload")"
