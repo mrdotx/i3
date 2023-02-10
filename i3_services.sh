@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-12-28T10:19:44+0100
+# date:   2023-02-10T19:50:31+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -91,11 +91,7 @@ $("$path"helper/i3_table.sh "$table_width1" "w" "" \
     "$(service_status wacom.service user) wacom")
 $("$path"helper/i3_table.sh "$table_width1" "m" "" \
     "$(service_status xbanish.service user) mousepointer")
-$("$path"helper/i3_table.sh "$table_width1" "s" "" \
-    "$(service_status systemd-resolved.service) resolver")
-$("$path"helper/i3_table.sh "$table_width1" "y" "ﮮ" \
-    "$(service_status systemd-timesyncd.service) timesync")
-$("$path"helper/i3_table.sh "$table_width1" "h" "撚" \
+$("$path"helper/i3_table.sh "$table_width1" "s" "撚" \
     "$(service_status sshd.service) ssh")
 $("$path"helper/i3_table.sh "$table_width1" "v" "旅" \
     "$(service_status wg0 wireguard) vpn")
@@ -174,12 +170,6 @@ case "$1" in
         else
             service_toggle "cups.service"
         fi
-        ;;
-    --resolver)
-        service_toggle "systemd-resolved.service"
-        ;;
-    --timesync)
-        service_toggle "systemd-timesyncd.service"
         ;;
     --ssh)
         service_toggle "sshd.service"
