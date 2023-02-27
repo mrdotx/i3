@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-02-27T10:47:26+0100
+# date:   2023-02-27T17:48:45+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -75,9 +75,24 @@ mount_toggle() {
     done
 }
 
+mount_silent() {
+    ! "$path"helper/i3_net_check.sh "$server" \
+        && exit 1
+
+    # shellcheck disable=SC2068
+    for share in $@; do
+        ! mountpoint -q "$folder/$share" \
+            && $auth mount -t nfs -o "$options" \
+                "$server:/$share" "$folder/$share"
+    done
+}
+
 case "$1" in
     --all)
         mount_toggle "Desktop Downloads Music Public Templates Videos"
+        ;;
+    --autostart)
+        mount_silent "Desktop Downloads Music Public Templates Videos"
         ;;
     --desktop)
         mount_toggle "Desktop"
