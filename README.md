@@ -16,6 +16,7 @@ shell scripts for i3
 | i3_editor.sh         | shows keybindings for editor mode with notify-send     |
 | i3_exit.sh           | lock/suspend/logout/reboot/shutdown/switch user script |
 | i3_macros.sh         | shows keybindings for predefined macros                |
+| i3_nfs.sh            | shows keybindings for nfs mounts                       |
 | i3_services.sh       | shows keybindings for services mode with notify-send   |
 | i3_ssh.sh            | shows keybindings for ssh mode with notify-send        |
 | i3_tmux.sh           | open applications in tmux windows                      |
@@ -25,6 +26,7 @@ shell scripts for i3
 ![screenshot editor mode](screenshot_editor.png)
 ![screenshot exit mode](screenshot_exit.png)
 ![screenshot macros mode](screenshot_macros.png)
+![screenshot nfs mode](screenshot_nfs.png)
 ![screenshot services mode](screenshot_services.png)
 ![screenshot ssh mode](screenshot_ssh.png)
 
