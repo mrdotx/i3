@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-02-27T17:48:45+0100
+# date:   2023-02-27T18:16:46+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -35,7 +35,7 @@ mount_status() {
 }
 
 title="nfs"
-table_width=51
+table_width=43
 table_width1=$((table_width + 4))
 message="
 $("$path"helper/i3_table.sh "$table_width" "header" "$server mounts")
@@ -53,7 +53,7 @@ $("$path"helper/i3_table.sh "$table_width1" "t" "$(mount_status Templates)" \
 $("$path"helper/i3_table.sh "$table_width1" "v" "$(mount_status Videos)" \
     "└─ $folder/Videos")
 
-[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+shift+backslash</b>]"
+[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+shift+\\\</b>]"
 
 mount_toggle() {
     ! "$path"helper/i3_net_check.sh "$server" \
