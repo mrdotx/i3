@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-01-23T08:33:41+0100
+# date:   2023-02-27T10:07:31+0100
 
 basename=${0##*/}
 path=${0%"$basename"}
@@ -22,6 +22,10 @@ $("$path"helper/i3_table.sh "$table_width" "b" "" "macbook")
 
 connect () {
     host="${1##*--}"
+
+    ! "$path"helper/i3_net_check.sh "$host" \
+        && exit 1
+
     i3_tmux.sh -o "$2" "$host" "ssh $host"
 }
 
