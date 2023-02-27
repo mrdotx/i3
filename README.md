@@ -26,6 +26,7 @@ shell scripts for i3
 ![screenshot editor mode](screenshot_editor.png)
 ![screenshot exit mode](screenshot_exit.png)
 ![screenshot macros mode](screenshot_macros.png)
+![screenshot macros autostart](screenshot_macros_autostart.png)
 ![screenshot nfs mode](screenshot_nfs.png)
 ![screenshot services mode](screenshot_services.png)
 ![screenshot ssh mode](screenshot_ssh.png)
