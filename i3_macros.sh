@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-11-08T08:44:18+0100
+# date:   2023-02-27T17:52:35+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -153,31 +153,37 @@ autostart() {
         "\n$("$path"helper/i3_table.sh \
             "$table_width" "" "" "open web browser")" 10
     firefox-developer-edition &
-    wait_for_max 45 "firefox" 5 30
+    wait_for_max 45 "firefox" 5 25
 
     progress_notification 0 \
         "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "" "open file manager")" 40
+            "$table_width" "" "" "open file manager")" 35
     open_terminal 1 "ranger_cd $HOME/.local/share/repos"
-    wait_for_max 35 "ranger" 0 60
+    wait_for_max 35 "ranger" 0 50
 
     progress_notification 0 \
         "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "" "open multiplexer")" 65
+            "$table_width" "" "" "open multiplexer")" 55
     open_tmux 1
-    wait_for_max 25 "tmux" 1 70
+    wait_for_max 25 "tmux" 1 60
 
     progress_notification 0 \
         "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "" "open system info")" 75
+            "$table_width" "" "" "open system info")" 65
     exec_terminal 2 "btop"
-    wait_for_max 25 "btop" 0 80
+    wait_for_max 25 "btop" 0 70
 
     progress_notification 0 \
         "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "" "resize multiplexer")" 85
+            "$table_width" "" "" "resize multiplexer")" 75
     press_key 3 Super+Ctrl+Down
     press_key 1 Super+Up
+    progress_notification 0 "$finished_icon" 80
+
+    progress_notification 0 \
+        "\n$("$path"helper/i3_table.sh \
+            "$table_width" "" "󰒍" "nfs mount")" 85
+    i3_nfs.sh --autostart
     progress_notification 0 "$finished_icon" 90
 
     progress_notification 0 \
