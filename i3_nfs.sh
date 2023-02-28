@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-02-27T18:16:46+0100
+# date:   2023-02-28T11:22:32+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -39,7 +39,7 @@ table_width=43
 table_width1=$((table_width + 4))
 message="
 $("$path"helper/i3_table.sh "$table_width" "header" "$server mounts")
-$("$path"helper/i3_table.sh "$table_width" "a" "󰒍" "toggle all")
+$("$path"helper/i3_table.sh "$table_width" "a" "歷" "toggle all")
 $("$path"helper/i3_table.sh "$table_width1" "d" "$(mount_status Desktop)" \
     "├─ $folder/Desktop")
 $("$path"helper/i3_table.sh "$table_width1" "l" "$(mount_status Downloads)" \
