@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-02-27T17:52:35+0100
+# date:   2023-02-28T12:44:48+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -182,7 +182,7 @@ autostart() {
 
     progress_notification 0 \
         "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "󰒍" "nfs mount")" 85
+            "$table_width" "" "歷" "nfs mount")" 85
     i3_nfs.sh --autostart
     progress_notification 0 "$finished_icon" 90
 
@@ -207,7 +207,7 @@ $("$path"helper/i3_table.sh "$table_width" "w" "" "weather")
 $("$path"helper/i3_table.sh "$table_width" "c" "" "corona stats")
 
 $("$path"helper/i3_table.sh "$table_width" "header" "other")
-$("$path"helper/i3_table.sh "$table_width" "s" "" "starwars")
+$("$path"helper/i3_table.sh "$table_width" "h" "ﳲ" "telehack")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+print</b>]"
 
@@ -236,10 +236,10 @@ case "$1" in
         exec_tmux 1 \
             "curl -fsS '$url' | head -n32"
         ;;
-    --starwars)
-        url="https://asciitv.fr"
+    --telehack)
+        url="telehack.com"
         exec_tmux 1 \
-            "curl -fsS '$url'"
+            "telnet '$url'"
         ;;
     --autostart)
         autostart
