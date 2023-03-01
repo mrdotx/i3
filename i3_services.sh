@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-02-10T19:50:31+0100
+# date:   2023-03-01T16:32:40+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -17,6 +17,8 @@ icon_inactive="﨡"
 
 basename=${0##*/}
 path=${0%"$basename"}
+i3_table="${path}helper/i3_table.sh"
+i3_notify="${path}helper/i3_notify.sh"
 
 # get xresources
 xrdb_query() {
@@ -80,55 +82,55 @@ table_width=39
 table_width1=$((table_width + 2))
 table_width2=$((table_width + 4))
 message="
-$("$path"helper/i3_table.sh "$table_width" "header" "enable/disable")
-$("$path"helper/i3_table.sh "$table_width1" "l" "" \
+$("$i3_table" "$table_width" "header" "enable/disable")
+$("$i3_table" "$table_width1" "l" "" \
     "$(service_status xautolock.service user) autolock")
-$("$path"helper/i3_table.sh "$table_width1" "t" "侀" \
+$("$i3_table" "$table_width1" "t" "侀" \
     "$(service_status i3_autotiling.service user) autotiling")
-$("$path"helper/i3_table.sh "$table_width1" "c" "頋" \
+$("$i3_table" "$table_width1" "c" "頋" \
     "$(service_status picom.service user) compositor")
-$("$path"helper/i3_table.sh "$table_width1" "w" "" \
+$("$i3_table" "$table_width1" "w" "" \
     "$(service_status wacom.service user) wacom")
-$("$path"helper/i3_table.sh "$table_width1" "m" "" \
+$("$i3_table" "$table_width1" "m" "" \
     "$(service_status xbanish.service user) mousepointer")
-$("$path"helper/i3_table.sh "$table_width1" "s" "撚" \
+$("$i3_table" "$table_width1" "s" "撚" \
     "$(service_status sshd.service) ssh")
-$("$path"helper/i3_table.sh "$table_width1" "v" "旅" \
+$("$i3_table" "$table_width1" "v" "旅" \
     "$(service_status wg0 wireguard) vpn")
-$("$path"helper/i3_table.sh "$table_width1" "p" "朗" \
+$("$i3_table" "$table_width1" "p" "朗" \
     "$(service_status cups.service) printer")
-$("$path"helper/i3_table.sh "$table_width1" "b" "" \
+$("$i3_table" "$table_width1" "b" "" \
     "$(service_status bluetooth.service) bluetooth")
 
-$("$path"helper/i3_table.sh "$table_width" "header" "polybar")
+$("$i3_table" "$table_width" "header" "polybar")
 $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
     printf "%s\n" \
-        "$("$path"helper/i3_table.sh "$table_width1" "a" "" \
+        "$("$i3_table" "$table_width1" "a" "" \
             "$icon_active bar")"
     printf "%s\n" \
-        "$("$path"helper/i3_table.sh "$table_width2" "1" "" \
+        "$("$i3_table" "$table_width2" "1" "" \
             "  ├─ primary   -> $(xrdb_query "Polybar.monitor1")")"
     printf "%s\n" \
-        "$("$path"helper/i3_table.sh "$table_width2" "2" "" \
+        "$("$i3_table" "$table_width2" "2" "" \
             "  ├─ secondary -> $(xrdb_query 'Polybar.monitor2')")"
     printf "%s\n" \
-        "$("$path"helper/i3_table.sh "$table_width2" "0" "" \
+        "$("$i3_table" "$table_width2" "0" "" \
             "  └─ reload")"
     printf "%s\n" \
-        "$("$path"helper/i3_table.sh "$table_width2" "f" "參" \
+        "$("$i3_table" "$table_width2" "f" "參" \
             "     ├─ freshrss")"
     printf "%s\n" \
-        "$("$path"helper/i3_table.sh "$table_width2" "o" "" \
+        "$("$i3_table" "$table_width2" "o" "" \
             "     ├─ openweathermap")"
     printf "%s\n" \
-        "$("$path"helper/i3_table.sh "$table_width2" "n" "" \
+        "$("$i3_table" "$table_width2" "n" "" \
             "     ├─ pacman")"
     printf "%s\n" \
-        "$("$path"helper/i3_table.sh "$table_width2" "r" "" \
+        "$("$i3_table" "$table_width2" "r" "" \
             "     └─ trash-cli")"
 else
     printf "%s" \
-        "$("$path"helper/i3_table.sh "$table_width1" "a" "" \
+        "$("$i3_table" "$table_width1" "a" "" \
             "$icon_inactive bar")"
 fi)
 
@@ -178,9 +180,9 @@ case "$1" in
         service_toggle "wg0" "wireguard"
         ;;
     --kill)
-        "$path"helper/i3_notify.sh 1 "$title"
+        "$i3_notify" 1 "$title"
         ;;
     *)
-        "$path"helper/i3_notify.sh 0 "$title" "$message"
+        "$i3_notify" 0 "$title" "$message"
         ;;
 esac

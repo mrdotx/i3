@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-02-28T11:22:32+0100
+# date:   2023-03-01T16:31:45+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -21,6 +21,8 @@ options="noatime,vers=4"
 
 basename=${0##*/}
 path=${0%"$basename"}
+i3_table="${path}helper/i3_table.sh"
+i3_notify="${path}helper/i3_notify.sh"
 
 mount_status() {
     mountpoint -q "$folder/$1"
@@ -38,19 +40,19 @@ title="nfs"
 table_width=43
 table_width1=$((table_width + 4))
 message="
-$("$path"helper/i3_table.sh "$table_width" "header" "$server mounts")
-$("$path"helper/i3_table.sh "$table_width" "a" "歷" "toggle all")
-$("$path"helper/i3_table.sh "$table_width1" "d" "$(mount_status Desktop)" \
+$("$i3_table" "$table_width" "header" "$server mounts")
+$("$i3_table" "$table_width" "a" "歷" "toggle all")
+$("$i3_table" "$table_width1" "d" "$(mount_status Desktop)" \
     "├─ $folder/Desktop")
-$("$path"helper/i3_table.sh "$table_width1" "l" "$(mount_status Downloads)" \
+$("$i3_table" "$table_width1" "l" "$(mount_status Downloads)" \
     "├─ $folder/Downloads")
-$("$path"helper/i3_table.sh "$table_width1" "m" "$(mount_status Music)" \
+$("$i3_table" "$table_width1" "m" "$(mount_status Music)" \
     "├─ $folder/Music")
-$("$path"helper/i3_table.sh "$table_width1" "p" "$(mount_status Public)" \
+$("$i3_table" "$table_width1" "p" "$(mount_status Public)" \
     "├─ $folder/Public")
-$("$path"helper/i3_table.sh "$table_width1" "t" "$(mount_status Templates)" \
+$("$i3_table" "$table_width1" "t" "$(mount_status Templates)" \
     "├─ $folder/Templates")
-$("$path"helper/i3_table.sh "$table_width1" "v" "$(mount_status Videos)" \
+$("$i3_table" "$table_width1" "v" "$(mount_status Videos)" \
     "└─ $folder/Videos")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+shift+\\\</b>]"
@@ -113,9 +115,9 @@ case "$1" in
         mount_toggle "Videos"
         ;;
     --kill)
-        "$path"helper/i3_notify.sh 1 "$title"
+        "$i3_notify" 1 "$title"
         ;;
     *)
-        "$path"helper/i3_notify.sh 0 "$title" "$message"
+        "$i3_notify" 0 "$title" "$message"
         ;;
 esac
