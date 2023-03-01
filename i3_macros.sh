@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-02-28T12:44:48+0100
+# date:   2023-03-01T10:35:02+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -32,29 +32,23 @@ type_string() {
             --file -
 }
 
-progress_notification() {
-    message="$message$2"
-
-    "$path"helper/i3_notify.sh "$1" "$title" "$message" "$3"
-}
-
 wait_for_max() {
     max_ds="$1"
     after_ds="$3"
-    progress="$4"
 
     while ! wmctrl -l | grep -iq "$2" \
         && [ "$max_ds" -ge 1 ]; do
             sleep .1
             max_ds=$((max_ds - 1))
     done
-    progress_notification 0 "" "$((progress - 5))"
+
+    [ "$max_ds" = 0 ] \
+        && return 1
 
     while [ "$after_ds" -ge 1 ]; do
         sleep .1
         after_ds=$((after_ds - 1))
     done
-    progress_notification 0 "$finished_icon" "$progress"
 }
 
 exec_terminal() {
@@ -145,53 +139,61 @@ move_mouse() {
 
 autostart() {
     table_width=28
-    finished_icon=""
-    message="\n$("$path"helper/i3_table.sh \
-                "$table_width" "header" "autostart")"
+    success_icon=""
 
-    progress_notification 0 \
-        "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "" "open web browser")" 10
+    progress_message() {
+        printf "\n"
+        "$path"helper/i3_table.sh "$table_width" "header" "autostart"
+        printf "\n"
+        "$path"helper/i3_table.sh "$table_width" "$icon1" "" "open web browser"
+        printf "\n"
+        "$path"helper/i3_table.sh "$table_width" "$icon2" "" "open file manager"
+        printf "\n"
+        "$path"helper/i3_table.sh "$table_width" "$icon3" "" "open multiplexer"
+        printf "\n"
+        "$path"helper/i3_table.sh "$table_width" "$icon4" "" "open system info"
+        printf "\n"
+        "$path"helper/i3_table.sh "$table_width" "$icon5" "" "resize multiplexer"
+        printf "\n"
+        "$path"helper/i3_table.sh "$table_width" "$icon6" "歷" "nfs mount"
+        printf "\n"
+        "$path"helper/i3_table.sh "$table_width" "$icon7" "" "move mouse pointer"
+    }
+
+    "$path"helper/i3_notify.sh 0 "$title" "$(progress_message)" 10
     firefox-developer-edition &
-    wait_for_max 45 "firefox" 5 25
+    wait_for_max 45 "firefox" 5 \
+        && icon1="$success_icon"
 
-    progress_notification 0 \
-        "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "" "open file manager")" 35
+    "$path"helper/i3_notify.sh 0 "$title" "$(progress_message)" 30
     open_terminal 1 "ranger_cd $HOME/.local/share/repos"
-    wait_for_max 35 "ranger" 0 50
+    wait_for_max 35 "ranger" 0 \
+        && icon2="$success_icon"
 
-    progress_notification 0 \
-        "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "" "open multiplexer")" 55
+    "$path"helper/i3_notify.sh 0 "$title" "$(progress_message)" 45
     open_tmux 1
-    wait_for_max 25 "tmux" 1 60
+    wait_for_max 25 "tmux" 1 \
+        && icon3="$success_icon"
 
-    progress_notification 0 \
-        "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "" "open system info")" 65
+    "$path"helper/i3_notify.sh 0 "$title" "$(progress_message)" 60
     exec_terminal 2 "btop"
-    wait_for_max 25 "btop" 0 70
+    wait_for_max 25 "btop" 0 \
+        && icon4="$success_icon"
 
-    progress_notification 0 \
-        "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "" "resize multiplexer")" 75
-    press_key 3 Super+Ctrl+Down
-    press_key 1 Super+Up
-    progress_notification 0 "$finished_icon" 80
+    "$path"helper/i3_notify.sh 0 "$title" "$(progress_message)" 75
+    press_key 3 Super+Ctrl+Down \
+        && press_key 1 Super+Up \
+        && icon5="$success_icon"
 
-    progress_notification 0 \
-        "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "歷" "nfs mount")" 85
-    i3_nfs.sh --autostart
-    progress_notification 0 "$finished_icon" 90
+    "$path"helper/i3_notify.sh 0 "$title" "$(progress_message)" 85
+    i3_nfs.sh --autostart \
+        && icon6="$success_icon"
 
-    progress_notification 0 \
-        "\n$("$path"helper/i3_table.sh \
-            "$table_width" "" "" "move mouse pointer")" 95
-    move_mouse "topright" 0
-    xdotool click 1
-    progress_notification 2500 "$finished_icon" 100
+    "$path"helper/i3_notify.sh 0 "$title" "$(progress_message)" 95
+    xdotool click 1 \
+        && icon7="$success_icon"
+
+    "$path"helper/i3_notify.sh 2500 "$title" "$(progress_message)" 100
 }
 
 title="macros"
