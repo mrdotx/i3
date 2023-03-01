@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-03-01T16:44:53+0100
+# date:   2023-03-01T19:18:29+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -162,39 +162,39 @@ autostart() {
             "$("$i3_table" "$table_width" "$icon7" "" "move mouse pointer")"
     }
 
-    "$i3_notify" 0 "$title" "$(progress_message)" 10
+    "$i3_notify" 0 "$title" "$(progress_message)" 5
+
     firefox-developer-edition &
     wait_for_max 45 "firefox" 5 \
         && icon1="$success_icon"
+    "$i3_notify" 0 "$title" "$(progress_message)" 20
 
-    "$i3_notify" 0 "$title" "$(progress_message)" 30
     open_terminal 1 "ranger_cd $HOME/.local/share/repos"
     wait_for_max 35 "ranger" 0 \
         && icon2="$success_icon"
+    "$i3_notify" 0 "$title" "$(progress_message)" 35
 
-    "$i3_notify" 0 "$title" "$(progress_message)" 45
     open_tmux 1
     wait_for_max 25 "tmux" 1 \
         && icon3="$success_icon"
+    "$i3_notify" 0 "$title" "$(progress_message)" 50
 
-    "$i3_notify" 0 "$title" "$(progress_message)" 60
     exec_terminal 2 "btop"
     wait_for_max 25 "btop" 0 \
         && icon4="$success_icon"
+    "$i3_notify" 0 "$title" "$(progress_message)" 65
 
-    "$i3_notify" 0 "$title" "$(progress_message)" 75
     press_key 3 Super+Ctrl+Down \
         && press_key 1 Super+Up \
         && icon5="$success_icon"
+    "$i3_notify" 0 "$title" "$(progress_message)" 75
 
-    "$i3_notify" 0 "$title" "$(progress_message)" 85
     i3_nfs.sh --autostart \
         && icon6="$success_icon"
+    "$i3_notify" 0 "$title" "$(progress_message)" 90
 
-    "$i3_notify" 0 "$title" "$(progress_message)" 95
     move_mouse "topright" 0 \
         && icon7="$success_icon"
-
     "$i3_notify" 2500 "$title" "$(progress_message)" 100
 }
 
