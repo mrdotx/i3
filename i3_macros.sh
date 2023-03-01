@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-03-01T10:35:02+0100
+# date:   2023-03-01T13:42:45+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -190,7 +190,7 @@ autostart() {
         && icon6="$success_icon"
 
     "$path"helper/i3_notify.sh 0 "$title" "$(progress_message)" 95
-    xdotool click 1 \
+    move_mouse "topright" 0 \
         && icon7="$success_icon"
 
     "$path"helper/i3_notify.sh 2500 "$title" "$(progress_message)" 100
