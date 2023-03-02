@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-03-01T16:31:45+0100
+# date:   2023-03-02T11:56:15+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -58,35 +58,31 @@ $("$i3_table" "$table_width1" "v" "$(mount_status Videos)" \
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+shift+\\\</b>]"
 
 mount_toggle() {
-    ! "$path"helper/i3_net_check.sh "$server" \
-        && exit 1
-
     # shellcheck disable=SC2068
-    for share in $@; do
-        mountpoint -q "$folder/$share"
-            case $? in
-                0)
-                    $auth umount "$folder/$share" \
-                    ;;
-                *)
-                    $auth mount -t nfs -o "$options" \
-                        "$server:/$share" "$folder/$share"
-                    ;;
-            esac \
-                && "$0"
-    done
+    "$path"helper/i3_net_check.sh "$server" \
+        && for share in $@; do
+            mountpoint -q "$folder/$share"
+                case $? in
+                    0)
+                        $auth umount "$folder/$share" \
+                        ;;
+                    *)
+                        $auth mount -t nfs -o "$options" \
+                            "$server:/$share" "$folder/$share"
+                        ;;
+                esac \
+                    && "$0"
+        done
 }
 
 mount_silent() {
-    ! "$path"helper/i3_net_check.sh "$server" \
-        && exit 1
-
     # shellcheck disable=SC2068
-    for share in $@; do
-        ! mountpoint -q "$folder/$share" \
-            && $auth mount -t nfs -o "$options" \
-                "$server:/$share" "$folder/$share"
-    done
+    "$path"helper/i3_net_check.sh "$server" \
+        && for share in $@; do
+            ! mountpoint -q "$folder/$share" \
+                && $auth mount -t nfs -o "$options" \
+                    "$server:/$share" "$folder/$share"
+        done
 }
 
 case "$1" in
