@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-03-02T11:56:15+0100
+# date:   2023-03-02T18:35:26+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -90,7 +90,7 @@ case "$1" in
         mount_toggle "Desktop Downloads Music Public Templates Videos"
         ;;
     --autostart)
-        mount_silent "Desktop Downloads Music Public Templates Videos"
+        mount_silent "Desktop Music Public Videos"
         ;;
     --desktop)
         mount_toggle "Desktop"
