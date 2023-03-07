@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-03-02T18:35:26+0100
+# date:   2023-03-07T12:37:11+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -36,6 +36,18 @@ mount_status() {
     esac
 }
 
+mount_nfs() {
+    mountpoint -q "$folder/$1"
+    case $? in
+        0)
+            $auth umount "$folder/$1"
+            ;;
+        *)
+            $auth mount -t nfs -o "$options" "$server:/$1" "$folder/$1"
+            ;;
+    esac
+}
+
 title="nfs"
 table_width=43
 table_width1=$((table_width + 4))
@@ -58,60 +70,36 @@ $("$i3_table" "$table_width1" "v" "$(mount_status Videos)" \
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+shift+\\\</b>]"
 
 mount_toggle() {
-    # shellcheck disable=SC2068
-    "$path"helper/i3_net_check.sh "$server" \
-        && for share in $@; do
-            mountpoint -q "$folder/$share"
-                case $? in
-                    0)
-                        $auth umount "$folder/$share" \
-                        ;;
-                    *)
-                        $auth mount -t nfs -o "$options" \
-                            "$server:/$share" "$folder/$share"
-                        ;;
-                esac \
-                    && "$0"
-        done
-}
+    case "$1" in
+        --silent)
+            shift
 
-mount_silent() {
-    # shellcheck disable=SC2068
-    "$path"helper/i3_net_check.sh "$server" \
-        && for share in $@; do
-            ! mountpoint -q "$folder/$share" \
-                && $auth mount -t nfs -o "$options" \
-                    "$server:/$share" "$folder/$share"
-        done
+            # shellcheck disable=SC2068
+            "$path"helper/i3_net_check.sh "$server" \
+                && for share in $@; do
+                    mount_nfs "$share"
+                done
+                ;;
+        *)
+            # shellcheck disable=SC2068
+            "$path"helper/i3_net_check.sh "$server" \
+                && for share in $@; do
+                    mount_nfs "$share" \
+                        && "$0"
+                done
+                ;;
+    esac
 }
 
 case "$1" in
     --all)
-        mount_toggle "Desktop Downloads Music Public Templates Videos"
-        ;;
-    --autostart)
-        mount_silent "Desktop Music Public Videos"
-        ;;
-    --desktop)
-        mount_toggle "Desktop"
-        ;;
-    --downloads)
-        mount_toggle "Downloads"
-        ;;
-    --music)
-        mount_toggle "Music"
-        ;;
-    --public)
-        mount_toggle "Public"
-        ;;
-    --templates)
-        mount_toggle "Templates"
-        ;;
-    --videos)
-        mount_toggle "Videos"
+        mount_toggle "$2" "Desktop Downloads Music Public Templates Videos"
         ;;
     --kill)
         "$i3_notify" 1 "$title"
+        ;;
+    --*)
+        mount_toggle "$2" "${1##*--}"
         ;;
     *)
         "$i3_notify" 0 "$title" "$message"
