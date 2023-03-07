@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-03-01T19:18:29+0100
+# date:   2023-03-07T12:55:31+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -162,40 +162,47 @@ autostart() {
             "$("$i3_table" "$table_width" "$icon7" "" "move mouse pointer")"
     }
 
-    "$i3_notify" 0 "$title" "$(progress_message)" 5
+    progress_bar() {
+        "$i3_notify" "${2:-0}" "$title" "$(progress_message)" "$1"
+    }
 
-    firefox-developer-edition &
+    progress_bar 5
+    # open web browser
+    firefox-developer-edition & progress_bar 10
     wait_for_max 45 "firefox" 5 \
         && icon1="$success_icon"
-    "$i3_notify" 0 "$title" "$(progress_message)" 20
-
-    open_terminal 1 "ranger_cd $HOME/.local/share/repos"
+    progress_bar 20
+    # open file manager
+    open_terminal 1 "ranger_cd $HOME/.local/share/repos" && progress_bar 25
     wait_for_max 35 "ranger" 0 \
         && icon2="$success_icon"
-    "$i3_notify" 0 "$title" "$(progress_message)" 35
-
-    open_tmux 1
+    progress_bar 35
+    # open multiplexer
+    open_tmux 1 && progress_bar 40
     wait_for_max 25 "tmux" 1 \
         && icon3="$success_icon"
-    "$i3_notify" 0 "$title" "$(progress_message)" 50
-
-    exec_terminal 2 "btop"
+    progress_bar 50
+    # open system info
+    exec_terminal 2 "btop" && progress_bar 55
     wait_for_max 25 "btop" 0 \
         && icon4="$success_icon"
-    "$i3_notify" 0 "$title" "$(progress_message)" 65
-
-    press_key 3 Super+Ctrl+Down \
-        && press_key 1 Super+Up \
+    progress_bar 65
+    # resize multiplexer
+    press_key 3 Super+Ctrl+Down && progress_bar 68 \
+        && press_key 1 Super+Up && progress_bar 71 \
         && icon5="$success_icon"
-    "$i3_notify" 0 "$title" "$(progress_message)" 75
-
-    i3_nfs.sh --autostart \
+    progress_bar 75
+    # nfs mount
+    i3_nfs.sh --Desktop --silent && progress_bar 78 \
+        && i3_nfs.sh --Music --silent && progress_bar 81 \
+        && i3_nfs.sh --Public --silent && progress_bar 84 \
+        && i3_nfs.sh --Videos --silent && progress_bar 87 \
         && icon6="$success_icon"
-    "$i3_notify" 0 "$title" "$(progress_message)" 90
-
-    move_mouse "topright" 0 \
+    progress_bar 90
+    # move mouse pointer
+    move_mouse "topright" 0 && progress_bar 95 \
         && icon7="$success_icon"
-    "$i3_notify" 2500 "$title" "$(progress_message)" 100
+    progress_bar 100 2500
 }
 
 title="macros"
