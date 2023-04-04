@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-03-01T16:45:02+0100
+# date:   2023-04-04T08:49:56+0200
 
 basename=${0##*/}
 path=${0%"$basename"}
@@ -16,10 +16,13 @@ open() {
 
 title="editor"
 table_width=37
+table_width1=$((table_width + 4))
 message="
 $("$i3_table" "$table_width" "header" "local")
 $("$i3_table" "$table_width" "v" "" "vim")
 $("$i3_table" "$table_width" "w" "ﴬ" "vimwiki")
+$("$i3_table" "$table_width1" "t" "ﴬ" "  ├─ todos")
+$("$i3_table" "$table_width1" "i" "ﴬ" "  └─ ideas")
 
 $("$i3_table" "$table_width" "header" "remote")
 $("$i3_table" "$table_width" "m" "歷" "m625q")
@@ -38,7 +41,15 @@ case "$1" in
         $TERMINAL -e "$EDITOR"
         ;;
     --vimwiki)
-        $TERMINAL -e "$EDITOR" -c ":VimwikiIndex"
+        [ -n "$2" ]
+        case $? in
+            0)
+                $TERMINAL -e "$EDITOR" -c ":VimwikiIndex" -c ":VimwikiGoto $2"
+                ;;
+            *)
+                $TERMINAL -e "$EDITOR" -c ":VimwikiIndex"
+                ;;
+        esac
         ;;
     --klassiker)
         open "ftp" "klassiker.online.de"
