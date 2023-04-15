@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-03-07T12:55:31+0100
+# date:   2023-04-15T12:34:30+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -188,8 +188,8 @@ autostart() {
         && icon4="$success_icon"
     progress_bar 65
     # resize multiplexer
-    press_key 3 Super+Ctrl+Down && progress_bar 68 \
-        && press_key 1 Super+Up && progress_bar 71 \
+    i3-msg -q resize shrink height 30 px or 15 ppt && progress_bar 68 \
+        && i3-msg -q focus up && progress_bar 71 \
         && icon5="$success_icon"
     progress_bar 75
     # nfs mount
