@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-03-07T12:37:11+0100
+# date:   2023-04-16T15:33:34+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -24,7 +24,7 @@ path=${0%"$basename"}
 i3_table="${path}helper/i3_table.sh"
 i3_notify="${path}helper/i3_notify.sh"
 
-mount_status() {
+nfs_status() {
     mountpoint -q "$folder/$1"
     case $? in
         0)
@@ -36,16 +36,40 @@ mount_status() {
     esac
 }
 
-mount_nfs() {
-    mountpoint -q "$folder/$1"
-    case $? in
-        0)
-            $auth umount "$folder/$1"
-            ;;
-        *)
-            $auth mount -t nfs -o "$options" "$server:/$1" "$folder/$1"
-            ;;
-    esac
+nfs_toggle() {
+    shares="$*"
+    for share in $shares; do
+        mountpoint -q "$folder/$share"
+        case $? in
+            0)
+                $auth umount "$folder/$share"
+                ;;
+            *)
+                $auth mount -t nfs -o "$options" \
+                    "$server:/$share" \
+                    "$folder/$share"
+                ;;
+        esac \
+            && "$0"
+    done
+}
+
+nfs_mount() {
+    shares="$*"
+    for share in $shares; do
+        mountpoint -q "$folder/$share" \
+            || $auth mount -t nfs -o "$options" \
+                "$server:/$share" \
+                "$folder/$share"
+    done
+}
+
+nfs_umount() {
+    shares="$*"
+    for share in $shares; do
+        mountpoint -q "$folder/$share" \
+            && $auth umount "$folder/$share"
+    done
 }
 
 title="nfs"
@@ -54,52 +78,44 @@ table_width1=$((table_width + 4))
 message="
 $("$i3_table" "$table_width" "header" "$server mounts")
 $("$i3_table" "$table_width" "a" "歷" "toggle all")
-$("$i3_table" "$table_width1" "d" "$(mount_status Desktop)" \
+$("$i3_table" "$table_width1" "d" "$(nfs_status Desktop)" \
     "├─ $folder/Desktop")
-$("$i3_table" "$table_width1" "l" "$(mount_status Downloads)" \
+$("$i3_table" "$table_width1" "l" "$(nfs_status Downloads)" \
     "├─ $folder/Downloads")
-$("$i3_table" "$table_width1" "m" "$(mount_status Music)" \
+$("$i3_table" "$table_width1" "m" "$(nfs_status Music)" \
     "├─ $folder/Music")
-$("$i3_table" "$table_width1" "p" "$(mount_status Public)" \
+$("$i3_table" "$table_width1" "p" "$(nfs_status Public)" \
     "├─ $folder/Public")
-$("$i3_table" "$table_width1" "t" "$(mount_status Templates)" \
+$("$i3_table" "$table_width1" "t" "$(nfs_status Templates)" \
     "├─ $folder/Templates")
-$("$i3_table" "$table_width1" "v" "$(mount_status Videos)" \
+$("$i3_table" "$table_width1" "v" "$(nfs_status Videos)" \
     "└─ $folder/Videos")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+shift+\\\</b>]"
 
-mount_toggle() {
-    case "$1" in
-        --silent)
-            shift
-
-            # shellcheck disable=SC2068
-            "$path"helper/i3_net_check.sh "$server" \
-                && for share in $@; do
-                    mount_nfs "$share"
-                done
-                ;;
-        *)
-            # shellcheck disable=SC2068
-            "$path"helper/i3_net_check.sh "$server" \
-                && for share in $@; do
-                    mount_nfs "$share" \
-                        && "$0"
-                done
-                ;;
-    esac
-}
-
 case "$1" in
     --all)
-        mount_toggle "$2" "Desktop Downloads Music Public Templates Videos"
+        "$path"helper/i3_net_check.sh "$server" \
+            && nfs_toggle "Desktop Downloads Music Public Templates Videos"
         ;;
     --kill)
         "$i3_notify" 1 "$title"
         ;;
+    --mount)
+        shift
+
+        "$path"helper/i3_net_check.sh "$server" \
+            && nfs_mount "$*"
+        ;;
+    --umount)
+        shift
+
+        "$path"helper/i3_net_check.sh "$server" \
+            && nfs_umount "$*"
+        ;;
     --*)
-        mount_toggle "$2" "${1##*--}"
+        "$path"helper/i3_net_check.sh "$server" \
+            && nfs_toggle "${1##*--}"
         ;;
     *)
         "$i3_notify" 0 "$title" "$message"
