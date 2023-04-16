@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-04-15T12:34:30+0200
+# date:   2023-04-16T11:49:57+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -34,11 +34,15 @@ type_string() {
             --file -
 }
 
+window_available() {
+    wmctrl -l | grep -iq "$1"
+}
+
 wait_for_max() {
     max_ds="$1"
     after_ds="$3"
 
-    while ! wmctrl -l | grep -iq "$2" \
+    while ! window_available "$2" \
         && [ "$max_ds" -ge 1 ]; do
             sleep .1
             max_ds=$((max_ds - 1))
@@ -153,13 +157,9 @@ autostart() {
         printf "\n%s" \
             "$("$i3_table" "$table_width" "$icon3" "" "open multiplexer")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" "$icon4" "" "open system info")"
+            "$("$i3_table" "$table_width" "$icon4" "歷" "mount nfs")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" "$icon5" "" "resize multiplexer")"
-        printf "\n%s" \
-            "$("$i3_table" "$table_width" "$icon6" "歷" "nfs mount")"
-        printf "\n%s" \
-            "$("$i3_table" "$table_width" "$icon7" "" "move mouse pointer")"
+            "$("$i3_table" "$table_width" "$icon5" "" "move mouse pointer")"
     }
 
     progress_bar() {
@@ -168,40 +168,38 @@ autostart() {
 
     progress_bar 5
     # open web browser
-    firefox-developer-edition & progress_bar 10
+    ! window_available "firefox" \
+        && firefox-developer-edition & progress_bar 10
     wait_for_max 45 "firefox" 5 \
         && icon1="$success_icon"
+
     progress_bar 20
     # open file manager
-    open_terminal 1 "ranger_cd $HOME/.local/share/repos" && progress_bar 25
+    ! window_available "ranger" \
+        && open_terminal 1 "ranger_cd $HOME/.local/share/repos" && progress_bar 25
     wait_for_max 35 "ranger" 0 \
         && icon2="$success_icon"
+
     progress_bar 35
     # open multiplexer
-    open_tmux 1 && progress_bar 40
+    ! window_available "tmux" \
+        && open_tmux 1 && progress_bar 40
     wait_for_max 25 "tmux" 1 \
         && icon3="$success_icon"
+
     progress_bar 50
-    # open system info
-    exec_terminal 2 "btop" && progress_bar 55
-    wait_for_max 25 "btop" 0 \
+    # mount nfs
+    i3_nfs.sh --mount Desktop && progress_bar 60 \
+        && i3_nfs.sh --mount Music && progress_bar 65 \
+        && i3_nfs.sh --mount Public && progress_bar 70 \
+        && i3_nfs.sh --mount Videos && progress_bar 75 \
         && icon4="$success_icon"
-    progress_bar 65
-    # resize multiplexer
-    i3-msg -q resize shrink height 30 px or 15 ppt && progress_bar 68 \
-        && i3-msg -q focus up && progress_bar 71 \
-        && icon5="$success_icon"
-    progress_bar 75
-    # nfs mount
-    i3_nfs.sh --Desktop --silent && progress_bar 78 \
-        && i3_nfs.sh --Music --silent && progress_bar 81 \
-        && i3_nfs.sh --Public --silent && progress_bar 84 \
-        && i3_nfs.sh --Videos --silent && progress_bar 87 \
-        && icon6="$success_icon"
-    progress_bar 90
+
+    progress_bar 80
     # move mouse pointer
-    move_mouse "topright" 0 && progress_bar 95 \
-        && icon7="$success_icon"
+    move_mouse "topright" 0 && progress_bar 90 \
+        && icon5="$success_icon"
+
     progress_bar 100 2500
 }
 
