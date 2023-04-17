@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-04-16T11:49:57+0200
+# date:   2023-04-17T17:50:09+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -166,40 +166,47 @@ autostart() {
         "$i3_notify" "${2:-0}" "$title" "$(progress_message)" "$1"
     }
 
+    # open web browser and file manager
     progress_bar 5
-    # open web browser
     ! window_available "firefox" \
-        && firefox-developer-edition & progress_bar 10
+        && firefox-developer-edition &
+    progress_bar 10
+    ! window_available "ranger" \
+        && open_terminal 1 "ranger_cd $HOME/.local/share/repos"
+    progress_bar 20
+    wait_for_max 35 "ranger" 0 \
+        && icon2="$success_icon"
+    progress_bar 30
     wait_for_max 45 "firefox" 5 \
         && icon1="$success_icon"
 
-    progress_bar 20
-    # open file manager
-    ! window_available "ranger" \
-        && open_terminal 1 "ranger_cd $HOME/.local/share/repos" && progress_bar 25
-    wait_for_max 35 "ranger" 0 \
-        && icon2="$success_icon"
-
-    progress_bar 35
     # open multiplexer
+    progress_bar 35
     ! window_available "tmux" \
-        && open_tmux 1 && progress_bar 40
+        && open_tmux 1
+    progress_bar 40
     wait_for_max 25 "tmux" 1 \
         && icon3="$success_icon"
 
-    progress_bar 50
     # mount nfs
-    i3_nfs.sh --mount Desktop && progress_bar 60 \
-        && i3_nfs.sh --mount Music && progress_bar 65 \
-        && i3_nfs.sh --mount Public && progress_bar 70 \
-        && i3_nfs.sh --mount Videos && progress_bar 75 \
+    progress_bar 50
+    i3_nfs.sh --mount Desktop \
+        && progress_bar 60 \
+        && i3_nfs.sh --mount Music \
+        && progress_bar 65 \
+        && i3_nfs.sh --mount Public \
+        && progress_bar 70 \
+        && i3_nfs.sh --mount Videos \
+        && progress_bar 75 \
         && icon4="$success_icon"
 
-    progress_bar 80
     # move mouse pointer
-    move_mouse "topright" 0 && progress_bar 90 \
+    progress_bar 85
+    move_mouse "topright" 0 \
         && icon5="$success_icon"
+    progress_bar 90
 
+    # completed
     progress_bar 100 2500
 }
 
