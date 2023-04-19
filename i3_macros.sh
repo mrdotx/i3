@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-04-17T17:50:09+0200
+# date:   2023-04-19T10:52:05+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -144,67 +144,97 @@ move_mouse() {
 }
 
 autostart() {
-    table_width=28
-    success_icon=""
+    table_width=32
+    icon_blank=""
+    icon_marked=""
 
     progress_message() {
         printf "\n%s" \
             "$("$i3_table" "$table_width" "header" "autostart")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" "$icon1" "" "open web browser")"
+            "$("$i3_table" "$table_width" \
+            "${icon_wb:-$icon_blank}" "" "open web browser")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" "$icon2" "" "open file manager")"
+            "$("$i3_table" "$table_width" \
+            "${icon_fm:-$icon_blank}" "" "open file manager")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" "$icon3" "" "open multiplexer")"
+            "$("$i3_table" "$table_width" \
+            "${icon_m:-$icon_blank}" "" "open multiplexer")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" "$icon4" "歷" "mount nfs")"
+            "$("$i3_table" "$table_width" \
+            "${icon_fd:-$icon_blank}" "歷" "mount folder \"Desktop\"")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" "$icon5" "" "move mouse pointer")"
+            "$("$i3_table" "$table_width" \
+            "${icon_fm:-$icon_blank}" "歷" "mount folder \"Music\"")"
+        printf "\n%s" \
+            "$("$i3_table" "$table_width" \
+            "${icon_fp:-$icon_blank}" "歷" "mount folder \"Public\"")"
+        printf "\n%s" \
+            "$("$i3_table" "$table_width" \
+            "${icon_fv:-$icon_blank}" "歷" "mount folder \"Videos\"")"
+        printf "\n%s" \
+            "$("$i3_table" "$table_width" \
+            "${icon_mp:-$icon_blank}" "" "move mouse pointer")"
     }
 
     progress_bar() {
         "$i3_notify" "${2:-0}" "$title" "$(progress_message)" "$1"
     }
 
-    # open web browser and file manager
-    progress_bar 5
-    ! window_available "firefox" \
+    # open web browser
+    progress_bar 10 \
+        && ! window_available "firefox" \
         && firefox-developer-edition &
-    progress_bar 10
-    ! window_available "ranger" \
+
+    # open file manager
+    progress_bar 20 \
+        && ! window_available "ranger" \
         && open_terminal 1 "ranger_cd $HOME/.local/share/repos"
-    progress_bar 20
-    wait_for_max 35 "ranger" 0 \
-        && icon2="$success_icon"
-    progress_bar 30
-    wait_for_max 45 "firefox" 5 \
-        && icon1="$success_icon"
 
-    # open multiplexer
-    progress_bar 35
-    ! window_available "tmux" \
-        && open_tmux 1
-    progress_bar 40
-    wait_for_max 25 "tmux" 1 \
-        && icon3="$success_icon"
+    # mount folder "Desktop"
+    progress_bar 30 \
+        && i3_nfs.sh --mount "Desktop" \
+        && icon_fd="$icon_marked"
 
-    # mount nfs
-    progress_bar 50
-    i3_nfs.sh --mount Desktop \
-        && progress_bar 60 \
-        && i3_nfs.sh --mount Music \
-        && progress_bar 65 \
-        && i3_nfs.sh --mount Public \
-        && progress_bar 70 \
-        && i3_nfs.sh --mount Videos \
-        && progress_bar 75 \
-        && icon4="$success_icon"
+    # mount folder "Music"
+    progress_bar 35 \
+        && i3_nfs.sh --mount "Music" \
+        && icon_fm="$icon_marked"
+
+    # mount folder "Public"
+    progress_bar 40 \
+        && i3_nfs.sh --mount "Public" \
+        && icon_fp="$icon_marked"
+
+    # mount folder "Videos"
+    progress_bar 45 \
+        && i3_nfs.sh --mount "Videos" \
+        && icon_fv="$icon_marked"
 
     # move mouse pointer
-    progress_bar 85
-    move_mouse "topright" 0 \
-        && icon5="$success_icon"
-    progress_bar 90
+    progress_bar 50 \
+        && move_mouse "topright" 0 \
+        && icon_mp="$icon_marked"
+
+    # wait for file manager
+    progress_bar 60 \
+        && wait_for_max 35 "ranger" 0 \
+        && icon_fm="$icon_marked"
+
+    # wait for web browser
+    progress_bar 70 \
+        && wait_for_max 45 "firefox" 5 \
+        && icon_wb="$icon_marked"
+
+    # open multiplexer
+    progress_bar 80 \
+        && ! window_available "tmux" \
+        && open_tmux 1
+
+    # wait for multiplexer
+    progress_bar 90 \
+        && wait_for_max 25 "tmux" 0 \
+        && icon_m="$icon_marked"
 
     # completed
     progress_bar 100 2500
