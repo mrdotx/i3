@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-04-16T15:33:34+0200
+# date:   2023-04-27T17:44:02+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -89,7 +89,8 @@ $("$i3_table" "$table_width1" "p" "$(nfs_status Public)" \
 $("$i3_table" "$table_width1" "t" "$(nfs_status Templates)" \
     "├─ $folder/Templates")
 $("$i3_table" "$table_width1" "v" "$(nfs_status Videos)" \
-    "└─ $folder/Videos")
+    "├─ $folder/Videos")
+$("$i3_table" "$table_width" "\\\\" "歷" "toggle default")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+shift+\\\</b>]"
 
@@ -97,6 +98,10 @@ case "$1" in
     --all)
         "$path"helper/i3_net_check.sh "$server" \
             && nfs_toggle "Desktop Downloads Music Public Templates Videos"
+        ;;
+    --default)
+        "$path"helper/i3_net_check.sh "$server" \
+            && nfs_toggle "Desktop Music Public Videos"
         ;;
     --kill)
         "$i3_notify" 1 "$title"
