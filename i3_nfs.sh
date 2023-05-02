@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-04-27T17:44:02+0200
+# date:   2023-05-02T05:23:35+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -12,8 +12,8 @@ LANG=C
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
-icon_active="蘒"
-icon_inactive="﨡"
+icon_active="󱨥"
+icon_inactive="󱨦"
 
 server="m625q"
 folder="/home/klassiker"
@@ -77,7 +77,7 @@ table_width=43
 table_width1=$((table_width + 4))
 message="
 $("$i3_table" "$table_width" "header" "$server mounts")
-$("$i3_table" "$table_width" "a" "歷" "toggle all")
+$("$i3_table" "$table_width" "a" "󰒍" "toggle all")
 $("$i3_table" "$table_width1" "d" "$(nfs_status Desktop)" \
     "├─ $folder/Desktop")
 $("$i3_table" "$table_width1" "l" "$(nfs_status Downloads)" \
@@ -90,7 +90,7 @@ $("$i3_table" "$table_width1" "t" "$(nfs_status Templates)" \
     "├─ $folder/Templates")
 $("$i3_table" "$table_width1" "v" "$(nfs_status Videos)" \
     "├─ $folder/Videos")
-$("$i3_table" "$table_width" "\\\\" "歷" "toggle default")
+$("$i3_table" "$table_width" "\\\\" "󰒍" "toggle default")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+shift+\\\</b>]"
 

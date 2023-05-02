@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-04-04T19:35:22+0200
+# date:   2023-05-01T21:30:27+0200
 
 basename=${0##*/}
 path=${0%"$basename"}
@@ -19,19 +19,19 @@ table_width=37
 table_width1=$((table_width + 4))
 message="
 $("$i3_table" "$table_width" "header" "local")
-$("$i3_table" "$table_width" "v" "" "vim")
-$("$i3_table" "$table_width" "w" "ﴬ" "vimwiki")
-$("$i3_table" "$table_width1" "t" "ﴬ" "├─ todos")
-$("$i3_table" "$table_width1" "i" "ﴬ" "└─ ideas")
+$("$i3_table" "$table_width" "v" "󰏫" "vim")
+$("$i3_table" "$table_width" "w" "󰠮" "vimwiki")
+$("$i3_table" "$table_width1" "t" "󰠮" "├─ todos")
+$("$i3_table" "$table_width1" "i" "󰠮" "└─ ideas")
 
 $("$i3_table" "$table_width" "header" "remote")
-$("$i3_table" "$table_width" "m" "歷" "m625q")
-$("$i3_table" "$table_width" "n" "" "mi")
-$("$i3_table" "$table_width" "b" "" "macbook")
-$("$i3_table" "$table_width" "f" "爵" "middlefinger")
-$("$i3_table" "$table_width" "z" "爵" "prinzipal")
-$("$i3_table" "$table_width" "k" "爵" "klassiker")
-$("$i3_table" "$table_width" "c" "爵" "marcus")
+$("$i3_table" "$table_width" "m" "󰒍" "m625q")
+$("$i3_table" "$table_width" "n" "󰌢" "mi")
+$("$i3_table" "$table_width" "b" "󰌢" "macbook")
+$("$i3_table" "$table_width" "f" "󰖟" "middlefinger")
+$("$i3_table" "$table_width" "z" "󰖟" "prinzipal")
+$("$i3_table" "$table_width" "k" "󰖟" "klassiker")
+$("$i3_table" "$table_width" "c" "󰖟" "marcus")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+e</b>]"
 

@@ -18,21 +18,21 @@ title="container"
 table_width=41
 message="
 $("$i3_table" "$table_width" "header" "layout")
-$("$i3_table" "$table_width" "s" "" "stacking")
-$("$i3_table" "$table_width" "t" "里" "tabbed")
-$("$i3_table" "$table_width" "p" "侀" "split")
+$("$i3_table" "$table_width" "s" "󰌨" "stacking")
+$("$i3_table" "$table_width" "t" "󰓪" "tabbed")
+$("$i3_table" "$table_width" "p" "󰕴" "split")
 
 $("$i3_table" "$table_width" "header" "split")
-$("$i3_table" "$table_width" "h" "" "horizontal")
-$("$i3_table" "$table_width" "v" "" "vertical")
+$("$i3_table" "$table_width" "h" "󰁕" "horizontal")
+$("$i3_table" "$table_width" "v" "󰁆" "vertical")
 
 $("$i3_table" "$table_width" "header" "scratchpad")
-$("$i3_table" "$table_width" "m" "" "move to")
-$("$i3_table" "$table_width" "c" "" "cycle")
+$("$i3_table" "$table_width" "m" "󰀿" "move to")
+$("$i3_table" "$table_width" "c" "󰀾" "cycle")
 
 $("$i3_table" "$table_width" "header" "wallpaper")
-$("$i3_table" "$table_width" "a" "列" "random")
-$("$i3_table" "$table_width" "e" "勒" "reset")
+$("$i3_table" "$table_width" "a" "󰒝" "random")
+$("$i3_table" "$table_width" "e" "󰑓" "reset")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+space</b>]"
 

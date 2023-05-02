@@ -102,22 +102,22 @@ move_mouse() {
 
     case "$1" in
         topleft)
-            position_icon=""
+            position_icon="󰁛"
             x=0
             y=0
             ;;
         topright)
-            position_icon=""
+            position_icon="󰁜"
             x="${resolution%% *}"
             y=0
             ;;
         bottomleft)
-            position_icon=""
+            position_icon="󰁂"
             x=0
             y="${resolution##* }"
             ;;
         bottomright)
-            position_icon=""
+            position_icon="󰁃"
             x="${resolution%% *}"
             y="${resolution##* }"
             ;;
@@ -145,36 +145,36 @@ move_mouse() {
 
 autostart() {
     table_width=32
-    icon_blank=""
-    icon_marked=""
+    icon_blank="󰄱"
+    icon_marked="󰄵"
 
     progress_message() {
         printf "\n%s" \
             "$("$i3_table" "$table_width" "header" "autostart")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_wb:-$icon_blank}" "" "open web browser")"
+            "${icon_wb:-$icon_blank}" "󰈹" "open web browser")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_fm:-$icon_blank}" "" "open file manager")"
+            "${icon_fm:-$icon_blank}" "󰆍" "open file manager")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_m:-$icon_blank}" "" "open multiplexer")"
+            "${icon_m:-$icon_blank}" "󰆍" "open multiplexer")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_fd:-$icon_blank}" "歷" "mount folder \"Desktop\"")"
+            "${icon_fd:-$icon_blank}" "󰒍" "mount folder \"Desktop\"")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_fm:-$icon_blank}" "歷" "mount folder \"Music\"")"
+            "${icon_fm:-$icon_blank}" "󰒍" "mount folder \"Music\"")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_fp:-$icon_blank}" "歷" "mount folder \"Public\"")"
+            "${icon_fp:-$icon_blank}" "󰒍" "mount folder \"Public\"")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_fv:-$icon_blank}" "歷" "mount folder \"Videos\"")"
+            "${icon_fv:-$icon_blank}" "󰒍" "mount folder \"Videos\"")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_mp:-$icon_blank}" "" "move mouse pointer")"
+            "${icon_mp:-$icon_blank}" "󰆽" "move mouse pointer")"
     }
 
     progress_bar() {
@@ -244,16 +244,16 @@ title="macros"
 table_width=41
 message="
 $("$i3_table" "$table_width" "header" "system")
-$("$i3_table" "$table_width" "b" "襤" "boot next")
-$("$i3_table" "$table_width" "v" "禍" "ventoy")
-$("$i3_table" "$table_width" "t" "" "terminal colors")
+$("$i3_table" "$table_width" "b" "󰐥" "boot next")
+$("$i3_table" "$table_width" "v" "󰕓" "ventoy")
+$("$i3_table" "$table_width" "t" "󰂶" "terminal colors")
 
 $("$i3_table" "$table_width" "header" "info")
 $("$i3_table" "$table_width" "w" "" "weather")
 $("$i3_table" "$table_width" "c" "" "corona stats")
 
 $("$i3_table" "$table_width" "header" "other")
-$("$i3_table" "$table_width" "h" "ﳲ" "telehack")
+$("$i3_table" "$table_width" "h" "󰟴" "telehack")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+print</b>]"
 

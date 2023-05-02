@@ -18,20 +18,20 @@ title="exit"
 table_width=45
 message="
 $("$i3_table" "$table_width" "header" "power")
-$("$i3_table" "$table_width" "d" "襤" "shutdown")
-$("$i3_table" "$table_width" "r" "累" "reboot")
-$("$i3_table" "$table_width" "s" "" "suspend")
+$("$i3_table" "$table_width" "d" "󰐥" "shutdown")
+$("$i3_table" "$table_width" "r" "󰑐" "reboot")
+$("$i3_table" "$table_width" "s" "󰏦" "suspend")
 
 $("$i3_table" "$table_width" "header" "other")
-$("$i3_table" "$table_width" "z" "鈴" "sleep (lock + suspend)")
-$("$i3_table" "$table_width" "l" "" "lock")
-$("$i3_table" "$table_width" "o" "" "logout")
+$("$i3_table" "$table_width" "z" "󰒲" "sleep (lock + suspend)")
+$("$i3_table" "$table_width" "l" "󰍁" "lock")
+$("$i3_table" "$table_width" "o" "󰍃" "logout")
 
 $("$i3_table" "$table_width" "header" "restart")
-$("$i3_table" "$table_width" "n" "" "notification daemon")
+$("$i3_table" "$table_width" "n" "󰂚" "notification daemon")
 
 $("$i3_table" "$table_width" "header" "kill")
-$("$i3_table" "$table_width" "x" "类" "select window")
+$("$i3_table" "$table_width" "x" "󰖯" "select window")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>ctrl+alt+delete</b>]"
 

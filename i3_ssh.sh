@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-03-02T11:57:48+0100
+# date:   2023-05-01T21:41:04+0200
 
 basename=${0##*/}
 path=${0%"$basename"}
@@ -14,11 +14,11 @@ title="ssh"
 table_width=37
 message="
 $("$i3_table" "$table_width" "header" "server")
-$("$i3_table" "$table_width" "m" "歷" "m625q")
+$("$i3_table" "$table_width" "m" "󰒍" "m625q")
 
 $("$i3_table" "$table_width" "header" "client")
-$("$i3_table" "$table_width" "n" "" "mi")
-$("$i3_table" "$table_width" "b" "" "macbook")
+$("$i3_table" "$table_width" "n" "󰌢" "mi")
+$("$i3_table" "$table_width" "b" "󰌢" "macbook")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+h</b>]"
 
