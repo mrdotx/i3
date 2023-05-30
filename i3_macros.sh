@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-04-19T10:52:05+0200
+# date:   2023-05-29T17:28:53+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -141,6 +141,42 @@ move_mouse() {
             xdotool mousemove "$x" "$y"
             ;;
     esac
+}
+
+move_window() {
+    [ -z "$1" ] \
+        && return 1
+
+    margin_x=${2:-0}
+    margin_y=${3:-0}
+
+    resolution=$( \
+        xrandr \
+            | head -n1 \
+            | cut -d" " -f8,10 \
+            | tr -d ","
+    )
+
+    eval "$(xdotool getwindowfocus getwindowgeometry --shell)" \
+        && case $1 in
+            topleft)
+                x="$margin_x"
+                y="$margin_y"
+                ;;
+            topright)
+                x="$((${resolution%% *} - WIDTH - margin_x))"
+                y="$margin_y"
+                ;;
+            bottomleft)
+                x="$margin_y"
+                y="$((${resolution##* } - HEIGHT - margin_y))"
+                ;;
+            bottomright)
+                x="$((${resolution%% *} - WIDTH - margin_x))"
+                y="$((${resolution##* } - HEIGHT - margin_y))"
+                ;;
+        esac \
+        && xdotool getactivewindow windowmove "$x" "$y"
 }
 
 autostart() {
@@ -292,6 +328,9 @@ case "$1" in
         ;;
     --movemouse)
         move_mouse "$2" "$3"
+        ;;
+    --movewindow)
+        move_window "$2" "$3" "$4"
         ;;
     --kill)
         "$i3_notify" 1 "$title"
