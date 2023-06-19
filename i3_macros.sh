@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-06-19T11:58:04+0200
+# date:   2023-06-19T15:55:45+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -60,7 +60,7 @@ wait_for_max() {
 exec_terminal() {
     i3-msg workspace "$1"
 
-    eval "$TERMINAL -T $2 -e $3"
+    eval "$TERMINAL -T \"$2\" -e $3"
 }
 
 open_terminal() {
