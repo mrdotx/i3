@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-06-19T09:48:26+0200
+# date:   2023-06-19T11:04:15+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -228,7 +228,7 @@ autostart() {
     # open file manager
     progress_bar 20 \
         && ! window_available "ranger" \
-        && open_terminal 1 "ranger" "ranger_cd $HOME/.local/share/repos"
+        && open_terminal 1 "" "ranger_cd $HOME/.local/share/repos"
 
     # mount folder "Desktop"
     progress_bar 30 \
