@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-05-30T08:41:03+0200
+# date:   2023-06-19T09:48:26+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -59,14 +59,17 @@ wait_for_max() {
 
 exec_terminal() {
     i3-msg workspace "$1"
-    $TERMINAL -e "$2"
+    window_title="$2"
+    shift 2
+
+    eval "$TERMINAL -T $window_title -e $3"
 }
 
 open_terminal() {
-    exec_terminal "$1" "$SHELL"
+    exec_terminal "$1" "$2" "$SHELL"
 
     sleep .5
-    type_string " $2"
+    type_string " $3"
     press_key 1 Return
 }
 
@@ -189,28 +192,28 @@ autostart() {
             "$("$i3_table" "$table_width" "header" "autostart")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_wb:-$icon_blank}" "󰈹" "open web browser")"
+            "${icon_owb:-$icon_blank}" "󰈹" "open web browser")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_fm:-$icon_blank}" "󰆍" "open file manager")"
+            "${icon_ofm:-$icon_blank}" "󰆍" "open file manager")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_m:-$icon_blank}" "󰆍" "open multiplexer")"
+            "${icon_om:-$icon_blank}" "󰆍" "open multiplexer")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_fd:-$icon_blank}" "󰒍" "mount folder \"Desktop\"")"
+            "${icon_mfd:-$icon_blank}" "󰒍" "mount folder \"Desktop\"")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_fm:-$icon_blank}" "󰒍" "mount folder \"Music\"")"
+            "${icon_mfm:-$icon_blank}" "󰒍" "mount folder \"Music\"")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_fp:-$icon_blank}" "󰒍" "mount folder \"Public\"")"
+            "${icon_mfp:-$icon_blank}" "󰒍" "mount folder \"Public\"")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_fv:-$icon_blank}" "󰒍" "mount folder \"Videos\"")"
+            "${icon_mfv:-$icon_blank}" "󰒍" "mount folder \"Videos\"")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_mp:-$icon_blank}" "󰆽" "move mouse pointer")"
+            "${icon_mmp:-$icon_blank}" "󰆽" "move mouse pointer")"
     }
 
     progress_bar() {
@@ -225,42 +228,42 @@ autostart() {
     # open file manager
     progress_bar 20 \
         && ! window_available "ranger" \
-        && open_terminal 1 "ranger_cd $HOME/.local/share/repos"
+        && open_terminal 1 "ranger" "ranger_cd $HOME/.local/share/repos"
 
     # mount folder "Desktop"
     progress_bar 30 \
         && i3_nfs.sh --mount "Desktop" \
-        && icon_fd="$icon_marked"
+        && icon_mfd="$icon_marked"
 
     # mount folder "Music"
     progress_bar 35 \
         && i3_nfs.sh --mount "Music" \
-        && icon_fm="$icon_marked"
+        && icon_mfm="$icon_marked"
 
     # mount folder "Public"
     progress_bar 40 \
         && i3_nfs.sh --mount "Public" \
-        && icon_fp="$icon_marked"
+        && icon_mfp="$icon_marked"
 
     # mount folder "Videos"
     progress_bar 45 \
         && i3_nfs.sh --mount "Videos" \
-        && icon_fv="$icon_marked"
+        && icon_mfv="$icon_marked"
 
     # move mouse pointer
     progress_bar 50 \
         && move_mouse "topright" 0 \
-        && icon_mp="$icon_marked"
+        && icon_mmp="$icon_marked"
 
     # wait for file manager
     progress_bar 60 \
         && wait_for_max 35 "ranger" 0 \
-        && icon_fm="$icon_marked"
+        && icon_ofm="$icon_marked"
 
     # wait for web browser
     progress_bar 70 \
         && wait_for_max 45 "firefox" 5 \
-        && icon_wb="$icon_marked"
+        && icon_owb="$icon_marked"
 
     # open multiplexer
     progress_bar 80 \
@@ -270,7 +273,7 @@ autostart() {
     # wait for multiplexer
     progress_bar 90 \
         && wait_for_max 25 "tmux" 0 \
-        && icon_m="$icon_marked"
+        && icon_om="$icon_marked"
 
     # completed
     progress_bar 100 2500
