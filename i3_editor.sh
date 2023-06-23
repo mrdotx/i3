@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-05-01T21:30:27+0200
+# date:   2023-06-23T21:07:08+0200
 
 basename=${0##*/}
 path=${0%"$basename"}
@@ -20,7 +20,7 @@ table_width1=$((table_width + 4))
 message="
 $("$i3_table" "$table_width" "header" "local")
 $("$i3_table" "$table_width" "v" "󰏫" "vim")
-$("$i3_table" "$table_width" "w" "󰠮" "vimwiki")
+$("$i3_table" "$table_width" "w" "󰠮" "wiki")
 $("$i3_table" "$table_width1" "t" "󰠮" "├─ todos")
 $("$i3_table" "$table_width1" "i" "󰠮" "└─ ideas")
 
