@@ -2,25 +2,26 @@
 
 general helper scripts for i3
 
-| name         | comment                         |
-| :----------- | :------------------------------ |
-| i3_notify.sh | general config for notification |
-| i3_table.sh  | table format for notification   |
+| name         | comment                          |
+| :----------- | :------------------------------- |
+| i3_notify.sh | general config for notifications |
+| i3_table.sh  | table format for notifications   |
 
 shell scripts for i3
 
-| name                 | comment                                                |
-| :------------------- | :----------------------------------------------------- |
-| i3_autotiling.sh     | automatic optimal tilings for windows                  |
-| i3_container.sh      | shows keybindings for container mode with notify-send  |
-| i3_editor.sh         | shows keybindings for editor mode with notify-send     |
-| i3_exit.sh           | lock/suspend/logout/reboot/shutdown/switch user script |
-| i3_macros.sh         | shows keybindings for predefined macros                |
-| i3_nfs.sh            | shows keybindings for nfs mounts                       |
-| i3_services.sh       | shows keybindings for services mode with notify-send   |
-| i3_ssh.sh            | shows keybindings for ssh mode with notify-send        |
-| i3_tmux.sh           | open applications in tmux windows                      |
-| i3_workspace_swap.sh | swap workspaces and focus(left,right,up,down)          |
+| name                 | comment                                            |
+| :------------------- | :------------------------------------------------- |
+| i3_autotiling.sh     | automatic optimal tilings for windows              |
+| i3_container.sh      | shows keybindings for i3 container actions         |
+| i3_editor.sh         | shows keybindings for editor                       |
+| i3_exit.sh           | shows keybindings for lock, reboot, shutdown, etc. |
+| i3_macros.sh         | shows keybindings for predefined macros            |
+| i3_nfs.sh            | shows keybindings for nfs mounts                   |
+| i3_notes.sh          | shows keybindings for notes                        |
+| i3_services.sh       | shows keybindings for services                     |
+| i3_ssh.sh            | shows keybindings for ssh connections              |
+| i3_tmux.sh           | open applications in tmux windows                  |
+| i3_workspace_swap.sh | swap workspaces and focus(left,right,up,down)      |
 
 ![screenshot container mode](screenshot_container.png)
 ![screenshot editor mode](screenshot_editor.png)
@@ -28,6 +29,7 @@ shell scripts for i3
 ![screenshot macros mode](screenshot_macros.png)
 ![screenshot macros autostart](screenshot_macros_autostart.gif)
 ![screenshot nfs mode](screenshot_nfs.gif)
+![screenshot notes mode](screenshot_notes.png)
 ![screenshot services mode](screenshot_services.png)
 ![screenshot ssh mode](screenshot_ssh.png)
 
