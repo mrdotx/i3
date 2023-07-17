@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-07-04T22:26:38+0200
+# date:   2023-07-17T14:51:44+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -283,7 +283,6 @@ message="
 $("$i3_table" "$table_width" "header" "system")
 $("$i3_table" "$table_width" "b" "󰐥" "boot next")
 $("$i3_table" "$table_width" "v" "󰕓" "ventoy")
-$("$i3_table" "$table_width" "t" "󰂶" "terminal colors")
 
 $("$i3_table" "$table_width" "header" "info")
 $("$i3_table" "$table_width" "w" "" "weather")
@@ -304,10 +303,6 @@ case "$1" in
             "lsblk; ventoy -h"
         type_string \
             "$auth ventoy -u /dev/sd"
-        ;;
-    --terminalcolors)
-        exec_tmux 1 \
-            "terminal_colors.sh"
         ;;
     --weather)
         url="wttr.in/?AFq2&format=v2d&lang=de"
