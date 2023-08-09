@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2022-07-17T17:29:20+0200
+# date:   2023-08-08T18:11:01+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -38,7 +38,9 @@ split() {
 autotiling() {
     active_workspace=$(wmctrl -d \
         | awk '$2=="*" {print $9}' \
-    ) \
+    )
+
+    [ -n "$active_workspace" ] \
         && for workspace in "$@"; do
             [ "$active_workspace" -eq "$workspace" ] \
                 && break
@@ -54,7 +56,8 @@ case "$1" in
         while true; do
             autotiling "$@" \
                 && split
-            i3-msg -q -t subscribe '[ "window" ]'
+            i3-msg -q -t subscribe '[ "window" ]' \
+                || return
         done
         ;;
     -t)
@@ -65,7 +68,8 @@ case "$1" in
     *)
         while true; do
             split
-            i3-msg -q -t subscribe '[ "window" ]'
+            i3-msg -q -t subscribe '[ "window" ]' \
+                || return
         done
         ;;
 esac
