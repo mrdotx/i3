@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-07-25T19:23:09+0200
+# date:   2023-08-25T19:11:09+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -205,9 +205,6 @@ autostart() {
             "${icon_mfv:-$icon_blank}" "󰒍" "mount folder \"Videos\"")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
-            "${icon_mmp:-$icon_blank}" "󰆽" "move mouse pointer")"
-        printf "\n%s" \
-            "$("$i3_table" "$table_width" \
             "${icon_owb:-$icon_blank}" "󰈹" "open web browser")"
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
@@ -215,6 +212,9 @@ autostart() {
         printf "\n%s" \
             "$("$i3_table" "$table_width" \
             "${icon_om:-$icon_blank}" "󰆍" "open multiplexer")"
+        printf "\n%s" \
+            "$("$i3_table" "$table_width" \
+            "${icon_mmp:-$icon_blank}" "󰆽" "move mouse pointer")"
     }
 
     progress_bar() {
@@ -251,35 +251,35 @@ autostart() {
         && i3_nfs.sh --mount "Videos" \
         && icon_mfv="$icon_marked"
 
-    # move mouse pointer
-    progress_bar 45 \
-        && move_mouse "topright" 0 \
-        && icon_mmp="$icon_marked"
-
     # wait for web browser
-    progress_bar 55 \
+    progress_bar 45 \
         && wait_for_max 45 "firefox" 5 \
         && icon_owb="$icon_marked"
 
     # open file manager
-    progress_bar 65 \
+    progress_bar 55 \
         && ! window_available "ranger" \
-        && open_terminal 1 "ranger" "ranger_cd $HOME/.local/share/repos"
+        && open_terminal 1 "" "ranger_cd $HOME/.local/share/repos"
 
     # wait for file manager
-    progress_bar 75 \
+    progress_bar 65 \
         && wait_for_max 35 "ranger" 0 \
         && icon_ofm="$icon_marked"
 
     # open multiplexer
-    progress_bar 85 \
+    progress_bar 75 \
         && ! window_available "tmux" \
         && open_tmux 1
 
     # wait for multiplexer
-    progress_bar 95 \
+    progress_bar 85 \
         && wait_for_max 25 "tmux" 0 \
         && icon_om="$icon_marked"
+
+    # move mouse pointer
+    progress_bar 95 \
+        && move_mouse "topright" 0 \
+        && icon_mmp="$icon_marked"
 
     # completed
     progress_bar 100 2500
