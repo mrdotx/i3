@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-08-26T12:05:25+0200
+# date:   2023-08-27T20:30:39+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -253,7 +253,7 @@ autostart() {
 
     # wait for web browser
     progress_bar 45 \
-        && wait_for_max 45 "firefox" 3 \
+        && wait_for_max 45 "firefox" 5 \
         && icon_owb="$icon_marked"
 
     # open file manager
