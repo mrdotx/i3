@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-08-27T20:30:39+0200
+# date:   2023-08-30T21:08:25+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -294,7 +294,6 @@ $("$i3_table" "$table_width" "v" "󰕓" "ventoy")
 
 $("$i3_table" "$table_width" "header" "info")
 $("$i3_table" "$table_width" "w" "" "weather")
-$("$i3_table" "$table_width" "c" "" "corona stats")
 
 $("$i3_table" "$table_width" "header" "other")
 $("$i3_table" "$table_width" "h" "󰟴" "telehack")
@@ -316,11 +315,6 @@ case "$1" in
         url="wttr.in/?AFq2&format=v2d&lang=de"
         exec_tmux 1 \
             "curl -fsS '$url'"
-        ;;
-    --coronastats)
-        url="https://corona-stats.online?top=30&source=2&minimal=true"
-        exec_tmux 1 \
-            "curl -fsS '$url' | head -n32"
         ;;
     --telehack)
         url="telehack.com"
