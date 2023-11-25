@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-25T15:51:09+0100
+# date:   2023-11-25T16:25:21+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -303,7 +303,7 @@ case "$1" in
             "$auth ventoy -u /dev/sd"
         ;;
     --weather)
-        location_file="/tmp/weather_location"
+        location_file="/tmp/weather.location"
 
         grep -q -s '[^[:space:]]' $location_file \
             || curl -fsS 'https://ipinfo.io/city' > $location_file
