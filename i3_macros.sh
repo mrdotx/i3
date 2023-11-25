@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-25T10:07:21+0100
+# date:   2023-11-25T15:51:09+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -308,7 +308,7 @@ case "$1" in
         grep -q -s '[^[:space:]]' $location_file \
             || curl -fsS 'https://ipinfo.io/city' > $location_file
 
-        url="wttr.in/$(cat "$location_file")?AFq2&format=v2d&lang=de"
+        url="wttr.in/$(sed 's/ /%20/g' "$location_file")?AFq2&format=v2d&lang=de"
 
         exec_tmux 1 \
             "curl -fsS '$url'"
