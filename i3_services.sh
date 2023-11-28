@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-07-01T10:31:58+0200
+# date:   2023-11-27T22:23:10+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -15,10 +15,8 @@ auth="${EXEC_AS_USER:-sudo}"
 icon_active="󱨥"
 icon_inactive="󱨦"
 
-basename=${0##*/}
-path=${0%"$basename"}
-i3_table="${path}helper/i3_table.sh"
-i3_notify="${path}helper/i3_notify.sh"
+# i3 helper
+. i3_helper.sh
 
 # get xresources
 xrdb_query() {
@@ -82,55 +80,55 @@ table_width=39
 table_width1=$((table_width + 3))
 table_width2=$((table_width + 4))
 message="
-$("$i3_table" "$table_width" "header" "enable/disable")
-$("$i3_table" "$table_width1" "l" "󰌾" \
+$(i3_table "$table_width" "header" "enable/disable")
+$(i3_table "$table_width1" "l" "󰌾" \
     "$(service_status xautolock.service user) autolock")
-$("$i3_table" "$table_width1" "t" "󰕴" \
+$(i3_table "$table_width1" "t" "󰕴" \
     "$(service_status i3_autotiling.service user) autotiling")
-$("$i3_table" "$table_width1" "c" "󰗌" \
+$(i3_table "$table_width1" "c" "󰗌" \
     "$(service_status picom.service user) compositor")
-$("$i3_table" "$table_width1" "w" "󰏪" \
+$(i3_table "$table_width1" "w" "󰏪" \
     "$(service_status wacom.service user) wacom")
-$("$i3_table" "$table_width1" "m" "󰆽" \
+$(i3_table "$table_width1" "m" "󰆽" \
     "$(service_status xbanish.service user) mousepointer")
-$("$i3_table" "$table_width1" "s" "󰒒" \
+$(i3_table "$table_width1" "s" "󰒒" \
     "$(service_status sshd.service) ssh")
-$("$i3_table" "$table_width1" "v" "󰒄" \
+$(i3_table "$table_width1" "v" "󰒄" \
     "$(service_status wg0 wireguard) vpn")
-$("$i3_table" "$table_width1" "p" "󰐪" \
+$(i3_table "$table_width1" "p" "󰐪" \
     "$(service_status cups.service) printer")
-$("$i3_table" "$table_width1" "b" "󰂯" \
+$(i3_table "$table_width1" "b" "󰂯" \
     "$(service_status bluetooth.service) bluetooth")
 
-$("$i3_table" "$table_width" "header" "polybar")
+$(i3_table "$table_width" "header" "polybar")
 $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
     printf "%s\n" \
-        "$("$i3_table" "$table_width1" "a" "󰄮" \
+        "$(i3_table "$table_width1" "a" "󰄮" \
             "$icon_active bar")"
     printf "%s\n" \
-        "$("$i3_table" "$table_width2" "1" "󰎤" \
+        "$(i3_table "$table_width2" "1" "󰎤" \
             "  ├─ primary   -> $(xrdb_query "Polybar.monitor1")")"
     printf "%s\n" \
-        "$("$i3_table" "$table_width2" "2" "󰎧" \
+        "$(i3_table "$table_width2" "2" "󰎧" \
             "  ├─ secondary -> $(xrdb_query 'Polybar.monitor2')")"
     printf "%s\n" \
-        "$("$i3_table" "$table_width2" "0" "󰎡" \
+        "$(i3_table "$table_width2" "0" "󰎡" \
             "  └─ reload")"
     printf "%s\n" \
-        "$("$i3_table" "$table_width2" "f" "󰑬" \
+        "$(i3_table "$table_width2" "f" "󰑬" \
             "     ├─ freshrss")"
     printf "%s\n" \
-        "$("$i3_table" "$table_width2" "o" "" \
-            "     ├─ openweathermap")"
+        "$(i3_table "$table_width2" "o" "" \
+            "     ├─ openweather")"
     printf "%s\n" \
-        "$("$i3_table" "$table_width2" "n" "󰏗" \
+        "$(i3_table "$table_width2" "n" "󰏗" \
             "     ├─ pacman")"
     printf "%s\n" \
-        "$("$i3_table" "$table_width2" "r" "" \
+        "$(i3_table "$table_width2" "r" "" \
             "     └─ trash-cli")"
 else
     printf "%s" \
-        "$("$i3_table" "$table_width1" "a" "󰄮" \
+        "$(i3_table "$table_width1" "a" "󰄮" \
             "$icon_inactive bar")"
 fi)
 
@@ -179,9 +177,9 @@ case "$1" in
         service_toggle "wg0" "wireguard"
         ;;
     --kill)
-        "$i3_notify" 1 "$title"
+        i3_notify 1 "$title"
         ;;
     *)
-        "$i3_notify" 0 "$title" "$message"
+        i3_notify 0 "$title" "$message"
         ;;
 esac
