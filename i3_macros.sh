@@ -3,16 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-25T16:25:21+0100
+# date:   2023-11-27T22:13:41+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 
-basename=${0##*/}
-path=${0%"$basename"}
-i3_table="${path}helper/i3_table.sh"
-i3_notify="${path}helper/i3_notify.sh"
+# i3 helper
+. i3_helper.sh
 
 press_key() {
     i="$1"
@@ -77,11 +75,11 @@ open_tmux() {
 }
 
 exec_tmux() {
-    open_tmux "$1"
+    open_tmux "$2"
 
     sleep .5
     press_key 1 Ctrl+c
-    type_string " tput reset; $2"
+    type_string " tput reset; $1"
     press_key 1 Return
 }
 
@@ -129,14 +127,12 @@ move_mouse() {
             message="mouse pointer moved [$position_icon]"
             message="$message\nfrom $(get_mouse_location)"
 
-            "$i3_notify" 0 "$title" \
-                "$message"
+            i3_notify 0 "$title" "$message"
 
             xdotool mousemove "$x" "$y"
             sleep .5
 
-            "$i3_notify" 2500 "$title" \
-                "$message to $(get_mouse_location)"
+            i3_notify 2500 "$title" "$message to $(get_mouse_location)"
             ;;
         *)
             xdotool mousemove "$x" "$y"
@@ -187,39 +183,39 @@ autostart() {
 
     progress_message() {
         printf "\n%s" \
-            "$("$i3_table" "$table_width" "header" "mount")"
+            "$(i3_table "$table_width" "header" "mount")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" \
+            "$(i3_table "$table_width" \
             "${icon_mfc:-$icon_blank}" "󰒍" "nfs \"Cloud\"")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" \
+            "$(i3_table "$table_width" \
             "${icon_mfd:-$icon_blank}" "󰒍" "nfs \"Desktop\"")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" \
+            "$(i3_table "$table_width" \
             "${icon_mfm:-$icon_blank}" "󰒍" "nfs \"Music\"")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" \
+            "$(i3_table "$table_width" \
             "${icon_mfp:-$icon_blank}" "󰒍" "nfs \"Public\"")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" \
+            "$(i3_table "$table_width" \
             "${icon_mfv:-$icon_blank}" "󰒍" "nfs \"Videos\"")"
         printf "\n\n%s" \
-            "$("$i3_table" "$table_width" "header" "open")"
+            "$(i3_table "$table_width" "header" "open")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" \
+            "$(i3_table "$table_width" \
             "${icon_ofm:-$icon_blank}" "󰆍" "file manager")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" \
+            "$(i3_table "$table_width" \
             "${icon_om:-$icon_blank}" "󰆍" "multiplexer")"
         printf "\n\n%s" \
-            "$("$i3_table" "$table_width" "header" "move")"
+            "$(i3_table "$table_width" "header" "move")"
         printf "\n%s" \
-            "$("$i3_table" "$table_width" \
+            "$(i3_table "$table_width" \
             "${icon_mmp:-$icon_blank}" "󰆽" "mouse pointer")"
     }
 
     progress_bar() {
-        "$i3_notify" "${2:-0}" "$title" "$(progress_message)" "$1"
+        i3_notify "${2:-0}" "$title" "$(progress_message)" "$1"
     }
 
     # mount folder "Cloud"
@@ -279,28 +275,25 @@ autostart() {
 title="macros"
 table_width=41
 message="
-$("$i3_table" "$table_width" "header" "system")
-$("$i3_table" "$table_width" "b" "󰐥" "boot next")
-$("$i3_table" "$table_width" "v" "󰕓" "ventoy")
+$(i3_table "$table_width" "header" "system")
+$(i3_table "$table_width" "b" "󰐥" "boot next")
+$(i3_table "$table_width" "v" "󰕓" "ventoy")
 
-$("$i3_table" "$table_width" "header" "info")
-$("$i3_table" "$table_width" "w" "" "weather")
+$(i3_table "$table_width" "header" "info")
+$(i3_table "$table_width" "w" "" "weather")
 
-$("$i3_table" "$table_width" "header" "other")
-$("$i3_table" "$table_width" "h" "󰟴" "telehack")
+$(i3_table "$table_width" "header" "other")
+$(i3_table "$table_width" "h" "󰟴" "telehack")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+print</b>]"
 
 case "$1" in
     --bootnext)
-        exec_tmux 1 \
-            "$auth efistub.sh -b"
+        exec_tmux "$auth efistub.sh -b"
         ;;
     --ventoy)
-        exec_tmux 1 \
-            "lsblk; ventoy -h"
-        type_string \
-            "$auth ventoy -u /dev/sd"
+        exec_tmux "lsblk; ventoy -h"
+        type_string "$auth ventoy -u /dev/sd"
         ;;
     --weather)
         location_file="/tmp/weather.location"
@@ -310,13 +303,11 @@ case "$1" in
 
         url="wttr.in/$(sed 's/ /%20/g' "$location_file")?AFq2&format=v2d&lang=de"
 
-        exec_tmux 1 \
-            "curl -fsS '$url'"
+        exec_tmux "curl -fsS '$url'"
         ;;
     --telehack)
         url="telehack.com"
-        exec_tmux 1 \
-            "telnet '$url'"
+        exec_tmux "telnet '$url'"
         ;;
     --autostart)
         autostart
@@ -328,9 +319,9 @@ case "$1" in
         move_window "$2" "$3" "$4"
         ;;
     --kill)
-        "$i3_notify" 1 "$title"
+        i3_notify 1 "$title"
         ;;
     *)
-        "$i3_notify" 0 "$title" "$message"
+        i3_notify 0 "$title" "$message"
         ;;
 esac

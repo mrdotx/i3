@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-07-25T18:15:28+0200
+# date:   2023-11-27T22:19:45+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -19,10 +19,8 @@ server="m625q"
 folder="/home/klassiker"
 options="noatime,vers=4"
 
-basename=${0##*/}
-path=${0%"$basename"}
-i3_table="${path}helper/i3_table.sh"
-i3_notify="${path}helper/i3_notify.sh"
+# i3 helper
+. i3_helper.sh
 
 nfs_status() {
     mountpoint -q "$folder/$1"
@@ -76,53 +74,53 @@ title="nfs"
 table_width=43
 table_width1=$((table_width + 4))
 message="
-$("$i3_table" "$table_width" "header" "$server mounts")
-$("$i3_table" "$table_width" "a" "󰒍" "toggle all")
-$("$i3_table" "$table_width1" "c" "$(nfs_status Cloud)" \
+$(i3_table "$table_width" "header" "$server mounts")
+$(i3_table "$table_width" "a" "󰒍" "toggle all")
+$(i3_table "$table_width1" "c" "$(nfs_status Cloud)" \
     "├─ $folder/Cloud")
-$("$i3_table" "$table_width1" "d" "$(nfs_status Desktop)" \
+$(i3_table "$table_width1" "d" "$(nfs_status Desktop)" \
     "├─ $folder/Desktop")
-$("$i3_table" "$table_width1" "m" "$(nfs_status Music)" \
+$(i3_table "$table_width1" "m" "$(nfs_status Music)" \
     "├─ $folder/Music")
-$("$i3_table" "$table_width1" "p" "$(nfs_status Public)" \
+$(i3_table "$table_width1" "p" "$(nfs_status Public)" \
     "├─ $folder/Public")
-$("$i3_table" "$table_width1" "t" "$(nfs_status Templates)" \
+$(i3_table "$table_width1" "t" "$(nfs_status Templates)" \
     "├─ $folder/Templates")
-$("$i3_table" "$table_width1" "v" "$(nfs_status Videos)" \
+$(i3_table "$table_width1" "v" "$(nfs_status Videos)" \
     "├─ $folder/Videos")
-$("$i3_table" "$table_width" "\\\\" "󰒍" "toggle default")
+$(i3_table "$table_width" "\\\\" "󰒍" "toggle default")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+shift+\\\</b>]"
 
 case "$1" in
     --all)
-        "$path"helper/i3_net_check.sh "$server" \
+        i3_net_check "$server" \
             && nfs_toggle "Cloud Desktop Music Public Templates Videos"
         ;;
     --default)
-        "$path"helper/i3_net_check.sh "$server" \
+        i3_net_check "$server" \
             && nfs_toggle "Cloud Desktop Music Public Videos"
         ;;
     --kill)
-        "$i3_notify" 1 "$title"
+        i3_notify 1 "$title"
         ;;
     --mount)
         shift
 
-        "$path"helper/i3_net_check.sh "$server" \
+        i3_net_check "$server" \
             && nfs_mount "$*"
         ;;
     --umount)
         shift
 
-        "$path"helper/i3_net_check.sh "$server" \
+        i3_net_check "$server" \
             && nfs_umount "$*"
         ;;
     --*)
-        "$path"helper/i3_net_check.sh "$server" \
+        i3_net_check "$server" \
             && nfs_toggle "${1##*--}"
         ;;
     *)
-        "$i3_notify" 0 "$title" "$message"
+        i3_notify 0 "$title" "$message"
         ;;
 esac
