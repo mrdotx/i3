@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-27T22:13:41+0100
+# date:   2023-11-30T07:42:54+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -215,7 +215,7 @@ autostart() {
     }
 
     progress_bar() {
-        i3_notify "${2:-0}" "$title" "$(progress_message)" "$1"
+        i3_notify_progress "${2:-0}" "$title" "$(progress_message)" "$1"
     }
 
     # mount folder "Cloud"
@@ -301,9 +301,9 @@ case "$1" in
         grep -q -s '[^[:space:]]' $location_file \
             || curl -fsS 'https://ipinfo.io/city' > $location_file
 
-        url="wttr.in/$(sed 's/ /%20/g' "$location_file")?AFq2&format=v2d&lang=de"
+        url="wttr.in/$(sed 's/ /%20/g' "$location_file")?AFq2&format=v2d"
 
-        exec_tmux "curl -fsS '$url'"
+        exec_tmux "curl -fsS '$url'; printf '\n'; polybar_openweather.sh --terminal"
         ;;
     --telehack)
         url="telehack.com"
