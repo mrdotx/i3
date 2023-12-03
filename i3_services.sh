@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-27T22:23:10+0100
+# date:   2023-12-03T09:23:45+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -12,8 +12,8 @@ LANG=C
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
-icon_active="󱨥"
-icon_inactive="󱨦"
+icon_active="󰨚"
+icon_inactive="󰨙"
 
 # i3 helper
 . i3_helper.sh
@@ -89,7 +89,7 @@ $(i3_table "$table_width1" "c" "󰗌" \
     "$(service_status picom.service user) compositor")
 $(i3_table "$table_width1" "w" "󰏪" \
     "$(service_status wacom.service user) wacom")
-$(i3_table "$table_width1" "m" "󰆽" \
+$(i3_table "$table_width1" "m" "󰇀" \
     "$(service_status xbanish.service user) mousepointer")
 $(i3_table "$table_width1" "s" "󰒒" \
     "$(service_status sshd.service) ssh")
@@ -103,28 +103,31 @@ $(i3_table "$table_width1" "b" "󰂯" \
 $(i3_table "$table_width" "header" "polybar")
 $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
     printf "%s\n" \
-        "$(i3_table "$table_width1" "a" "󰄮" \
+        "$(i3_table "$table_width1" "a" "󰄱" \
             "$icon_active bar")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "1" "󰎤" \
+        "$(i3_table "$table_width2" "0" "󰎣" \
+            "  ├─ restart")"
+    printf "%s\n" \
+        "$(i3_table "$table_width2" "1" "󰎦" \
             "  ├─ primary   -> $(xrdb_query "Polybar.monitor1")")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "2" "󰎧" \
+        "$(i3_table "$table_width2" "2" "󰎩" \
             "  ├─ secondary -> $(xrdb_query 'Polybar.monitor2')")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "0" "󰎡" \
+        "$(i3_table "$table_width2" "r" "󰑐" \
             "  └─ reload")"
-    printf "%s\n" \
-        "$(i3_table "$table_width2" "f" "󰑬" \
-            "     ├─ freshrss")"
     printf "%s\n" \
         "$(i3_table "$table_width2" "o" "" \
             "     ├─ openweather")"
     printf "%s\n" \
+        "$(i3_table "$table_width2" "f" "󰑬" \
+            "     ├─ freshrss")"
+    printf "%s\n" \
         "$(i3_table "$table_width2" "n" "󰏗" \
             "     ├─ pacman")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "r" "" \
+        "$(i3_table "$table_width2" "x" "󰩺" \
             "     └─ trash-cli")"
 else
     printf "%s" \
