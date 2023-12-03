@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-27T22:19:45+0100
+# date:   2023-12-03T09:24:14+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -12,8 +12,8 @@ LANG=C
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
-icon_active="󱨥"
-icon_inactive="󱨦"
+icon_active="󰨚"
+icon_inactive="󰨙"
 
 server="m625q"
 folder="/home/klassiker"
