@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-30T07:42:54+0100
+# date:   2023-12-01T18:51:06+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -211,7 +211,7 @@ autostart() {
             "$(i3_table "$table_width" "header" "move")"
         printf "\n%s" \
             "$(i3_table "$table_width" \
-            "${icon_mmp:-$icon_blank}" "󰆽" "mouse pointer")"
+            "${icon_mmp:-$icon_blank}" "󰇀" "mouse pointer")"
     }
 
     progress_bar() {
