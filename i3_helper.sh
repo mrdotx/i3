@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_helper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-28T08:37:40+0100
+# date:   2023-12-04T09:19:42+0100
 
 i3_set_spacer() {
     i3_set_spacer_i=$1
@@ -15,8 +15,8 @@ i3_set_spacer() {
 
 i3_table() {
     i3_table_line="─"
-    i3_table_divider="┬"
-    i3_table_line_divider="│"
+    i3_table_line_divider="┬"
+    i3_table_row_divider="│"
 
     i3_table_fixed_column=3
     i3_table_variable_column=$(($1 - 2 - (2*i3_table_fixed_column)))
@@ -26,18 +26,18 @@ i3_table() {
             printf "<i>%s</i>\n%s%s%s%s%s" \
                 "$3" \
                 "$(i3_set_spacer "$i3_table_variable_column" "$i3_table_line")" \
-                "$i3_table_divider" \
+                "$i3_table_line_divider" \
                 "$(i3_set_spacer "$i3_table_fixed_column" "$i3_table_line")" \
-                "$i3_table_divider" \
+                "$i3_table_line_divider" \
                 "$(i3_set_spacer "$i3_table_fixed_column" "$i3_table_line")"
             ;;
         *)
             printf " %s %s%s %s %s <b>%s</b>" \
                 "$4" \
                 "$(i3_set_spacer "$((i3_table_variable_column - ${#4} - 2))")" \
-                "$i3_table_line_divider" \
+                "$i3_table_row_divider" \
                 "$3" \
-                "$i3_table_line_divider" \
+                "$i3_table_row_divider" \
                 "$2"
             ;;
     esac
