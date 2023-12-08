@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-12-04T18:55:54+0100
+# date:   2023-12-07T21:21:01+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -11,6 +11,9 @@ auth="${EXEC_AS_USER:-sudo}"
 
 # i3 helper
 . i3_helper.sh
+
+# workaround for xdotool mismatched keyboard layouts
+setxkbmap -synch
 
 press_key() {
     i="$1"
@@ -22,9 +25,6 @@ press_key() {
 }
 
 type_string() {
-    # workaround for mismatched keyboard layouts
-    setxkbmap -synch
-
     printf "%s" "$1" \
         | xdotool type \
             --delay 1 \
@@ -33,7 +33,7 @@ type_string() {
 }
 
 window_available() {
-    wmctrl -l | grep -iq "$1"
+    wmctrl -l | grep -q "$1"
 }
 
 wait_for_max() {
@@ -63,8 +63,8 @@ exec_terminal() {
 
 open_terminal() {
     exec_terminal "$1" "$2" "$SHELL"
-
     sleep .5
+
     type_string " $3"
     press_key 1 Return
 }
@@ -72,12 +72,12 @@ open_terminal() {
 open_tmux() {
     i3_tmux.sh -o "$1" 'shell'
     i3-msg workspace 2
+    sleep .5
 }
 
 exec_tmux() {
     open_tmux "$2"
 
-    sleep .5
     press_key 1 Ctrl+c
     type_string " tput reset; $1"
     press_key 1 Return
@@ -245,22 +245,22 @@ autostart() {
 
     # open file manager
     progress_bar 50 \
-        && ! window_available "ranger" \
+        && ! window_available "ranger:" \
         && open_terminal 1 "" "ranger_cd $HOME/.local/share/repos"
 
     # wait for file manager
     progress_bar 60 \
-        && wait_for_max 35 "ranger" 0 \
+        && wait_for_max 35 "ranger:" 0 \
         && icon_ofm="$icon_marked"
 
     # open multiplexer
     progress_bar 70 \
-        && ! window_available "tmux" \
+        && ! window_available "i3 tmux" \
         && open_tmux 1
 
     # wait for multiplexer
     progress_bar 80 \
-        && wait_for_max 25 "tmux" 0 \
+        && wait_for_max 25 "i3 tmux" 0 \
         && icon_om="$icon_marked"
 
     # move mouse pointer
