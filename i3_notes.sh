@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_notes.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-27T22:20:59+0100
+# date:   2023-12-18T18:12:26+0100
 
 # i3 helper
 . i3_helper.sh
@@ -27,15 +27,11 @@ $(i3_table "$table_width1" "b" "󰠮" "└─ bash")
 
 case "$1" in
     --vimwiki)
-        [ -n "$2" ]
-        case $? in
-            0)
-                open "$2"
-                ;;
-            *)
-                open "index"
-                ;;
-        esac
+        [ -n "$2" ] \
+            && open "$2" \
+            && return
+
+        open "index"
         ;;
     --kill)
         i3_notify 1 "$title"

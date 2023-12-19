@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-12-03T09:24:14+0100
+# date:   2023-12-18T18:13:53+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -23,15 +23,11 @@ options="noatime,vers=4"
 . i3_helper.sh
 
 nfs_status() {
-    mountpoint -q "$folder/$1"
-    case $? in
-        0)
-            printf "%s" "$icon_active"
-            ;;
-        *)
-            printf "%s" "$icon_inactive"
-            ;;
-    esac
+    mountpoint -q "$folder/$1" \
+        && printf "%s" "$icon_active" \
+        && return
+
+    printf "%s" "$icon_inactive"
 }
 
 nfs_toggle() {

@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-27T22:16:53+0100
+# date:   2023-12-18T18:10:34+0100
 
 # i3 helper
 . i3_helper.sh
@@ -39,15 +39,11 @@ case "$1" in
         $TERMINAL -e "$EDITOR"
         ;;
     --vimwiki)
-        [ -n "$2" ]
-        case $? in
-            0)
-                $TERMINAL -e "$EDITOR" -c ":VimwikiIndex" -c ":VimwikiGoto $2"
-                ;;
-            *)
-                $TERMINAL -e "$EDITOR" -c ":VimwikiIndex"
-                ;;
-        esac
+        [ -n "$2" ] \
+            && $TERMINAL -e "$EDITOR" -c ":VimwikiIndex" -c ":VimwikiGoto $2" \
+            && return
+
+        $TERMINAL -e "$EDITOR" -c ":VimwikiIndex"
         ;;
     --klassiker)
         open "ftp" "klassiker.online.de"
