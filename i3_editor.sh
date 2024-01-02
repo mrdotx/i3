@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-12-18T18:10:34+0100
+# date:   2024-01-02T10:37:15+0100
 
 # i3 helper
 . i3_helper.sh
@@ -28,7 +28,6 @@ $(i3_table "$table_width" "n" "󰌢" "mi")
 $(i3_table "$table_width" "b" "󰌢" "macbook")
 $(i3_table "$table_width" "f" "󰖟" "middlefinger")
 $(i3_table "$table_width" "z" "󰖟" "prinzipal")
-$(i3_table "$table_width" "k" "󰖟" "klassiker")
 $(i3_table "$table_width" "c" "󰖟" "marcus")
 
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+e</b>]"
@@ -44,9 +43,6 @@ case "$1" in
             && return
 
         $TERMINAL -e "$EDITOR" -c ":VimwikiIndex"
-        ;;
-    --klassiker)
-        open "ftp" "klassiker.online.de"
         ;;
     --marcus)
         open "ftp" "marcusreith.de"
