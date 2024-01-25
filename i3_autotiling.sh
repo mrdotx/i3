@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-08-08T18:11:01+0200
+# date:   2024-01-25T18:06:06+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -17,8 +17,8 @@ help="$script [-h/--help] -- script for optimal tiling focused window
   Settings:
     without given settings, script runs in the background and divides the focused
     window automatically
-    [-w]      = auto tiling only defined workspaces
-    [-t]      = auto tiling once and execute command
+    [-w]      = auto tiling only on defined workspaces
+    [-t]      = auto tiling once with defined command
     [command] = application to start
 
   Examples:
