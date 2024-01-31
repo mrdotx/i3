@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-12-07T21:21:01+0100
+# date:   2024-01-31T17:49:01+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -144,8 +144,8 @@ move_window() {
     [ -z "$1" ] \
         && return 1
 
-    margin_x=${2:-0}
-    margin_y=${3:-0}
+    margin=5
+    margin_bar=30
 
     resolution=$( \
         xrandr \
@@ -157,20 +157,52 @@ move_window() {
     eval "$(xdotool getwindowfocus getwindowgeometry --shell)" \
         && case $1 in
             topleft)
-                x="$margin_x"
-                y="$margin_y"
+                x="$margin"
+                y="$margin_bar"
+                ;;
+            centertopleft)
+                x="$((${resolution%% *} / 2 - WIDTH - margin))"
+                y="$margin_bar"
+                ;;
+            centertopright)
+                x="$((${resolution%% *} / 2 + margin))"
+                y="$margin_bar"
                 ;;
             topright)
-                x="$((${resolution%% *} - WIDTH - margin_x))"
-                y="$margin_y"
+                x="$((${resolution%% *} - WIDTH - margin))"
+                y="$margin_bar"
                 ;;
-            bottomleft)
-                x="$margin_x"
-                y="$((${resolution##* } - HEIGHT - margin_y))"
+            middletopright)
+                x="$((${resolution%% *} - WIDTH - margin))"
+                y="$((${resolution##* } / 2 - HEIGHT - margin))"
+                ;;
+            middlebottomright)
+                x="$((${resolution%% *} - WIDTH - margin))"
+                y="$((${resolution##* } / 2 + margin_bar))"
                 ;;
             bottomright)
-                x="$((${resolution%% *} - WIDTH - margin_x))"
-                y="$((${resolution##* } - HEIGHT - margin_y))"
+                x="$((${resolution%% *} - WIDTH - margin))"
+                y="$((${resolution##* } - HEIGHT - margin))"
+                ;;
+            centerbottomright)
+                x="$((${resolution%% *} / 2 + margin))"
+                y="$((${resolution##* } - HEIGHT - margin))"
+                ;;
+            centerbottomleft)
+                x="$((${resolution%% *} / 2 - WIDTH - margin))"
+                y="$((${resolution##* } - HEIGHT - margin))"
+                ;;
+            bottomleft)
+                x="$margin"
+                y="$((${resolution##* } - HEIGHT - margin))"
+                ;;
+            middlebottomleft)
+                x="$margin"
+                y="$((${resolution##* } / 2 + margin_bar))"
+                ;;
+            middletopleft)
+                x="$margin"
+                y="$((${resolution##* } / 2 - HEIGHT - margin))"
                 ;;
         esac \
         && xdotool getactivewindow windowmove "$x" "$y"
@@ -316,7 +348,7 @@ case "$1" in
         move_mouse "$2" "$3"
         ;;
     --movewindow)
-        move_window "$2" "$3" "$4"
+        move_window "$2"
         ;;
     --kill)
         i3_notify 1 "$title"
