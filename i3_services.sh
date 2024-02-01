@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-12-03T16:22:52+0100
+# date:   2024-02-01T07:53:12+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -17,13 +17,6 @@ icon_inactive="󰨙"
 
 # i3 helper
 . i3_helper.sh
-
-# get xresources
-xrdb_query() {
-    xrdb -query \
-        | grep "$1:" \
-        | cut -f2
-}
 
 service_status() {
     case "$2" in
@@ -79,6 +72,7 @@ title="services"
 table_width=39
 table_width1=$((table_width + 3))
 table_width2=$((table_width + 4))
+table_width3=$((table_width + 6))
 message="
 $(i3_table "$table_width" "header" "enable/disable")
 $(i3_table "$table_width1" "l" "󰌾" \
@@ -106,32 +100,26 @@ $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
         "$(i3_table "$table_width1" "a" "󰄱" \
             "$icon_active bar")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "z" "󰆖" \
-            "  ├─ toggle")"
-    printf "%s\n" \
         "$(i3_table "$table_width2" "0" "󰎣" \
             "  ├─ restart")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "1" "󰎦" \
-            "  ├─ primary   -> $(xrdb_query "Polybar.monitor1")")"
-    printf "%s\n" \
-        "$(i3_table "$table_width2" "2" "󰎩" \
-            "  ├─ secondary -> $(xrdb_query 'Polybar.monitor2')")"
-    printf "%s\n" \
         "$(i3_table "$table_width2" "r" "󰑐" \
-            "  └─ reload")"
+            "  ├─ reload")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "o" "" \
-            "     ├─ openweather")"
+        "$(i3_table "$table_width3" "o" "" \
+            "  │  ├─ openweather")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "f" "󰑬" \
-            "     ├─ freshrss")"
+        "$(i3_table "$table_width3" "f" "󰑬" \
+            "  │  ├─ freshrss")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "n" "󰏗" \
-            "     ├─ pacman")"
+        "$(i3_table "$table_width3" "n" "󰏗" \
+            "  │  ├─ pacman")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "x" "󰩺" \
-            "     └─ trash-cli")"
+        "$(i3_table "$table_width3" "x" "󰩺" \
+            "  │  └─ trash-cli")"
+    printf "%s\n" \
+        "$(i3_table "$table_width2" "z" "󰆖" \
+            "  └─ toggle")"
 else
     printf "%s" \
         "$(i3_table "$table_width1" "a" "󰄮" \
