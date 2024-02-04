@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-02-01T07:53:12+0100
+# date:   2024-02-04T08:10:52+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -100,8 +100,8 @@ $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
         "$(i3_table "$table_width1" "a" "󰄱" \
             "$icon_active bar")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "0" "󰎣" \
-            "  ├─ restart")"
+        "$(i3_table "$table_width2" "z" "󰆖" \
+            "  ├─ toggle")"
     printf "%s\n" \
         "$(i3_table "$table_width2" "r" "󰑐" \
             "  ├─ reload")"
@@ -118,8 +118,8 @@ $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
         "$(i3_table "$table_width3" "x" "󰩺" \
             "  │  └─ trash-cli")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "z" "󰆖" \
-            "  └─ toggle")"
+        "$(i3_table "$table_width2" "0" "󰎣" \
+            "  └─ restart")"
 else
     printf "%s" \
         "$(i3_table "$table_width1" "a" "󰄮" \
