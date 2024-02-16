@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-02-03T16:55:21+0100
+# date:   2024-02-16T08:57:15+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -144,8 +144,8 @@ move_window() {
     [ -z "$1" ] \
         && return 1
 
-    margin=5
-    margin_bar=30
+    margin=1
+    margin_bar=25
 
     resolution=$( \
         xrandr \
@@ -174,7 +174,7 @@ move_window() {
                 ;;
             middletopright)
                 x="$((${resolution%% *} - WIDTH - margin))"
-                y="$((${resolution##* } / 2 - HEIGHT - margin))"
+                y="$((${resolution##* } / 2 - HEIGHT - margin_bar))"
                 ;;
             middlebottomright)
                 x="$((${resolution%% *} - WIDTH - margin))"
@@ -182,19 +182,19 @@ move_window() {
                 ;;
             bottomright)
                 x="$((${resolution%% *} - WIDTH - margin))"
-                y="$((${resolution##* } - HEIGHT - margin))"
+                y="$((${resolution##* } - HEIGHT - margin_bar))"
                 ;;
             centerbottomright)
                 x="$((${resolution%% *} / 2 + margin))"
-                y="$((${resolution##* } - HEIGHT - margin))"
+                y="$((${resolution##* } - HEIGHT - margin_bar))"
                 ;;
             centerbottomleft)
                 x="$((${resolution%% *} / 2 - WIDTH - margin))"
-                y="$((${resolution##* } - HEIGHT - margin))"
+                y="$((${resolution##* } - HEIGHT - margin_bar))"
                 ;;
             bottomleft)
                 x="$margin"
-                y="$((${resolution##* } - HEIGHT - margin))"
+                y="$((${resolution##* } - HEIGHT - margin_bar))"
                 ;;
             middlebottomleft)
                 x="$margin"
@@ -202,7 +202,7 @@ move_window() {
                 ;;
             middletopleft)
                 x="$margin"
-                y="$((${resolution##* } / 2 - HEIGHT - margin))"
+                y="$((${resolution##* } / 2 - HEIGHT - margin_bar))"
                 ;;
         esac \
         && xdotool getactivewindow windowmove "$x" "$y"
