@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-02-16T08:57:15+0100
+# date:   2024-02-18T09:39:41+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -83,42 +83,48 @@ exec_tmux() {
     press_key 1 Return
 }
 
+get_resolution() {
+    resolution=$(xrandr \
+            | head -n1 \
+            | cut -d" " -f8,10 \
+            | tr -d ","
+        )
+
+    resolution_x=${resolution%% *}
+    resolution_y=${resolution##* }
+}
+
+get_mouse_location() {
+    eval "$(xdotool getmouselocation --shell)"
+    printf "%sx%s" "$X" "$Y"
+}
+
 move_mouse() {
     [ -z "$1" ] \
         && return 1
 
-    resolution=$( \
-        xrandr \
-            | head -n1 \
-            | cut -d" " -f8,10 \
-            | tr -d ","
-    )
-
-    get_mouse_location() {
-        eval "$(xdotool getmouselocation --shell)"
-        printf "%sx%s" "$X" "$Y"
-    }
+    get_resolution
 
     case "$1" in
-        topleft)
+        nw)
             position_icon="󰁛"
             x=0
             y=0
             ;;
-        topright)
+        ne)
             position_icon="󰁜"
-            x="${resolution%% *}"
+            x="$resolution_x"
             y=0
             ;;
-        bottomleft)
+        se)
+            position_icon="󰁃"
+            x="$resolution_x"
+            y="$resolution_y"
+            ;;
+        sw)
             position_icon="󰁂"
             x=0
-            y="${resolution##* }"
-            ;;
-        bottomright)
-            position_icon="󰁃"
-            x="${resolution%% *}"
-            y="${resolution##* }"
+            y="$resolution_y"
             ;;
     esac
 
@@ -144,68 +150,80 @@ move_window() {
     [ -z "$1" ] \
         && return 1
 
-    margin=1
-    margin_bar=25
+    margin_x=${2:-0}
+    margin_y=${3:-0}
 
-    resolution=$( \
-        xrandr \
-            | head -n1 \
-            | cut -d" " -f8,10 \
-            | tr -d ","
-    )
+    get_resolution
 
     eval "$(xdotool getwindowfocus getwindowgeometry --shell)" \
         && case $1 in
-            topleft)
-                x="$margin"
-                y="$margin_bar"
+            nw)
+                x=0
+                y=0
                 ;;
-            centertopleft)
-                x="$((${resolution%% *} / 2 - WIDTH - margin))"
-                y="$margin_bar"
+            nnw)
+                x="$((resolution_x / 2 - WIDTH))"
+                y=0
                 ;;
-            centertopright)
-                x="$((${resolution%% *} / 2 + margin))"
-                y="$margin_bar"
+            n)
+                x="$((resolution_x / 2 - WIDTH / 2))"
+                y=0
                 ;;
-            topright)
-                x="$((${resolution%% *} - WIDTH - margin))"
-                y="$margin_bar"
+            nne)
+                x="$((resolution_x / 2))"
+                y=0
                 ;;
-            middletopright)
-                x="$((${resolution%% *} - WIDTH - margin))"
-                y="$((${resolution##* } / 2 - HEIGHT - margin_bar))"
+            ne)
+                x="$((resolution_x - WIDTH))"
+                y=0
                 ;;
-            middlebottomright)
-                x="$((${resolution%% *} - WIDTH - margin))"
-                y="$((${resolution##* } / 2 + margin_bar))"
+            ene)
+                x="$((resolution_x - WIDTH))"
+                y="$((resolution_y / 2 - HEIGHT))"
                 ;;
-            bottomright)
-                x="$((${resolution%% *} - WIDTH - margin))"
-                y="$((${resolution##* } - HEIGHT - margin_bar))"
+            e)
+                x="$((resolution_x - WIDTH))"
+                y="$((resolution_y / 2 - HEIGHT / 2))"
                 ;;
-            centerbottomright)
-                x="$((${resolution%% *} / 2 + margin))"
-                y="$((${resolution##* } - HEIGHT - margin_bar))"
+            ese)
+                x="$((resolution_x - WIDTH))"
+                y="$((resolution_y / 2))"
                 ;;
-            centerbottomleft)
-                x="$((${resolution%% *} / 2 - WIDTH - margin))"
-                y="$((${resolution##* } - HEIGHT - margin_bar))"
+            se)
+                x="$((resolution_x - WIDTH))"
+                y="$((resolution_y - HEIGHT))"
                 ;;
-            bottomleft)
-                x="$margin"
-                y="$((${resolution##* } - HEIGHT - margin_bar))"
+            sse)
+                x="$((resolution_x / 2))"
+                y="$((resolution_y - HEIGHT))"
                 ;;
-            middlebottomleft)
-                x="$margin"
-                y="$((${resolution##* } / 2 + margin_bar))"
+            s)
+                x="$((resolution_x / 2 - WIDTH / 2))"
+                y="$((resolution_y - HEIGHT))"
                 ;;
-            middletopleft)
-                x="$margin"
-                y="$((${resolution##* } / 2 - HEIGHT - margin_bar))"
+            ssw)
+                x="$((resolution_x / 2 - WIDTH))"
+                y="$((resolution_y - HEIGHT))"
+                ;;
+            sw)
+                x=0
+                y="$((resolution_y - HEIGHT))"
+                ;;
+            wsw)
+                x=0
+                y="$((resolution_y / 2))"
+                ;;
+            w)
+                x=0
+                y="$((resolution_y / 2 - HEIGHT / 2))"
+                ;;
+            wnw)
+                x=0
+                y="$((resolution_y / 2 - HEIGHT))"
                 ;;
         esac \
-        && xdotool getactivewindow windowmove "$x" "$y"
+        && xdotool getactivewindow windowmove \
+            "$((margin_x + x))" "$((margin_y + y))"
 }
 
 autostart() {
@@ -297,7 +315,7 @@ autostart() {
 
     # move mouse pointer
     progress_bar 90 \
-        && move_mouse "topright" 0 \
+        && move_mouse "ne" 0 \
         && icon_mmp="$icon_marked"
 
     # completed
@@ -352,7 +370,7 @@ case "$1" in
         move_mouse "$2" "$3"
         ;;
     --movewindow)
-        move_window "$2"
+        move_window "$2" "$3" "$4"
         ;;
     --kill)
         i3_notify 1 "$title"
