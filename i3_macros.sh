@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-02-18T09:39:41+0100
+# date:   2024-03-03T22:33:44+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -83,17 +83,6 @@ exec_tmux() {
     press_key 1 Return
 }
 
-get_resolution() {
-    resolution=$(xrandr \
-            | head -n1 \
-            | cut -d" " -f8,10 \
-            | tr -d ","
-        )
-
-    resolution_x=${resolution%% *}
-    resolution_y=${resolution##* }
-}
-
 get_mouse_location() {
     eval "$(xdotool getmouselocation --shell)"
     printf "%sx%s" "$X" "$Y"
@@ -103,7 +92,14 @@ move_mouse() {
     [ -z "$1" ] \
         && return 1
 
-    get_resolution
+    resolution=$(xrandr \
+            | head -n1 \
+            | cut -d" " -f8,10 \
+            | tr -d ","
+        )
+
+    resolution_x=${resolution%% *}
+    resolution_y=${resolution##* }
 
     case "$1" in
         nw)
@@ -144,86 +140,6 @@ move_mouse() {
             xdotool mousemove "$x" "$y"
             ;;
     esac
-}
-
-move_window() {
-    [ -z "$1" ] \
-        && return 1
-
-    margin_x=${2:-0}
-    margin_y=${3:-0}
-
-    get_resolution
-
-    eval "$(xdotool getwindowfocus getwindowgeometry --shell)" \
-        && case $1 in
-            nw)
-                x=0
-                y=0
-                ;;
-            nnw)
-                x="$((resolution_x / 2 - WIDTH))"
-                y=0
-                ;;
-            n)
-                x="$((resolution_x / 2 - WIDTH / 2))"
-                y=0
-                ;;
-            nne)
-                x="$((resolution_x / 2))"
-                y=0
-                ;;
-            ne)
-                x="$((resolution_x - WIDTH))"
-                y=0
-                ;;
-            ene)
-                x="$((resolution_x - WIDTH))"
-                y="$((resolution_y / 2 - HEIGHT))"
-                ;;
-            e)
-                x="$((resolution_x - WIDTH))"
-                y="$((resolution_y / 2 - HEIGHT / 2))"
-                ;;
-            ese)
-                x="$((resolution_x - WIDTH))"
-                y="$((resolution_y / 2))"
-                ;;
-            se)
-                x="$((resolution_x - WIDTH))"
-                y="$((resolution_y - HEIGHT))"
-                ;;
-            sse)
-                x="$((resolution_x / 2))"
-                y="$((resolution_y - HEIGHT))"
-                ;;
-            s)
-                x="$((resolution_x / 2 - WIDTH / 2))"
-                y="$((resolution_y - HEIGHT))"
-                ;;
-            ssw)
-                x="$((resolution_x / 2 - WIDTH))"
-                y="$((resolution_y - HEIGHT))"
-                ;;
-            sw)
-                x=0
-                y="$((resolution_y - HEIGHT))"
-                ;;
-            wsw)
-                x=0
-                y="$((resolution_y / 2))"
-                ;;
-            w)
-                x=0
-                y="$((resolution_y / 2 - HEIGHT / 2))"
-                ;;
-            wnw)
-                x=0
-                y="$((resolution_y / 2 - HEIGHT))"
-                ;;
-        esac \
-        && xdotool getactivewindow windowmove \
-            "$((margin_x + x))" "$((margin_y + y))"
 }
 
 autostart() {
@@ -368,9 +284,6 @@ case "$1" in
         ;;
     --movemouse)
         move_mouse "$2" "$3"
-        ;;
-    --movewindow)
-        move_window "$2" "$3" "$4"
         ;;
     --kill)
         i3_notify 1 "$title"
