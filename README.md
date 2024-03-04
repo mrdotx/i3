@@ -15,6 +15,7 @@ shell scripts for i3
 | i3_services.sh       | shows keybindings for services                               |
 | i3_ssh.sh            | shows keybindings for ssh connections                        |
 | i3_tmux.sh           | open applications in tmux windows                            |
+| i3_window_move.sh    | move floating window to the edge of the monitor              |
 | i3_workspace_swap.sh | swap workspaces and focus(left,right,up,down)                |
 
 ![screenshot container mode](screenshot_container.png)
