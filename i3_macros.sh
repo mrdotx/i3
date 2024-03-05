@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-03-03T22:33:44+0100
+# date:   2024-03-05T07:46:46+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -81,65 +81,6 @@ exec_tmux() {
     press_key 1 Ctrl+c
     type_string " tput reset; $1"
     press_key 1 Return
-}
-
-get_mouse_location() {
-    eval "$(xdotool getmouselocation --shell)"
-    printf "%sx%s" "$X" "$Y"
-}
-
-move_mouse() {
-    [ -z "$1" ] \
-        && return 1
-
-    resolution=$(xrandr \
-            | head -n1 \
-            | cut -d" " -f8,10 \
-            | tr -d ","
-        )
-
-    resolution_x=${resolution%% *}
-    resolution_y=${resolution##* }
-
-    case "$1" in
-        nw)
-            position_icon="󰁛"
-            x=0
-            y=0
-            ;;
-        ne)
-            position_icon="󰁜"
-            x="$resolution_x"
-            y=0
-            ;;
-        se)
-            position_icon="󰁃"
-            x="$resolution_x"
-            y="$resolution_y"
-            ;;
-        sw)
-            position_icon="󰁂"
-            x=0
-            y="$resolution_y"
-            ;;
-    esac
-
-    case "$2" in
-        "")
-            message="mouse pointer moved [$position_icon]"
-            message="$message\nfrom $(get_mouse_location)"
-
-            i3_notify 0 "$title" "$message"
-
-            xdotool mousemove "$x" "$y"
-            sleep .5
-
-            i3_notify 2500 "$title" "$message to $(get_mouse_location)"
-            ;;
-        *)
-            xdotool mousemove "$x" "$y"
-            ;;
-    esac
 }
 
 autostart() {
@@ -231,7 +172,7 @@ autostart() {
 
     # move mouse pointer
     progress_bar 90 \
-        && move_mouse "ne" 0 \
+        && i3_mouse_move.sh "ne" 0 \
         && icon_mmp="$icon_marked"
 
     # completed
@@ -281,9 +222,6 @@ case "$1" in
         ;;
     --autostart)
         autostart
-        ;;
-    --movemouse)
-        move_mouse "$2" "$3"
         ;;
     --kill)
         i3_notify 1 "$title"
