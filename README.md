@@ -10,6 +10,7 @@ shell scripts for i3
 | i3_exit.sh           | shows keybindings for lock, reboot, shutdown, etc.           |
 | i3_helper.sh         | used in the other scripts for table, notify, net check, etc. |
 | i3_macros.sh         | shows keybindings for predefined macros                      |
+| i3_mouse_move.sh     | move mouse pointer to the edge of the monitor                |
 | i3_nfs.sh            | shows keybindings for nfs mounts                             |
 | i3_notes.sh          | shows keybindings for notes                                  |
 | i3_services.sh       | shows keybindings for services                               |
