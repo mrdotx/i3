@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_helper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-12-04T09:19:42+0100
+# date:   2024-03-13T17:24:11+0100
 
 i3_set_spacer() {
     i3_set_spacer_i=$1
@@ -44,6 +44,9 @@ i3_table() {
 }
 
 i3_notify() {
+    # WORKAROUND: notifications are sometimes not closed
+    sleep .1
+
     i3_notify_timer="$1"
     i3_notify_title="$2 [i3 mode]"
     i3_notify_message="$3"
@@ -66,6 +69,9 @@ i3_notify() {
 }
 
 i3_notify_progress() {
+    # WORKAROUND: notifications are sometimes not closed
+    sleep .1
+
     i3_notify_progress_timer="$1"
     i3_notify_progress_title="$2 [i3 mode]"
     i3_notify_progress_message="$3"
