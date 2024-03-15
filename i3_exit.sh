@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-11-27T22:17:48+0100
+# date:   2024-03-13T17:24:43+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -34,7 +34,7 @@ $(i3_table "$table_width" "x" "󰖯" "select window")
 [<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>ctrl+alt+delete</b>]"
 
 simple_lock() {
-    # workaround (sleep -> https://github.com/i3/i3/issues/3298)
+    # WORKAROUND: https://github.com/i3/i3/issues/3298
     sleep .5 \
         && slock -m "$(cinfo -a)"
 }
