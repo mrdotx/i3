@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-03-13T17:23:38+0100
+# date:   2024-03-19T08:06:11+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -209,8 +209,7 @@ case "$1" in
             || curl -fsS 'https://ipinfo.io/city' > $location_file
 
         url="wttr.in/$(sed 's/ /%20/g' "$location_file")?AFq2&format=v2d"
-        exclude="Weather:\|Timezone:\|Now:\|Zenith:\|Location:"
-        wttr="curl -fsS '$url' | grep -v '$exclude'"
+        wttr="curl -fsS '$url' | uniq"
 
         openweather="polybar_openweather.sh --terminal"
 
