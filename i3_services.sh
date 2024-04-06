@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-04-04T16:33:34+0200
+# date:   2024-04-06T07:50:22+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -48,17 +48,6 @@ service_toggle() {
     case "$2" in
         wireguard)
             "$auth" wireguard_toggle.sh "$1"
-            ;;
-        resolv.conf.*)
-            if systemctl -q is-active "$1"; then
-                $auth systemctl disable "$1" --now
-                $auth cp --remove-destination \
-                    "/etc/$2" "/etc/resolv.conf"
-            else
-                $auth systemctl enable "$1" --now
-                $auth ln --force --symbolic \
-                    "/run/systemd/resolve/resolv.conf" "/etc/resolv.conf"
-            fi
             ;;
         user)
             if systemctl --user -q is-active "$1"; then
@@ -180,7 +169,15 @@ case "$1" in
         fi
         ;;
     --resolver)
-        service_toggle "systemd-resolved.service" "resolv.conf.m625q"
+        if systemctl -q is-active systemd-resolved.service; then
+            service_toggle "systemd-resolved.service" \
+                && $auth cp --remove-destination \
+                    "/etc/resolv.conf.m625q" "/etc/resolv.conf"
+        else
+            service_toggle "systemd-resolved.service" \
+                && $auth ln --force --symbolic \
+                    "/run/systemd/resolve/resolv.conf" "/etc/resolv.conf"
+        fi
         ;;
     --timesync)
         service_toggle "systemd-timesyncd.service"
