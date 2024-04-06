@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-02-04T08:10:52+0100
+# date:   2024-04-04T16:33:34+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -49,6 +49,17 @@ service_toggle() {
         wireguard)
             "$auth" wireguard_toggle.sh "$1"
             ;;
+        resolv.conf.*)
+            if systemctl -q is-active "$1"; then
+                $auth systemctl disable "$1" --now
+                $auth cp --remove-destination \
+                    "/etc/$2" "/etc/resolv.conf"
+            else
+                $auth systemctl enable "$1" --now
+                $auth ln --force --symbolic \
+                    "/run/systemd/resolve/resolv.conf" "/etc/resolv.conf"
+            fi
+            ;;
         user)
             if systemctl --user -q is-active "$1"; then
                 systemctl --user disable "$1" --now
@@ -85,6 +96,10 @@ $(i3_table "$table_width1" "w" "󰏪" \
     "$(service_status wacom.service user) wacom")
 $(i3_table "$table_width1" "m" "󰇀" \
     "$(service_status xbanish.service user) mousepointer")
+$(i3_table "$table_width1" "d" "󰇧" \
+    "$(service_status systemd-resolved.service) resolver")
+$(i3_table "$table_width1" "y" "󱫬" \
+    "$(service_status systemd-timesyncd.service) timesync")
 $(i3_table "$table_width1" "s" "󰒒" \
     "$(service_status sshd.service) ssh")
 $(i3_table "$table_width1" "v" "󰒄" \
@@ -163,6 +178,12 @@ case "$1" in
         else
             service_toggle "cups.service"
         fi
+        ;;
+    --resolver)
+        service_toggle "systemd-resolved.service" "resolv.conf.m625q"
+        ;;
+    --timesync)
+        service_toggle "systemd-timesyncd.service"
         ;;
     --ssh)
         service_toggle "sshd.service"
