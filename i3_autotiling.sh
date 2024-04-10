@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-01-25T18:06:06+0100
+# date:   2024-04-10T08:46:23+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -15,10 +15,10 @@ help="$script [-h/--help] -- script for optimal tiling focused window
     $script [-w] [-t] [command]
 
   Settings:
-    without given settings, script runs in the background and divides the focused
+    without options, the script runs in the background and divides the focused
     window automatically
-    [-w]      = auto tiling only on defined workspaces
     [-t]      = auto tiling once with defined command
+    [-w]      = auto tiling only on defined workspaces
     [command] = application to start
 
   Examples:
@@ -51,6 +51,11 @@ case "$1" in
     -h | --help)
         printf "%s\n" "$help"
         ;;
+    -t)
+        shift
+        split
+        "$@" &
+        ;;
     -w)
         shift
         while true; do
@@ -59,11 +64,6 @@ case "$1" in
             i3-msg -q -t subscribe '[ "window" ]' \
                 || return
         done
-        ;;
-    -t)
-        shift
-        split
-        "$@" &
         ;;
     *)
         while true; do
