@@ -1,0 +1,19 @@
+# path:   /home/klassiker/.local/share/repos/i3/suspend@.service
+# author: klassiker [mrdotx]
+# github: https://github.com/mrdotx/suspend
+# date:   2024-04-11T09:21:24+0200
+
+[Unit]
+Description=lock x session using i3_exit for user %i
+Before=sleep.target
+
+[Service]
+User=%i
+Type=forking
+Environment=DISPLAY=:0
+# changed xauthority file location
+Environment=XAUTHORITY=/home/%i/.local/share/xorg/Xauthority
+ExecStart=/home/%i/.local/share/repos/i3/i3_exit.sh --lock
+
+[Install]
+WantedBy=sleep.target
