@@ -2,7 +2,7 @@
 
 shell scripts for i3
 
-| name                 | comment                                                      |
+| file                 | comment                                                      |
 | :------------------- | :----------------------------------------------------------- |
 | i3_autotiling.sh     | automatic optimal tilings for windows                        |
 | i3_container.sh      | shows keybindings for i3 container actions                   |
@@ -18,6 +18,7 @@ shell scripts for i3
 | i3_tmux.sh           | open applications in tmux windows                            |
 | i3_window_move.sh    | move floating window to the edge of the monitor              |
 | i3_workspace_swap.sh | swap workspaces and focus(left,right,up,down)                |
+| suspend@.service     | systemd service to lock the screen before sleep              |
 
 ![screenshot container mode](screenshot_container.png)
 ![screenshot editor mode](screenshot_editor.png)
