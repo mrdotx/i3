@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-03-19T08:06:11+0100
+# date:   2024-05-03T08:12:27+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -176,7 +176,7 @@ autostart() {
         && icon_mmp="$icon_marked"
 
     # completed
-    progress_bar 100 2500
+    progress_bar 100 250
 }
 
 title="macros"
