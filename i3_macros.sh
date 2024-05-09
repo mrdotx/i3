@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-05-03T08:12:27+0200
+# date:   2024-05-09T08:27:32+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -79,7 +79,7 @@ exec_tmux() {
     open_tmux "$2"
 
     press_key 1 Ctrl+c
-    type_string " tput reset; $1"
+    type_string " printf '\033c'; $1"
     press_key 1 Return
 }
 
