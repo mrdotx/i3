@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_helper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-03-13T17:24:11+0100
+# date:   2024-06-02T07:34:58+0200
 
 i3_set_spacer() {
     i3_set_spacer_i=$1
@@ -19,7 +19,7 @@ i3_table() {
     i3_table_row_divider="│"
 
     i3_table_fixed_column=3
-    i3_table_variable_column=$(($1 - 2 - (2*i3_table_fixed_column)))
+    i3_table_variable_column=$(($1 - 2 - (2 * i3_table_fixed_column)))
 
     case "$2" in
         header)
