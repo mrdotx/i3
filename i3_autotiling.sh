@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-04-10T08:46:23+0200
+# date:   2024-07-03T08:53:31+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -12,7 +12,7 @@ LANG=C
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling focused window
   Usage:
-    $script [-w] [-t] [command]
+    $script [-w/-t] [command]
 
   Settings:
     without options, the script runs in the background and divides the focused
