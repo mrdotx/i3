@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-04-06T07:50:22+0200
+# date:   2024-08-19T16:16:09+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -69,7 +69,7 @@ service_toggle() {
 }
 
 title="services"
-table_width=39
+table_width=26
 table_width1=$((table_width + 3))
 table_width2=$((table_width + 4))
 table_width3=$((table_width + 6))
@@ -111,16 +111,16 @@ $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
             "  ├─ reload")"
     printf "%s\n" \
         "$(i3_table "$table_width3" "o" "" \
-            "  │  ├─ openweather")"
+            "  │  ├─ weather")"
     printf "%s\n" \
         "$(i3_table "$table_width3" "f" "󰑬" \
-            "  │  ├─ freshrss")"
+            "  │  ├─ rss")"
     printf "%s\n" \
         "$(i3_table "$table_width3" "n" "󰏗" \
-            "  │  ├─ pacman")"
+            "  │  ├─ packages")"
     printf "%s\n" \
         "$(i3_table "$table_width3" "x" "󰩺" \
-            "  │  └─ trash-cli")"
+            "  │  └─ trash")"
     printf "%s\n" \
         "$(i3_table "$table_width2" "0" "󰎣" \
             "  └─ restart")"
@@ -130,7 +130,7 @@ else
             "$icon_inactive bar")"
 fi)
 
-[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>alt+space</b>]"
+[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>]"
 
 case "$1" in
     --polybar)

@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2023-12-18T18:13:53+0100
+# date:   2024-08-19T16:11:10+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -67,26 +67,26 @@ nfs_umount() {
 }
 
 title="nfs"
-table_width=43
+table_width=26
 table_width1=$((table_width + 4))
 message="
 $(i3_table "$table_width" "header" "$server mounts")
 $(i3_table "$table_width" "a" "󰒍" "toggle all")
 $(i3_table "$table_width1" "c" "$(nfs_status Cloud)" \
-    "├─ $folder/Cloud")
+    "├─ ~/Cloud")
 $(i3_table "$table_width1" "d" "$(nfs_status Desktop)" \
-    "├─ $folder/Desktop")
+    "├─ ~/Desktop")
 $(i3_table "$table_width1" "m" "$(nfs_status Music)" \
-    "├─ $folder/Music")
+    "├─ ~/Music")
 $(i3_table "$table_width1" "p" "$(nfs_status Public)" \
-    "├─ $folder/Public")
+    "├─ ~/Public")
 $(i3_table "$table_width1" "t" "$(nfs_status Templates)" \
-    "├─ $folder/Templates")
+    "├─ ~/Templates")
 $(i3_table "$table_width1" "v" "$(nfs_status Videos)" \
-    "├─ $folder/Videos")
+    "├─ ~/Videos")
 $(i3_table "$table_width" "\\\\" "󰒍" "toggle default")
 
-[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+shift+\\\</b>]"
+[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>]"
 
 case "$1" in
     --all)

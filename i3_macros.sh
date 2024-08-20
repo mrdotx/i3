@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-05-09T08:27:32+0200
+# date:   2024-08-19T15:42:59+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -84,7 +84,7 @@ exec_tmux() {
 }
 
 autostart() {
-    table_width=27
+    table_width=26
     icon_blank="󰄱"
     icon_marked="󰄵"
 
@@ -180,7 +180,7 @@ autostart() {
 }
 
 title="macros"
-table_width=41
+table_width=26
 message="
 $(i3_table "$table_width" "header" "system")
 $(i3_table "$table_width" "b" "󰐥" "boot next")
@@ -192,7 +192,7 @@ $(i3_table "$table_width" "w" "" "weather")
 $(i3_table "$table_width" "header" "other")
 $(i3_table "$table_width" "h" "󰟴" "telehack")
 
-[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>], [<b>super+print</b>]"
+[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>]"
 
 case "$1" in
     --bootnext)
