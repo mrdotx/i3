@@ -8,6 +8,7 @@ shell scripts for i3
 | i3_container.sh      | shows keybindings for i3 container actions                   |
 | i3_editor.sh         | shows keybindings for editor                                 |
 | i3_exit.sh           | shows keybindings for lock, reboot, shutdown, etc.           |
+| i3_floating.sh       | shows keybindings for positioning floating windows           |
 | i3_helper.sh         | used in the other scripts for table, notify, net check, etc. |
 | i3_macros.sh         | shows keybindings for predefined macros                      |
 | i3_mouse_move.sh     | move mouse pointer to the edge of the monitor                |
@@ -23,6 +24,7 @@ shell scripts for i3
 ![screenshot container mode](screenshot_container.png)
 ![screenshot editor mode](screenshot_editor.png)
 ![screenshot exit mode](screenshot_exit.png)
+![screenshot floating mode](screenshot_floating.png)
 ![screenshot macros mode](screenshot_macros.png)
 ![screenshot macros autostart](screenshot_macros_autostart.gif)
 ![screenshot nfs mode](screenshot_nfs.gif)
