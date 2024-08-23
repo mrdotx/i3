@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-08-19T16:16:09+0200
+# date:   2024-08-22T07:09:34+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -130,7 +130,7 @@ else
             "$icon_inactive bar")"
 fi)
 
-[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>]"
+[<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
 
 case "$1" in
     --polybar)

@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-08-19T15:32:23+0200
+# date:   2024-08-22T07:09:38+0200
 
 # i3 helper
 . i3_helper.sh
@@ -18,7 +18,7 @@ $(i3_table "$table_width" "header" "client")
 $(i3_table "$table_width" "n" "󰌢" "mi")
 $(i3_table "$table_width" "b" "󰌢" "macbook")
 
-[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>]"
+[<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
 
 connect () {
     host="${1##*--}"

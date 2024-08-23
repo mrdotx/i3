@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-08-19T16:11:49+0200
+# date:   2024-08-22T07:09:09+0200
 
 # i3 helper
 . i3_helper.sh
@@ -29,7 +29,7 @@ $(i3_table "$table_width" "b" "󰌢" "macbook")
 $(i3_table "$table_width" "z" "󰖟" "prinzipal")
 $(i3_table "$table_width" "c" "󰖟" "marcus")
 
-[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>]"
+[<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
 
 case "$1" in
     --vim)
