@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-08-19T15:42:59+0200
+# date:   2024-08-22T08:15:13+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -125,6 +125,9 @@ autostart() {
         i3_notify_progress "${2:-0}" "$title" "$(progress_message)" "$1"
     }
 
+    # initialize
+    progress_bar 0
+
     # mount folder "Cloud"
     progress_bar 10 \
         && i3_nfs.sh --mount "Cloud" \
@@ -175,7 +178,7 @@ autostart() {
         && i3_mouse_move.sh "ne" 0 \
         && icon_mmp="$icon_marked"
 
-    # completed
+    # complete
     progress_bar 100 250
 }
 
@@ -192,7 +195,7 @@ $(i3_table "$table_width" "w" "" "weather")
 $(i3_table "$table_width" "header" "other")
 $(i3_table "$table_width" "h" "󰟴" "telehack")
 
-[<b>q</b>]uit, [<b>return</b>], [<b>escape</b>]"
+[<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
 
 case "$1" in
     --bootnext)
