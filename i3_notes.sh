@@ -3,13 +3,13 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_notes.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-08-22T07:09:29+0200
+# date:   2024-08-29T12:15:28+0200
 
 # i3 helper
 . i3_helper.sh
 
 open() {
-    $BROWSER "http://m625q/wiki/$1.html"
+    w3m.sh "http://m625q/wiki/$1.html"
 }
 
 title="notes"
