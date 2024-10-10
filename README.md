@@ -2,7 +2,7 @@
 
 shell scripts for i3
 
-| file                 | comment                                                      | images                                                                             |
+| file                 | comment                                                      | image                                                                              |
 | :------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------- |
 | i3_autotiling.sh     | automatic optimal tilings for windows                        |                                                                                    |
 | i3_container.sh      | shows keybindings for i3 container actions                   | ![container mode](images/container.png)                                            |
