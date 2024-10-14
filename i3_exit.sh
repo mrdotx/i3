@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-08-22T07:09:14+0200
+# date:   2024-10-14T07:27:11+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -53,7 +53,7 @@ case "$1" in
     --sleep)
         i3_mouse_move.sh ne 0 \
             && simple_lock \
-            && sleep .5 \
+            && sleep 1 \
             && systemctl suspend --no-wall
         ;;
     --lock)
