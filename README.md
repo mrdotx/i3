@@ -4,7 +4,7 @@ shell scripts for i3
 
 | file                 | comment                                                      | image                                                                              |
 | :------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------- |
-| i3_autotiling.sh     | automatic optimal tilings for windows                        |                                                                                    |
+| i3_autotiling.sh     | optimal tiling of focused windows                            |                                                                                    |
 | i3_container.sh      | shows keybindings for i3 container actions                   | ![container mode](images/container.png)                                            |
 | i3_editor.sh         | shows keybindings for editor                                 | ![editor mode](images/editor.png)                                                  |
 | i3_exit.sh           | shows keybindings for lock, reboot, shutdown, etc.           | ![exit mode](images/exit.png)                                                      |
