@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-10-24T08:17:24+0200
+# date:   2024-10-25T05:12:35+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -31,18 +31,16 @@ autotiling() {
         | awk '$2=="*" {print $9}' \
     )
 
-    [ -n "$active_workspace" ] \
-        && for workspace in "$@"; do
-            [ "$active_workspace" -eq "$workspace" ] \
-                && break
-        done
+    for workspace in "$@"; do
+        [ "$active_workspace" -eq "$workspace" ] \
+            && break
+    done
 }
 
 set_orientation() {
     tmp_file="/tmp/window_event.i3"
 
-    i3-msg -t subscribe '[ "window" ]' > "$tmp_file" \
-        || exit
+    i3-msg -t subscribe '[ "window" ]' > "$tmp_file"
 
     change_type=$(cut -d ',' -f1 "$tmp_file" \
         | sed \
