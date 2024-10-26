@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-10-25T05:12:35+0200
+# date:   2024-10-26T08:09:37+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -42,14 +42,8 @@ set_orientation() {
 
     i3-msg -t subscribe '[ "window" ]' > "$tmp_file"
 
-    change_type=$(cut -d ',' -f1 "$tmp_file" \
-        | sed \
-            -e 's/{"change":"//' \
-            -e 's/"$//' \
-    )
-
     # window event change type (https://i3wm.org/docs/ipc.html#_window_event)
-    case "$change_type" in
+    case "$(sed -e 's/",.*//' -e 's/{"change":"//' "$tmp_file")" in
         new | close | focus)
             eval "$(xdotool getwindowfocus getwindowgeometry --shell)" \
                 && if [ "$WIDTH" -ge "$HEIGHT" ]; then
