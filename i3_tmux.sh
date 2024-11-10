@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-01-06T10:49:32+0100
+# date:   2024-11-10T07:30:32+0100
 
 session="$(uname -n)"
 attach="tmux attach -d -t $session"
@@ -19,7 +19,8 @@ help="$script [-h/--help] -- script to open applications in tmux windows
     [-o]                = open tmux in separate terminal
     [window]            = tmux window no. to open application in
     [title]             = optional title of the window (default command)
-                          if title is \"shell\" it opens the shell
+                          shell  = opens the shell
+                          nvbtop = opens nvtop and btop in split-window
     [directory/command] = application to start
                           if title is \"shell\" this is the start-directory
 
@@ -54,11 +55,21 @@ tmux_open() {
         cmd="$*"
 
         ! tmux lsw 2>/dev/null | grep -q "^$window:" \
-            && if printf "%s" "$title" | grep -q "^shell$"; then
-                tmux neww -t "$session:$window" -c "$cmd"
-            else
-                tmux neww -t "$session:$window" -n "$title" "$cmd"
-            fi
+            && case "$title" in
+                shell)
+                    tmux neww -t "$session:$window" -c "$cmd"
+                    ;;
+                nvbtop)
+                    lines="$((($(stty size | cut -d' ' -f1)-2)/2))"
+
+                    tmux neww -t "$session:$window" -n "$title" "nvtop" \
+                        \; splitw -l $lines -v "btop" \
+                        \; selectp -t 1
+                    ;;
+                *)
+                    tmux neww -t "$session:$window" -n "$title" "$cmd"
+                    ;;
+            esac
 
         tmux selectw -t "$session:$window"
     fi
@@ -75,7 +86,7 @@ if [ "$(tmux ls 2>/dev/null | cut -d ':' -f1)" = "$session" ]; then
     tmux_open "$@"
 else
     tmux new -d -s "$session"
-    # tmux_open 15 "htop"
+    # tmux_open 16 "htop"
     tmux_open "$@"
     tmux_kill 1
 fi
