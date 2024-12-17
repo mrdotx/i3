@@ -3,14 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-08-22T08:15:13+0200
+# date:   2024-12-17T08:05:07+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
 auth="${EXEC_AS_USER:-sudo}"
 
-# i3 helper
-. i3_helper.sh
+# source i3 helper
+. _i3_helper.sh
 
 # WORKAROUND: xdotool mismatched keyboard layouts
 setxkbmap -synch

@@ -3,14 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_mouse_move.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-03-05T07:46:38+0100
+# date:   2024-12-17T08:05:12+0100
 
 # speed up script by using standard c
 LC_ALL=C
 LANG=C
 
-# i3 helper
-. i3_helper.sh
+# source i3 helper
+. _i3_helper.sh
 
 script=$(basename "$0")
 help="$script [-h/--help] -- move mouse pointer to the edge of the monitor

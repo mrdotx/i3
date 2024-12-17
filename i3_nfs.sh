@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-08-22T07:09:25+0200
+# date:   2024-12-17T08:05:17+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -19,8 +19,8 @@ server="m625q"
 folder="/home/klassiker"
 options="noatime,vers=4"
 
-# i3 helper
-. i3_helper.sh
+# source i3 helper
+. _i3_helper.sh
 
 nfs_status() {
     mountpoint -q "$folder/$1" \

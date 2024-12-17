@@ -3,14 +3,14 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-10-14T07:27:11+0200
+# date:   2024-12-17T08:04:58+0100
 
 # speed up script by using standard c
 LC_ALL=C
 LANG=C
 
-# i3 helper
-. i3_helper.sh
+# source i3 helper
+. _i3_helper.sh
 
 title="exit"
 table_width=26

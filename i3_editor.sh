@@ -3,10 +3,10 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-08-22T07:09:09+0200
+# date:   2024-12-17T08:04:54+0100
 
-# i3 helper
-. i3_helper.sh
+# source i3 helper
+. _i3_helper.sh
 
 open() {
     $TERMINAL -e "$EDITOR" "$1://$2/" -c ":call NetrwToggle()"

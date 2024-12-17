@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-08-22T07:09:34+0200
+# date:   2024-12-17T08:05:26+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -15,8 +15,8 @@ auth="${EXEC_AS_USER:-sudo}"
 icon_active="󰨚"
 icon_inactive="󰨙"
 
-# i3 helper
-. i3_helper.sh
+# source i3 helper
+. _i3_helper.sh
 
 service_status() {
     case "$2" in

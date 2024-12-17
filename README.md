@@ -4,12 +4,12 @@ shell scripts for i3
 
 | file                 | comment                                                      | image                                                                              |
 | :------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------- |
+| _i3_helper.sh        | used in the other scripts for table, notify, net check, etc. |                                                                                    |
 | i3_autotiling.sh     | optimal tiling of focused windows                            |                                                                                    |
 | i3_container.sh      | shows keybindings for i3 container actions                   | ![container mode](images/container.png)                                            |
 | i3_editor.sh         | shows keybindings for editor                                 | ![editor mode](images/editor.png)                                                  |
 | i3_exit.sh           | shows keybindings for lock, reboot, shutdown, etc.           | ![exit mode](images/exit.png)                                                      |
 | i3_floating.sh       | shows keybindings for positioning floating windows           | ![floating mode](images/floating.png)                                              |
-| i3_helper.sh         | used in the other scripts for table, notify, net check, etc. |                                                                                    |
 | i3_macros.sh         | shows keybindings for predefined macros                      | ![macros mode](images/macros.png) ![macros autostart](images/macros_autostart.gif) |
 | i3_mouse_move.sh     | move mouse pointer to the edge of the monitor                |                                                                                    |
 | i3_nfs.sh            | shows keybindings for nfs mounts                             | ![nfs mode](images/nfs.gif)                                                        |
@@ -48,4 +48,3 @@ service to lock the screen before sleep
 ## check after reboot
 
 - systemctl status suspend@[username]
-

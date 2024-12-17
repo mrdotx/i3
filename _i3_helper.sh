@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/i3/i3_helper.sh
+# path:   /home/klassiker/.local/share/repos/i3/_i3_helper.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-06-02T07:34:58+0200
+# date:   2024-12-17T08:04:44+0100
 
 i3_set_spacer() {
     i3_set_spacer_i=$1
