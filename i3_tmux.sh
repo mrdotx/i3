@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-11-10T07:30:32+0100
+# date:   2025-01-24T07:52:45+0100
 
 session="$(uname -n)"
 attach="tmux attach -d -t $session"
@@ -19,8 +19,8 @@ help="$script [-h/--help] -- script to open applications in tmux windows
     [-o]                = open tmux in separate terminal
     [window]            = tmux window no. to open application in
     [title]             = optional title of the window (default command)
-                          shell  = opens the shell
-                          nvbtop = opens nvtop and btop in split-window
+                          shell = opens the shell
+                          xtop  = opens htop and nvtop in split-window
     [directory/command] = application to start
                           if title is \"shell\" this is the start-directory
 
@@ -59,11 +59,11 @@ tmux_open() {
                 shell)
                     tmux neww -t "$session:$window" -c "$cmd"
                     ;;
-                nvbtop)
-                    lines="$((($(stty size | cut -d' ' -f1)-2)/2))"
+                xtop)
+                    lines="$((($(stty size | cut -d' ' -f1)-2)/3))"
 
-                    tmux neww -t "$session:$window" -n "$title" "nvtop" \
-                        \; splitw -l $lines -v "btop" \
+                    tmux neww -t "$session:$window" -n "$title" "htop" \
+                        \; splitw -l $lines -v "nvtop" \
                         \; selectp -t 1
                     ;;
                 *)
