@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-12-17T08:05:26+0100
+# date:   2025-02-20T06:47:20+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -84,7 +84,7 @@ $(i3_table "$table_width1" "c" "󰗌" \
 $(i3_table "$table_width1" "w" "󰏪" \
     "$(service_status wacom.service user) wacom")
 $(i3_table "$table_width1" "m" "󰇀" \
-    "$(service_status xbanish.service user) mousepointer")
+    "$(service_status xhidecursor.service user) mousepointer")
 $(i3_table "$table_width1" "d" "󰇧" \
     "$(service_status systemd-resolved.service) resolver")
 $(i3_table "$table_width1" "y" "󱫬" \
@@ -149,7 +149,7 @@ case "$1" in
         service_toggle "wacom.service" "user"
         ;;
     --mousepointer)
-        service_toggle "xbanish.service" "user"
+        service_toggle "xhidecursor.service" "user"
         ;;
     --bluetooth)
         if lsmod | grep -q btusb; then
