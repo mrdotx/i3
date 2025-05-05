@@ -1,7 +1,7 @@
-# path:   /home/klassiker/.local/share/repos/i3/suspend@.service
+# path:   /home/klassiker/.local/share/repos/i3/systemd/suspend@.service
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-04-11T18:34:02+0200
+# date:   2025-05-05T05:38:16+0200
 
 [Unit]
 Description=lock x session using i3_exit for user %i
