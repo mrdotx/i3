@@ -2,6 +2,11 @@
 
 shell scripts for i3
 
+| folder  | comment                       |
+| :------ | :---------------------------- |
+| images  | images for the README.md file |
+| systemd | systemd services and timer    |
+
 | file                 | comment                                                      | image                                                                              |
 | :------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------- |
 | _i3_helper.sh        | used in the other scripts for table, notify, net check, etc. |                                                                                    |
@@ -19,7 +24,6 @@ shell scripts for i3
 | i3_tmux.sh           | open applications in tmux windows                            |                                                                                    |
 | i3_window_move.sh    | move floating window to the edge of the monitor              |                                                                                    |
 | i3_workspace_swap.sh | swap workspaces and focus(left,right,up,down)                |                                                                                    |
-| suspend@.service     | systemd service to lock the screen before sleep              |                                                                                    |
 
 config files:
 
@@ -32,19 +36,3 @@ config files:
 related projects:
 
 - [polybar](https://github.com/mrdotx/polybar)
-
-# suspend systemd service
-
-service to lock the screen before sleep
-
-## installation
-
-- cp suspend@.service /etc/systemd/system/suspend@.service
-
-## enable service
-
-- systemctl enable suspend@[username]
-
-## check after reboot
-
-- systemctl status suspend@[username]
