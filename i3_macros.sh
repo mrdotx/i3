@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-12-17T08:05:07+0100
+# date:   2025-05-09T05:32:47+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -107,7 +107,7 @@ autostart() {
             "$(i3_table "$table_width" \
             "${icon_mfv:-$icon_blank}" "󰒍" "nfs \"Videos\"")"
         printf "\n\n%s" \
-            "$(i3_table "$table_width" "header" "open")"
+            "$(i3_table "$table_width" "header" "start")"
         printf "\n%s" \
             "$(i3_table "$table_width" \
             "${icon_ofm:-$icon_blank}" "󰆍" "file manager")"
@@ -115,70 +115,77 @@ autostart() {
             "$(i3_table "$table_width" \
             "${icon_om:-$icon_blank}" "󰆍" "multiplexer")"
         printf "\n\n%s" \
-            "$(i3_table "$table_width" "header" "move")"
+            "$(i3_table "$table_width" "header" "default")"
         printf "\n%s" \
             "$(i3_table "$table_width" \
-            "${icon_mmp:-$icon_blank}" "󰇀" "mouse pointer")"
+            "${icon_mmp:-$icon_blank}" "󰇀" "mouse position")"
+        printf "\n%s" \
+            "$(i3_table "$table_width" \
+            "${icon_sv:-$icon_blank}" "󰕾" "audio volume")"
+        printf "\n%s" \
+            "$(i3_table "$table_width" \
+            "${icon_su:-$icon_blank}" "󰕾" "audio unmute")"
     }
 
     progress_bar() {
         i3_notify_progress "${2:-0}" "$title" "$(progress_message)" "$1"
     }
 
-    # initialize
+    # progress initialization
     progress_bar 0
 
     # mount folder "Cloud"
-    progress_bar 10 \
-        && i3_nfs.sh --mount "Cloud" \
+    i3_nfs.sh --mount "Cloud" \
         && icon_mfc="$icon_marked"
+    progress_bar 10
 
     # mount folder "Desktop"
-    progress_bar 15 \
-        && i3_nfs.sh --mount "Desktop" \
+    i3_nfs.sh --mount "Desktop" \
         && icon_mfd="$icon_marked"
+    progress_bar 20
 
     # mount folder "Music"
-    progress_bar 20 \
-        && i3_nfs.sh --mount "Music" \
+    i3_nfs.sh --mount "Music" \
         && icon_mfm="$icon_marked"
+    progress_bar 30
 
     # mount folder "Public"
-    progress_bar 25 \
-        && i3_nfs.sh --mount "Public" \
+    i3_nfs.sh --mount "Public" \
         && icon_mfp="$icon_marked"
+    progress_bar 40
 
     # mount folder "Videos"
-    progress_bar 30 \
-        && i3_nfs.sh --mount "Videos" \
+    i3_nfs.sh --mount "Videos" \
         && icon_mfv="$icon_marked"
+    progress_bar 50
 
-    # open file manager
-    progress_bar 50 \
-        && ! window_available "ranger:" \
+    # start file manager and wait
+    ! window_available "ranger:" \
         && open_terminal 1 "" "ranger_cd $HOME/.local/share/repos"
-
-    # wait for file manager
-    progress_bar 60 \
-        && wait_for_max 35 "ranger:" 0 \
+    wait_for_max 35 "ranger:" 0 \
         && icon_ofm="$icon_marked"
+    progress_bar 60
 
-    # open multiplexer
-    progress_bar 70 \
-        && ! window_available "i3 tmux" \
+    # start multiplexer and wait
+    ! window_available "i3 tmux" \
         && open_tmux 1
-
-    # wait for multiplexer
-    progress_bar 80 \
-        && wait_for_max 25 "i3 tmux" 0 \
+    wait_for_max 25 "i3 tmux" 0 \
         && icon_om="$icon_marked"
+    progress_bar 70
 
-    # move mouse pointer
-    progress_bar 90 \
-        && i3_mouse_move.sh "ne" 0 \
+    # default mouse position
+    i3_mouse_move.sh "ne" 0 \
         && icon_mmp="$icon_marked"
+    progress_bar 80
 
-    # complete
+    # default audio volume
+    alsa.sh --absolute 35 \
+        && icon_sv="$icon_marked"
+    progress_bar 90
+
+    # default audio unmute
+    alsa.sh --unmute \
+        && icon_su="$icon_marked"
     progress_bar 100 250
 }
 
