@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2025-05-09T05:32:47+0200
+# date:   2025-05-12T05:59:04+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -198,8 +198,6 @@ $(i3_table "$table_width" "v" "󰕓" "ventoy")
 
 $(i3_table "$table_width" "header" "info")
 $(i3_table "$table_width" "w" "" "weather")
-
-$(i3_table "$table_width" "header" "other")
 $(i3_table "$table_width" "h" "󰟴" "telehack")
 
 [<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
