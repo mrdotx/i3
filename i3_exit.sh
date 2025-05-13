@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-12-17T08:04:58+0100
+# date:   2025-05-13T05:50:24+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -19,17 +19,8 @@ $(i3_table "$table_width" "header" "power")
 $(i3_table "$table_width" "d" "󰐥" "shutdown")
 $(i3_table "$table_width" "r" "󰑐" "reboot")
 $(i3_table "$table_width" "s" "󰏦" "suspend")
-
-$(i3_table "$table_width" "header" "other")
-$(i3_table "$table_width" "z" "󰒲" "sleep")
 $(i3_table "$table_width" "l" "󰍁" "lock")
 $(i3_table "$table_width" "o" "󰍃" "logout")
-
-$(i3_table "$table_width" "header" "restart")
-$(i3_table "$table_width" "n" "󰂚" "notify daemon")
-
-$(i3_table "$table_width" "header" "kill")
-$(i3_table "$table_width" "x" "󰖯" "select window")
 
 [<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
 
@@ -40,17 +31,13 @@ simple_lock() {
 }
 
 case "$1" in
-    --suspend)
-        i3_mouse_move.sh ne 0 \
-            && systemctl suspend --no-wall
+    --shutdown)
+        systemctl poweroff --no-wall
         ;;
     --reboot)
         systemctl reboot --no-wall
         ;;
-    --shutdown)
-        systemctl poweroff --no-wall
-        ;;
-    --sleep)
+    --suspend)
         i3_mouse_move.sh ne 0 \
             && simple_lock \
             && sleep 1 \
