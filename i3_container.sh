@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2025-01-10T08:32:13+0100
+# date:   2025-05-13T05:55:25+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -27,6 +27,9 @@ $(i3_table "$table_width" "v" "󰁆" "vertical")
 $(i3_table "$table_width" "header" "scratchpad")
 $(i3_table "$table_width" "m" "󰀿" "move to")
 $(i3_table "$table_width" "c" "󰀾" "cycle")
+
+$(i3_table "$table_width" "header" "kill")
+$(i3_table "$table_width" "x" "󰖯" "select")
 
 $(i3_table "$table_width" "header" "wallpaper")
 $(i3_table "$table_width" "a" "󰒝" "random")
