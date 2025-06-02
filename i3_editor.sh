@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_editor.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-12-17T08:04:54+0100
+# date:   2025-06-02T05:10:44+0200
 
 # source i3 helper
 . _i3_helper.sh
@@ -24,7 +24,8 @@ $(i3_table "$table_width1" "i" "󰠮" "└─ ideas")
 
 $(i3_table "$table_width" "header" "remote")
 $(i3_table "$table_width" "m" "󰒍" "m625q")
-$(i3_table "$table_width" "n" "󰌢" "mi")
+$(i3_table "$table_width" "d" "󰇅" "m75q")
+$(i3_table "$table_width" "n" "󰌢" "t14")
 $(i3_table "$table_width" "b" "󰌢" "macbook")
 $(i3_table "$table_width" "z" "󰖟" "prinzipal")
 $(i3_table "$table_width" "c" "󰖟" "marcus")
