@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2025-05-13T05:50:24+0200
+# date:   2025-06-24T05:45:15+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -24,12 +24,6 @@ $(i3_table "$table_width" "o" "󰍃" "logout")
 
 [<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
 
-simple_lock() {
-    # WORKAROUND: https://github.com/i3/i3/issues/3298
-    sleep .5 \
-        && slock -m "$(cinfo -a)" &
-}
-
 case "$1" in
     --shutdown)
         systemctl poweroff --no-wall
@@ -39,13 +33,13 @@ case "$1" in
         ;;
     --suspend)
         i3_mouse_move.sh ne 0 \
-            && simple_lock \
+            && _i3_lock.sh \
             && sleep 1 \
             && systemctl suspend --no-wall
         ;;
     --lock)
         i3_mouse_move.sh ne 0 \
-            && simple_lock
+            && _i3_lock.sh
         ;;
     --logout)
         i3-msg exit
