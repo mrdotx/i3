@@ -10,6 +10,7 @@ shell scripts for i3
 | file                 | comment                                                      | image                                                                              |
 | :------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------- |
 | _i3_helper.sh        | used in the other scripts for table, notify, net check, etc. |                                                                                    |
+| _i3_lock.sh          | used in systemd lock service and exit script                 |                                                                                    |
 | i3_autotiling.sh     | optimal tiling of focused windows                            |                                                                                    |
 | i3_container.sh      | shows keybindings for i3 container actions                   | ![container mode](images/container.png)                                            |
 | i3_editor.sh         | shows keybindings for editor                                 | ![editor mode](images/editor.png)                                                  |
