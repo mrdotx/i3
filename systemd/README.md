@@ -2,18 +2,18 @@
 
 systemd services and timer
 
-| file             | comment                                 |
-| :--------------- | :-------------------------------------- |
-| suspend@.service | service to lock the screen before sleep |
+| file          | comment                                 |
+| :------------ | :-------------------------------------- |
+| lock@.service | service to lock the screen before sleep |
 
 ## installation
 
-- cp suspend@.service /etc/systemd/system/suspend@.service
+- cp lock@.service /etc/systemd/system/lock@.service
 
 ## enable service
 
-- systemctl enable suspend@[username]
+- systemctl enable lock@[username]
 
 ## check after reboot
 
-- systemctl status suspend@[username]
+- systemctl status lock@[username]
