@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_mouse_move.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2024-12-17T08:05:12+0100
+# date:   2025-07-18T05:23:31+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -15,15 +15,16 @@ LANG=C
 script=$(basename "$0")
 help="$script [-h/--help] -- move mouse pointer to the edge of the monitor
   Usage:
-    $script [nw/ne/se/sw] [notification]
+    $script [-nw/-ne/-se/-sw] [-n/--notify]
 
   Settings:
-    [nw/ne/se/sw]  = position to move the mouse pointer
-    [notification] = if the value is specified, suppress notification
+    [-nw/-ne/-se/-sw] = position to move the mouse pointer
+    [-n/--notify]     = send status notification
 
   Examples:
-    $script ne
-    $script ne 0"
+    $script -ne
+    $script -nw --notify
+    $script -sw -n"
 
 get_mouse_location() {
     eval "$(xdotool getmouselocation --shell)"
@@ -45,22 +46,22 @@ move_mouse() {
     resolution_y=${resolution##* }
 
     case "$1" in
-        nw)
+        -nw)
             position_icon="󰁛"
             x=0
             y=0
             ;;
-        ne)
+        -ne)
             position_icon="󰁜"
             x="$resolution_x"
             y=0
             ;;
-        se)
+        -se)
             position_icon="󰁃"
             x="$resolution_x"
             y="$resolution_y"
             ;;
-        sw)
+        -sw)
             position_icon="󰁂"
             x=0
             y="$resolution_y"
@@ -68,7 +69,7 @@ move_mouse() {
     esac
 
     case "$2" in
-        "")
+        -n | --notify)
             title="mouse"
             message="mouse pointer moved [$position_icon]"
             message="$message\nfrom $(get_mouse_location)"
