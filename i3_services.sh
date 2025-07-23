@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2025-02-20T06:47:20+0100
+# date:   2025-07-23T04:52:23+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -14,6 +14,7 @@ LANG=C
 auth="${EXEC_AS_USER:-sudo}"
 icon_active="󰨚"
 icon_inactive="󰨙"
+wireguard_config="99-$(uname -n)_vpn"
 
 # source i3 helper
 . _i3_helper.sh
@@ -92,7 +93,7 @@ $(i3_table "$table_width1" "y" "󱫬" \
 $(i3_table "$table_width1" "s" "󰒒" \
     "$(service_status sshd.service) ssh")
 $(i3_table "$table_width1" "v" "󰒄" \
-    "$(service_status wg0 wireguard) vpn")
+    "$(service_status "$wireguard_config" wireguard) vpn")
 $(i3_table "$table_width1" "p" "󰐪" \
     "$(service_status cups.service) printer")
 $(i3_table "$table_width1" "b" "󰂯" \
@@ -186,7 +187,7 @@ case "$1" in
         service_toggle "sshd.service"
         ;;
     --vpn)
-        service_toggle "wg0" "wireguard"
+        service_toggle "$wireguard_config" "wireguard"
         ;;
     --kill)
         i3_notify 1 "$title"
