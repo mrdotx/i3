@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2025-05-12T05:59:04+0200
+# date:   2025-07-24T04:15:21+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -114,17 +114,6 @@ autostart() {
         printf "\n%s" \
             "$(i3_table "$table_width" \
             "${icon_om:-$icon_blank}" "󰆍" "multiplexer")"
-        printf "\n\n%s" \
-            "$(i3_table "$table_width" "header" "default")"
-        printf "\n%s" \
-            "$(i3_table "$table_width" \
-            "${icon_mmp:-$icon_blank}" "󰇀" "mouse position")"
-        printf "\n%s" \
-            "$(i3_table "$table_width" \
-            "${icon_sv:-$icon_blank}" "󰕾" "audio volume")"
-        printf "\n%s" \
-            "$(i3_table "$table_width" \
-            "${icon_su:-$icon_blank}" "󰕾" "audio unmute")"
     }
 
     progress_bar() {
@@ -162,30 +151,17 @@ autostart() {
     # start file manager and wait
     ! window_available "ranger:" \
         && open_terminal 1 "" "ranger_cd $HOME/.local/share/repos"
+    progress_bar 70
     wait_for_max 35 "ranger:" 0 \
         && icon_ofm="$icon_marked"
-    progress_bar 60
+    progress_bar 80
 
     # start multiplexer and wait
     ! window_available "i3 tmux" \
         && open_tmux 1
+    progress_bar 90
     wait_for_max 25 "i3 tmux" 0 \
         && icon_om="$icon_marked"
-    progress_bar 70
-
-    # default mouse position
-    i3_mouse_move.sh "ne" 0 \
-        && icon_mmp="$icon_marked"
-    progress_bar 80
-
-    # default audio volume
-    alsa.sh --absolute 35 \
-        && icon_sv="$icon_marked"
-    progress_bar 90
-
-    # default audio unmute
-    alsa.sh --unmute \
-        && icon_su="$icon_marked"
     progress_bar 100 250
 }
 
