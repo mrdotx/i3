@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # github: https://github.com/mrdotx/i3
-# date:   2025-07-23T04:52:23+0200
+# date:   2025-08-02T05:48:04+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -14,7 +14,7 @@ LANG=C
 auth="${EXEC_AS_USER:-sudo}"
 icon_active="󰨚"
 icon_inactive="󰨙"
-wireguard_config="99-$(uname -n)_vpn"
+wireguard_config="90-vpn_$(uname -n)"
 
 # source i3 helper
 . _i3_helper.sh
