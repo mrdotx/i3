@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/i3_window_move.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2024-03-04T08:23:07+0100
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:32:56+0200
 
 # speed up script by using standard c
 LC_ALL=C

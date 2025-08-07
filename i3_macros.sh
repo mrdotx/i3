@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2025-07-24T04:15:21+0200
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:32:25+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements

@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/_i3_lock.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2025-06-24T05:44:48+0200
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:32:00+0200
 
 # speed up script by using standard c
 LC_ALL=C

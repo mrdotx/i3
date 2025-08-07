@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/_i3_helper.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2025-03-07T06:54:33+0100
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:31:56+0200
 
 i3_set_spacer() {
     i3_set_spacer_i=$1

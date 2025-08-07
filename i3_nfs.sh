@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2024-12-17T08:05:17+0100
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:32:35+0200
 
 # speed up script by using standard c
 LC_ALL=C

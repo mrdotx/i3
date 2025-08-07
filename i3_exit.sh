@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2025-07-18T05:25:12+0200
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:32:16+0200
 
 # speed up script by using standard c
 LC_ALL=C

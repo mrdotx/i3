@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2025-05-13T05:55:25+0200
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:32:08+0200
 
 # speed up script by using standard c
 LC_ALL=C

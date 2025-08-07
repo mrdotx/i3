@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/i3_workspace_swap.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2022-04-24T08:06:21+0200
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:33:00+0200
 
 # speed up script by using standard c
 LC_ALL=C

@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/i3_notes.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2024-12-17T08:05:21+0100
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:32:39+0200
 
 # source i3 helper
 . _i3_helper.sh

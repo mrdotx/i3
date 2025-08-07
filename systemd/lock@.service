@@ -1,7 +1,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/systemd/lock@.service
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2025-06-24T05:51:26+0200
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:31:51+0200
 
 [Unit]
 Description=lock x session using _i3_lock.sh for user %i

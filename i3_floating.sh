@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/i3_floating.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2025-07-17T05:30:37+0200
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:32:20+0200
 
 # speed up script by using standard c
 LC_ALL=C

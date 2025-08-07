@@ -2,8 +2,8 @@
 
 # path:   /home/klassiker/.local/share/repos/i3/i3_tmux.sh
 # author: klassiker [mrdotx]
-# github: https://github.com/mrdotx/i3
-# date:   2025-01-26T08:27:38+0100
+# url:    https://github.com/mrdotx/i3
+# date:   2025-08-07T05:32:52+0200
 
 session="$(uname -n)"
 attach="tmux attach -d -t $session"
