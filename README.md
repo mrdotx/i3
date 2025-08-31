@@ -19,7 +19,6 @@ shell scripts for i3
 | i3_macros.sh         | shows keybindings for predefined macros                      | ![macros mode](images/macros.png) ![macros autostart](images/macros_autostart.gif) |
 | i3_mouse_move.sh     | move mouse pointer to the edge of the monitor                |                                                                                    |
 | i3_nfs.sh            | shows keybindings for nfs mounts                             | ![nfs mode](images/nfs.gif)                                                        |
-| i3_notes.sh          | shows keybindings for notes                                  | ![notes mode](images/notes.png)                                                    |
 | i3_services.sh       | shows keybindings for services                               | ![services mode](images/services.png)                                              |
 | i3_ssh.sh            | shows keybindings for ssh connections                        | ![ssh mode](images/ssh.png)                                                        |
 | i3_tmux.sh           | open applications in tmux windows                            |                                                                                    |
