@@ -13,7 +13,6 @@ shell scripts for i3
 | _i3_lock.sh          | used in systemd lock service and exit script                 |                                                                                    |
 | i3_autotiling.sh     | optimal tiling of focused windows                            |                                                                                    |
 | i3_container.sh      | shows keybindings for i3 container actions                   | ![container mode](images/container.png)                                            |
-| i3_editor.sh         | shows keybindings for editor                                 | ![editor mode](images/editor.png)                                                  |
 | i3_exit.sh           | shows keybindings for lock, reboot, shutdown, etc.           | ![exit mode](images/exit.png)                                                      |
 | i3_floating.sh       | shows keybindings for positioning floating windows           | ![floating mode](images/floating.png)                                              |
 | i3_macros.sh         | shows keybindings for predefined macros                      | ![macros mode](images/macros.png) ![macros autostart](images/macros_autostart.gif) |
