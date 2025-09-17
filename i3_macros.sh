@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-08-07T05:32:25+0200
+# date:   2025-09-17T04:32:42+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -187,13 +187,15 @@ case "$1" in
         type_string "$auth ventoy -u /dev/sd"
         ;;
     --weather)
-        location_file="/tmp/weather_location"
+        location_cache() {
+            grep -q -s '[^[:space:]]' "$1" \
+                || curl -fsS 'https://ipinfo.io/city' > "$1"
 
-        grep -q -s '[^[:space:]]' $location_file \
-            || curl -fsS 'https://ipinfo.io/city' > $location_file
+            cat "$1"
+        }
 
-        url="wttr.in/$(sed 's/ /%20/g' "$location_file")?AFq2&format=v2d"
-        wttr="curl -fsS '$url' | uniq"
+        city=$(location_cache /tmp/location.cache | sed 's/ /%20/g')
+        wttr="curl -fsS 'wttr.in/$city?AFq2&format=v2d' | uniq"
 
         openweather="polybar_openweather.sh --terminal"
 
