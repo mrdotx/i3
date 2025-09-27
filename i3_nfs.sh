@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-08-07T05:32:35+0200
+# date:   2025-09-27T05:05:12+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -17,7 +17,7 @@ icon_inactive="󰨙"
 
 server="m625q"
 folder="/home/klassiker"
-options="noatime,vers=4"
+options="noatime,timeo=300,retrans=3"
 
 # source i3 helper
 . _i3_helper.sh
