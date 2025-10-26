@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-08-07T05:32:04+0200
+# date:   2025-10-26T05:39:30+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -18,26 +18,15 @@ help="$script [-h/--help] -- script for optimal tiling of focused windows
     without options, the script runs in the background and divides the focused
     window automatically
     [-t]      = auto tiling once with defined command
-    [-w]      = auto tiling only on defined workspaces
+    [-w]      = auto tiling only on defined workspaces by names
     [command] = application to start
 
   Examples:
     $script
-    $script -w 1 4 5 7 8 9
+    $script -w 1|2|3|6|7|8|9|0
     $script -t $TERMINAL"
 
-autotiling() {
-    active_workspace=$(wmctrl -d \
-        | awk '$2=="*" {print $9}' \
-    )
-
-    for workspace in "$@"; do
-        [ "$active_workspace" -eq "$workspace" ] \
-            && break
-    done
-}
-
-set_orientation() {
+split() {
     i3_window_event=$(i3-msg -t subscribe '[ "window" ]')
 
     # window event change type (https://i3wm.org/docs/ipc.html#_window_event)
@@ -46,9 +35,9 @@ set_orientation() {
         new | close | focus)
             eval "$(xdotool getwindowfocus getwindowgeometry --shell)" \
                 && if [ "$WIDTH" -ge "$HEIGHT" ]; then
-                    i3-msg -q split h
+                    i3-msg -q "[tiling$1] split h"
                 else
-                    i3-msg -q split v
+                    i3-msg -q "[tiling$1] split v"
                 fi
             ;;
     esac
@@ -60,19 +49,18 @@ case "$1" in
         ;;
     -t)
         shift
-        set_orientation
+        split
         "$@" &
         ;;
     -w)
         shift
         while true; do
-            autotiling "$@" \
-                && set_orientation
+            split " workspace=($1)"
         done
         ;;
     *)
         while true; do
-            set_orientation
+            split
         done
         ;;
 esac
