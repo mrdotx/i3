@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_exit.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-08-07T05:32:16+0200
+# date:   2025-10-30T05:35:51+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -21,6 +21,9 @@ $(i3_table "$table_width" "r" "󰑐" "reboot")
 $(i3_table "$table_width" "s" "󰏦" "suspend")
 $(i3_table "$table_width" "l" "󰍁" "lock")
 $(i3_table "$table_width" "o" "󰍃" "logout")
+
+$(i3_table "$table_width" "header" "kill")
+$(i3_table "$table_width" "x" "󰖯" "select x client")
 
 [<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
 

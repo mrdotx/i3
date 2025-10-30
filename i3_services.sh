@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-08-07T05:32:43+0200
+# date:   2025-10-30T05:35:32+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -78,8 +78,6 @@ message="
 $(i3_table "$table_width" "header" "enable/disable")
 $(i3_table "$table_width1" "l" "󰌾" \
     "$(service_status xautolock.service user) autolock")
-$(i3_table "$table_width1" "t" "󰕴" \
-    "$(service_status i3_autotiling.service user) autotiling")
 $(i3_table "$table_width1" "c" "󰗌" \
     "$(service_status picom.service user) compositor")
 $(i3_table "$table_width1" "w" "󰏪" \
@@ -88,7 +86,7 @@ $(i3_table "$table_width1" "m" "󰇀" \
     "$(service_status xhidecursor.service user) mousepointer")
 $(i3_table "$table_width1" "d" "󰇧" \
     "$(service_status systemd-resolved.service) resolver")
-$(i3_table "$table_width1" "y" "󱫬" \
+$(i3_table "$table_width1" "t" "󱫬" \
     "$(service_status systemd-timesyncd.service) timesync")
 $(i3_table "$table_width1" "s" "󰒒" \
     "$(service_status sshd.service) ssh")
@@ -139,9 +137,6 @@ case "$1" in
         ;;
     --autolock)
         service_toggle "xautolock.service" "user"
-        ;;
-    --tiling)
-        service_toggle "i3_autotiling.service" "user"
         ;;
     --compositor)
         service_toggle "picom.service" "user"
