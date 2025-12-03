@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-10-30T05:35:32+0100
+# date:   2025-12-03T06:16:34+0100
 
 # speed up script by using standard c
 LC_ALL=C
@@ -158,8 +158,7 @@ case "$1" in
         ;;
     --printer)
         if systemctl -q is-active cups.service; then
-            service_toggle "cups.service" \
-                && service_toggle "colord.service"
+            service_toggle "cups.service"
         else
             service_toggle "cups.service"
         fi
