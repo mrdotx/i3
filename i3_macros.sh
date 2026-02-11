@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-09-17T04:32:42+0200
+# date:   2026-02-11T06:12:39+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -174,6 +174,7 @@ $(i3_table "$table_width" "v" "󰕓" "ventoy")
 
 $(i3_table "$table_width" "header" "info")
 $(i3_table "$table_width" "w" "" "weather")
+$(i3_table "$table_width" "s" "󰟴" "starwars")
 $(i3_table "$table_width" "h" "󰟴" "telehack")
 
 [<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
@@ -200,6 +201,10 @@ case "$1" in
         openweather="polybar_openweather.sh --terminal"
 
         exec_tmux "$wttr; printf '\n'; $openweather"
+        ;;
+    --starwars)
+        url="starwarstel.net"
+        exec_tmux "telnet '$url'"
         ;;
     --telehack)
         url="telehack.com"
