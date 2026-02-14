@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-02-11T06:12:39+0100
+# date:   2026-02-14T06:04:46+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -12,24 +12,14 @@ auth="${EXEC_AS_USER:-sudo}"
 # source i3 helper
 . _i3_helper.sh
 
-# WORKAROUND: xdotool mismatched keyboard layouts
-setxkbmap -synch
-
-press_key() {
-    i="$1"
-    shift
-    while [ "$i" -ge 1 ]; do
-        xdotool key --delay 15 "$@"
-        i=$((i - 1))
-    done
-}
+# WORKAROUND: RANGER_LEVEL=0 to disable cinfo on shell launch
+shell="RANGER_LEVEL=0 $SHELL"
 
 type_string() {
-    printf "%s" "$1" \
-        | xdotool type \
-            --delay 1 \
-            --clearmodifiers \
-            --file -
+    # WORKAROUND: xdotool mismatched keyboard layouts
+    setxkbmap -synch
+
+    xdotool type --delay 0 --clearmodifiers "$@"
 }
 
 window_available() {
@@ -55,32 +45,14 @@ wait_for_max() {
     done
 }
 
-exec_terminal() {
-    i3-msg workspace "$1"
-
-    eval "$TERMINAL -T \"$2\" -e $3"
-}
-
 open_terminal() {
-    exec_terminal "$1" "$2" "$SHELL"
-    sleep .5
-
-    type_string " $3"
-    press_key 1 Return
+    i3-msg workspace "$1"
+    $TERMINAL -T "$2" -e "$SHELL" -ic "$3; $shell"
 }
 
 open_tmux() {
-    i3_tmux.sh -o "$1" 'shell'
+    i3_tmux.sh -o "$1" "$2" "$3; $shell"
     i3-msg workspace 2
-    sleep .5
-}
-
-exec_tmux() {
-    open_tmux "$2"
-
-    press_key 1 Ctrl+c
-    type_string " printf '\033c'; $1"
-    press_key 1 Return
 }
 
 autostart() {
@@ -150,7 +122,7 @@ autostart() {
 
     # start file manager and wait
     ! window_available "ranger:" \
-        && open_terminal 1 "" "ranger_cd $HOME/.local/share/repos"
+        && open_terminal 1 '' "ranger_cd $HOME/.local/share/repos"
     progress_bar 70
     wait_for_max 35 "ranger:" 0 \
         && icon_ofm="$icon_marked"
@@ -158,7 +130,7 @@ autostart() {
 
     # start multiplexer and wait
     ! window_available "i3 tmux" \
-        && open_tmux 1
+        && open_tmux 1 'shell'
     progress_bar 90
     wait_for_max 25 "i3 tmux" 0 \
         && icon_om="$icon_marked"
@@ -181,10 +153,10 @@ $(i3_table "$table_width" "h" "󰟴" "telehack")
 
 case "$1" in
     --bootnext)
-        exec_tmux "$auth efistub.sh -b"
+        open_tmux '' 'bootnext' "$auth efistub.sh -b"
         ;;
     --ventoy)
-        exec_tmux "lsblk; ventoy -h"
+        open_tmux '' 'ventoy' "lsblk; ventoy -h"
         type_string "$auth ventoy -u /dev/sd"
         ;;
     --weather)
@@ -200,15 +172,15 @@ case "$1" in
 
         openweather="polybar_openweather.sh --terminal"
 
-        exec_tmux "$wttr; printf '\n'; $openweather"
+        open_tmux '' 'weather' "$wttr; printf '\n'; $openweather"
         ;;
     --starwars)
         url="starwarstel.net"
-        exec_tmux "telnet '$url'"
+        open_tmux '' 'starwars' "telnet '$url'"
         ;;
     --telehack)
         url="telehack.com"
-        exec_tmux "telnet '$url'"
+        open_tmux '' 'telehack' "telnet '$url'"
         ;;
     --autostart)
         autostart
