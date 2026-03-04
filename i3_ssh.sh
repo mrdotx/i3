@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-09-04T04:40:48+0200
+# date:   2026-03-04T05:17:31+0100
 
 # source i3 helper
 . _i3_helper.sh
@@ -22,8 +22,9 @@ $(i3_table "$table_width" "b" "󰌢" "macbook")
 case "$1" in
     --host)
         shift
+        # REQUIRES: tmux.sh (https://github.com/mrdotx/shell)
         i3_net_check "$1" \
-            && i3_tmux.sh -o "$2" "$1" "ssh $1"
+            && tmux.sh -o "$2" "$1" "ssh $1"
         ;;
     --kill)
         i3_notify 1 "$title"
