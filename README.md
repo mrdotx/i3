@@ -20,7 +20,6 @@ shell scripts for i3
 | i3_nfs.sh            | shows keybindings for nfs mounts                             | ![nfs mode](images/nfs.gif)                                                        |
 | i3_services.sh       | shows keybindings for services                               | ![services mode](images/services.png)                                              |
 | i3_ssh.sh            | shows keybindings for ssh connections                        | ![ssh mode](images/ssh.png)                                                        |
-| i3_tmux.sh           | open applications in tmux windows                            |                                                                                    |
 | i3_window_move.sh    | move floating window to the edge of the monitor              |                                                                                    |
 | i3_workspace_swap.sh | swap workspaces and focus(left,right,up,down)                |                                                                                    |
 
@@ -28,10 +27,10 @@ config files:
 
 - [dotfiles/i3](https://github.com/mrdotx/dotfiles/tree/master/.config/i3)
 - [dotfiles/polybar](https://github.com/mrdotx/dotfiles/tree/master/.config/polybar)
-- [dotfiles/tmux](https://github.com/mrdotx/dotfiles/tree/master/.config/tmux)
 - [dotfiles/dunst](https://github.com/mrdotx/dotfiles/tree/master/.config/dunst)
 - [dotfiles/systemd](https://github.com/mrdotx/dotfiles/tree/master/.config/systemd/user)
 
 related projects:
 
 - [polybar](https://github.com/mrdotx/polybar)
+- [shell](https://github.com/mrdotx/shell)
