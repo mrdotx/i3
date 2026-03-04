@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-02-14T06:04:46+0100
+# date:   2026-03-04T05:17:47+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -19,6 +19,8 @@ type_string() {
     # WORKAROUND: xdotool mismatched keyboard layouts
     setxkbmap -synch
 
+    # WORKAROUND: starts typing too fast
+    sleep .2
     xdotool type --delay 0 --clearmodifiers "$@"
 }
 
@@ -51,7 +53,8 @@ open_terminal() {
 }
 
 open_tmux() {
-    i3_tmux.sh -o "$1" "$2" "$3; $shell"
+    # REQUIRES: tmux.sh (https://github.com/mrdotx/shell)
+    tmux.sh -o "$1" "$2" "$3; $shell"
     i3-msg workspace 2
 }
 
@@ -129,10 +132,10 @@ autostart() {
     progress_bar 80
 
     # start multiplexer and wait
-    ! window_available "i3 tmux" \
+    ! window_available "tmux" \
         && open_tmux 1 'shell'
     progress_bar 90
-    wait_for_max 25 "i3 tmux" 0 \
+    wait_for_max 25 "tmux" 0 \
         && icon_om="$icon_marked"
     progress_bar 100 250
 }
