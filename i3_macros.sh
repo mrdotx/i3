@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-03-04T05:17:47+0100
+# date:   2026-03-20T05:22:48+0100
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -19,8 +19,9 @@ type_string() {
     # WORKAROUND: xdotool mismatched keyboard layouts
     setxkbmap -synch
 
-    # WORKAROUND: starts typing too fast
+    # WORKAROUND: early start
     sleep .2
+
     xdotool type --delay 0 --clearmodifiers "$@"
 }
 
