@@ -1,7 +1,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/systemd/lock@.service
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-08-07T05:31:51+0200
+# date:   2026-03-24T05:45:38+0100
 
 [Unit]
 Description=lock x session using _i3_lock.sh for user %i
@@ -12,7 +12,7 @@ User=%i
 Type=forking
 Environment=DISPLAY=:0
 # custom xauthority file location
-Environment=XAUTHORITY=/home/%i/.local/share/xorg/Xauthority
+Environment=XAUTHORITY=/home/%i/.local/state/xorg/Xauthority
 ExecStart=/home/%i/.local/share/repos/i3/_i3_lock.sh
 
 [Install]
