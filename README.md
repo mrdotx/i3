@@ -2,10 +2,10 @@
 
 shell scripts for i3
 
-| folder  | comment                       |
-| :------ | :---------------------------- |
-| images  | images for the README.md file |
-| systemd | systemd services and timer    |
+| directory | comment                       |
+| :-------- | :---------------------------- |
+| images    | images for the README.md file |
+| systemd   | systemd services and timer    |
 
 | file                 | comment                                                      | image                                                                              |
 | :------------------- | :----------------------------------------------------------- | :--------------------------------------------------------------------------------- |
