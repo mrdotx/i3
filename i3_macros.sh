@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-03-20T05:22:48+0100
+# date:   2026-04-29T05:10:20+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -99,27 +99,27 @@ autostart() {
     # progress initialization
     progress_bar 0
 
-    # mount folder "Cloud"
+    # mount directory "Cloud"
     i3_nfs.sh --mount "Cloud" \
         && icon_mfc="$icon_marked"
     progress_bar 10
 
-    # mount folder "Desktop"
+    # mount directory "Desktop"
     i3_nfs.sh --mount "Desktop" \
         && icon_mfd="$icon_marked"
     progress_bar 20
 
-    # mount folder "Music"
+    # mount directory "Music"
     i3_nfs.sh --mount "Music" \
         && icon_mfm="$icon_marked"
     progress_bar 30
 
-    # mount folder "Public"
+    # mount directory "Public"
     i3_nfs.sh --mount "Public" \
         && icon_mfp="$icon_marked"
     progress_bar 40
 
-    # mount folder "Videos"
+    # mount directory "Videos"
     i3_nfs.sh --mount "Videos" \
         && icon_mfv="$icon_marked"
     progress_bar 50
