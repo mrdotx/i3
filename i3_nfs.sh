@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-09-27T05:05:12+0200
+# date:   2026-05-02T05:33:38+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -16,14 +16,14 @@ icon_active="󰨚"
 icon_inactive="󰨙"
 
 server="m625q"
-folder="/home/klassiker"
+directory="/home/klassiker"
 options="noatime,timeo=300,retrans=3"
 
 # source i3 helper
 . _i3_helper.sh
 
 nfs_status() {
-    mountpoint -q "$folder/$1" \
+    mountpoint -q "$directory/$1" \
         && printf "%s" "$icon_active" \
         && return
 
@@ -33,15 +33,15 @@ nfs_status() {
 nfs_toggle() {
     shares="$*"
     for share in $shares; do
-        mountpoint -q "$folder/$share"
+        mountpoint -q "$directory/$share"
         case $? in
             0)
-                $auth umount "$folder/$share"
+                $auth umount "$directory/$share"
                 ;;
             *)
                 $auth mount -t nfs -o "$options" \
                     "$server:/$share" \
-                    "$folder/$share"
+                    "$directory/$share"
                 ;;
         esac \
             && "$0"
@@ -51,18 +51,18 @@ nfs_toggle() {
 nfs_mount() {
     shares="$*"
     for share in $shares; do
-        mountpoint -q "$folder/$share" \
+        mountpoint -q "$directory/$share" \
             || $auth mount -t nfs -o "$options" \
                 "$server:/$share" \
-                "$folder/$share"
+                "$directory/$share"
     done
 }
 
 nfs_umount() {
     shares="$*"
     for share in $shares; do
-        mountpoint -q "$folder/$share" \
-            && $auth umount "$folder/$share"
+        mountpoint -q "$directory/$share" \
+            && $auth umount "$directory/$share"
     done
 }
 
