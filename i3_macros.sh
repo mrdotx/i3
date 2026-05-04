@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-04-29T05:10:20+0200
+# date:   2026-05-04T05:12:59+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -81,6 +81,9 @@ autostart() {
             "${icon_mfp:-$icon_blank}" "󰒍" "nfs \"Public\"")"
         printf "\n%s" \
             "$(i3_table "$table_width" \
+            "${icon_mfs:-$icon_blank}" "󰒍" "nfs \"Share\"")"
+        printf "\n%s" \
+            "$(i3_table "$table_width" \
             "${icon_mfv:-$icon_blank}" "󰒍" "nfs \"Videos\"")"
         printf "\n\n%s" \
             "$(i3_table "$table_width" "header" "start")"
@@ -119,10 +122,15 @@ autostart() {
         && icon_mfp="$icon_marked"
     progress_bar 40
 
+    # mount directory "Share"
+    i3_nfs.sh --mount "Share" \
+        && icon_mfs="$icon_marked"
+    progress_bar 50
+
     # mount directory "Videos"
     i3_nfs.sh --mount "Videos" \
         && icon_mfv="$icon_marked"
-    progress_bar 50
+    progress_bar 60
 
     # start file manager and wait
     ! window_available "ranger:" \
