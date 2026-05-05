@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-05-02T05:33:38+0200
+# date:   2026-05-05T05:19:41+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -80,22 +80,17 @@ $(i3_table "$table_width1" "m" "$(nfs_status Music)" \
     "├─ ~/Music")
 $(i3_table "$table_width1" "p" "$(nfs_status Public)" \
     "├─ ~/Public")
-$(i3_table "$table_width1" "t" "$(nfs_status Templates)" \
-    "├─ ~/Templates")
+$(i3_table "$table_width1" "s" "$(nfs_status Share)" \
+    "├─ ~/Share")
 $(i3_table "$table_width1" "v" "$(nfs_status Videos)" \
-    "├─ ~/Videos")
-$(i3_table "$table_width" "\\\\" "󰒍" "toggle default")
+    "└─ ~/Videos")
 
 [<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
 
 case "$1" in
     --all)
         i3_net_check "$server" \
-            && nfs_toggle "Cloud Desktop Music Public Templates Videos"
-        ;;
-    --default)
-        i3_net_check "$server" \
-            && nfs_toggle "Cloud Desktop Music Public Videos"
+            && nfs_toggle "Cloud Desktop Music Public Share Videos"
         ;;
     --kill)
         i3_notify 1 "$title"
