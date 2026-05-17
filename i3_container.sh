@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-10-30T05:35:12+0100
+# date:   2026-05-17T04:57:32+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -18,10 +18,9 @@ icon_inactive="󰨙"
 
 title="container"
 table_width=26
-table_width1=$((table_width + 3))
 message="
 $(i3_table "$table_width" "header" "service")
-$(i3_table "$table_width1" "a" "󰕴" "$( \
+$(i3_table "$table_width" "a" "󰕴" "$( \
     if systemctl --user -q is-active "$service_name"; then
         printf "%s" "$icon_active"
     else
