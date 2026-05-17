@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_nfs.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-05-05T05:19:41+0200
+# date:   2026-05-17T04:57:43+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -68,21 +68,20 @@ nfs_umount() {
 
 title="nfs"
 table_width=26
-table_width1=$((table_width + 4))
 message="
 $(i3_table "$table_width" "header" "$server mounts")
 $(i3_table "$table_width" "a" "󰒍" "toggle all")
-$(i3_table "$table_width1" "c" "$(nfs_status Cloud)" \
+$(i3_table "$table_width" "c" "$(nfs_status Cloud)" \
     "├─ ~/Cloud")
-$(i3_table "$table_width1" "d" "$(nfs_status Desktop)" \
+$(i3_table "$table_width" "d" "$(nfs_status Desktop)" \
     "├─ ~/Desktop")
-$(i3_table "$table_width1" "m" "$(nfs_status Music)" \
+$(i3_table "$table_width" "m" "$(nfs_status Music)" \
     "├─ ~/Music")
-$(i3_table "$table_width1" "p" "$(nfs_status Public)" \
+$(i3_table "$table_width" "p" "$(nfs_status Public)" \
     "├─ ~/Public")
-$(i3_table "$table_width1" "s" "$(nfs_status Share)" \
+$(i3_table "$table_width" "s" "$(nfs_status Share)" \
     "├─ ~/Share")
-$(i3_table "$table_width1" "v" "$(nfs_status Videos)" \
+$(i3_table "$table_width" "v" "$(nfs_status Videos)" \
     "└─ ~/Videos")
 
 [<b>q</b>]uit, [<b>escape</b>], [<b>return</b>]"
