@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-12-03T06:16:34+0100
+# date:   2026-05-17T04:57:48+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -71,61 +71,58 @@ service_toggle() {
 
 title="services"
 table_width=26
-table_width1=$((table_width + 3))
-table_width2=$((table_width + 4))
-table_width3=$((table_width + 6))
 message="
 $(i3_table "$table_width" "header" "enable/disable")
-$(i3_table "$table_width1" "l" "󰌾" \
+$(i3_table "$table_width" "l" "󰌾" \
     "$(service_status xautolock.service user) autolock")
-$(i3_table "$table_width1" "c" "󰗌" \
+$(i3_table "$table_width" "c" "󰗌" \
     "$(service_status picom.service user) compositor")
-$(i3_table "$table_width1" "w" "󰏪" \
+$(i3_table "$table_width" "w" "󰏪" \
     "$(service_status wacom.service user) wacom")
-$(i3_table "$table_width1" "m" "󰇀" \
+$(i3_table "$table_width" "m" "󰇀" \
     "$(service_status xhidecursor.service user) mousepointer")
-$(i3_table "$table_width1" "d" "󰇧" \
+$(i3_table "$table_width" "d" "󰇧" \
     "$(service_status systemd-resolved.service) resolver")
-$(i3_table "$table_width1" "t" "󱫬" \
+$(i3_table "$table_width" "t" "󱫬" \
     "$(service_status systemd-timesyncd.service) timesync")
-$(i3_table "$table_width1" "s" "󰒒" \
+$(i3_table "$table_width" "s" "󰒒" \
     "$(service_status sshd.service) ssh")
-$(i3_table "$table_width1" "v" "󰒄" \
+$(i3_table "$table_width" "v" "󰒄" \
     "$(service_status "$wireguard_config" wireguard) vpn")
-$(i3_table "$table_width1" "p" "󰐪" \
+$(i3_table "$table_width" "p" "󰐪" \
     "$(service_status cups.service) printer")
-$(i3_table "$table_width1" "b" "󰂯" \
+$(i3_table "$table_width" "b" "󰂯" \
     "$(service_status bluetooth.service) bluetooth")
 
 $(i3_table "$table_width" "header" "polybar")
 $(if [ "$(service_status polybar.service user)" = "$icon_active" ]; then
     printf "%s\n" \
-        "$(i3_table "$table_width1" "a" "󰄱" \
+        "$(i3_table "$table_width" "a" "󰄱" \
             "$icon_active bar")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "z" "󰆖" \
+        "$(i3_table "$table_width" "z" "󰆖" \
             "  ├─ toggle")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "r" "󰑐" \
+        "$(i3_table "$table_width" "r" "󰑐" \
             "  ├─ reload")"
     printf "%s\n" \
-        "$(i3_table "$table_width3" "o" "" \
+        "$(i3_table "$table_width" "o" "" \
             "  │  ├─ weather")"
     printf "%s\n" \
-        "$(i3_table "$table_width3" "f" "󰑬" \
+        "$(i3_table "$table_width" "f" "󰑬" \
             "  │  ├─ rss")"
     printf "%s\n" \
-        "$(i3_table "$table_width3" "n" "󰏗" \
+        "$(i3_table "$table_width" "n" "󰏗" \
             "  │  ├─ packages")"
     printf "%s\n" \
-        "$(i3_table "$table_width3" "x" "󰩺" \
+        "$(i3_table "$table_width" "x" "󰩺" \
             "  │  └─ trash")"
     printf "%s\n" \
-        "$(i3_table "$table_width2" "0" "󰎣" \
+        "$(i3_table "$table_width" "0" "󰎣" \
             "  └─ restart")"
 else
     printf "%s" \
-        "$(i3_table "$table_width1" "a" "󰄮" \
+        "$(i3_table "$table_width" "a" "󰄮" \
             "$icon_inactive bar")"
 fi)
 
