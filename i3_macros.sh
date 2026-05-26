@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-05-04T05:12:59+0200
+# date:   2026-05-26T04:50:42+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -50,12 +50,14 @@ wait_for_max() {
 
 open_terminal() {
     i3-msg workspace "$1"
-    $TERMINAL -T "$2" -e "$SHELL" -ic "$3; $shell"
+    i3-msg -q "exec --no-startup-id \
+        \"$TERMINAL -T '$2' -e '$SHELL' -ic '$3; $shell'\""
 }
 
 open_tmux() {
     # REQUIRES: tmux.sh (https://github.com/mrdotx/shell)
-    tmux.sh -o "$1" "$2" "$3; $shell"
+    i3-msg -q "exec --no-startup-id \
+        \"tmux.sh -o '$1' '$2' '$3; $shell'\""
     i3-msg workspace 2
 }
 
@@ -134,7 +136,7 @@ autostart() {
 
     # start file manager and wait
     ! window_available "ranger:" \
-        && open_terminal 1 '' "ranger_cd $HOME/.local/share/repos"
+        && open_terminal 1 'ranger' "ranger_cd $HOME/.local/share/repos"
     progress_bar 70
     wait_for_max 35 "ranger:" 0 \
         && icon_ofm="$icon_marked"
@@ -165,6 +167,7 @@ $(i3_table "$table_width" "h" "󰟴" "telehack")
 
 case "$1" in
     --bootnext)
+        # REQUIRES: efistub.sh (https://github.com/mrdotx/efistub)
         open_tmux '' 'bootnext' "$auth efistub.sh -b"
         ;;
     --ventoy)
@@ -172,19 +175,10 @@ case "$1" in
         type_string "$auth ventoy -u /dev/sd"
         ;;
     --weather)
-        location_cache() {
-            grep -q -s '[^[:space:]]' "$1" \
-                || curl -fsS 'https://ipinfo.io/city' > "$1"
-
-            cat "$1"
-        }
-
-        city=$(location_cache /tmp/location.cache | sed 's/ /%20/g')
-        wttr="curl -fsS 'wttr.in/$city?AFq2&format=v2d' | uniq"
-
-        openweather="polybar_openweather.sh --terminal"
-
-        open_tmux '' 'weather' "$wttr; printf '\n'; $openweather"
+        # REQUIRES:      wttr.sh (https://github.com/mrdotx/shell)
+        # polybar_openweather.sh (https://github.com/mrdotx/polybar)
+        open_tmux '' 'weather' \
+            "wttr.sh --clean; echo; polybar_openweather.sh --terminal"
         ;;
     --starwars)
         url="starwarstel.net"
