@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-05-17T04:57:48+0200
+# date:   2026-06-18T04:15:58+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -77,10 +77,12 @@ $(i3_table "$table_width" "l" "󰌾" \
     "$(service_status xautolock.service user) autolock")
 $(i3_table "$table_width" "c" "󰗌" \
     "$(service_status picom.service user) compositor")
-$(i3_table "$table_width" "w" "󰏪" \
-    "$(service_status wacom.service user) wacom")
 $(i3_table "$table_width" "m" "󰇀" \
     "$(service_status xhidecursor.service user) mousepointer")
+$(i3_table "$table_width" "w" "󰏪" \
+    "$(service_status wacom.service user) wacom")
+$(i3_table "$table_width" "1" "󰎤" \
+    "$(service_status numlockx.service user) numlock")
 $(i3_table "$table_width" "d" "󰇧" \
     "$(service_status systemd-resolved.service) resolver")
 $(i3_table "$table_width" "t" "󱫬" \
@@ -138,11 +140,14 @@ case "$1" in
     --compositor)
         service_toggle "picom.service" "user"
         ;;
+    --mousepointer)
+        service_toggle "xhidecursor.service" "user"
+        ;;
     --wacom)
         service_toggle "wacom.service" "user"
         ;;
-    --mousepointer)
-        service_toggle "xhidecursor.service" "user"
+    --numlock)
+        service_toggle "numlockx.service" "user"
         ;;
     --bluetooth)
         if lsmod | grep -q btusb; then
