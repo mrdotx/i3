@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_floating.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-08-07T05:32:20+0200
+# date:   2026-06-18T04:27:29+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -19,11 +19,11 @@ message="
  ┌───────────────────────┐
  │ resize      [<b>←</b>,<b>→</b>,<b>↑</b>,<b>↓</b>] │
  ├───────────────────────┤
- │ [<b>1</b>]      [<b>2</b>]      [<b>3</b>] │
+ │ [<b>7</b>]      [<b>8</b>]      [<b>9</b>] │
  │          [<b>w</b>]          │
  │ [<b>4</b>]   [<b>a</b>][<b>5</b>][<b>d</b>]   [<b>6</b>] │
  │          [<b>s</b>]          │
- │ [<b>7</b>]      [<b>8</b>]      [<b>9</b>] │
+ │ [<b>1</b>]      [<b>2</b>]      [<b>3</b>] │
  ├───────────────────────┤
  │ disable           [<b>0</b>] │
  └───────────────────────┘
