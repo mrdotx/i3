@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_container.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-05-17T04:57:32+0200
+# date:   2026-06-23T03:53:54+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -12,21 +12,9 @@ LANG=C
 # source i3 helper
 . _i3_helper.sh
 
-service_name="i3_autotiling.service"
-icon_active="󰨚"
-icon_inactive="󰨙"
-
 title="container"
 table_width=26
 message="
-$(i3_table "$table_width" "header" "service")
-$(i3_table "$table_width" "a" "󰕴" "$( \
-    if systemctl --user -q is-active "$service_name"; then
-        printf "%s" "$icon_active"
-    else
-        printf "%s" "$icon_inactive"
-    fi) autotiling")
-
 $(i3_table "$table_width" "header" "layout")
 $(i3_table "$table_width" "p" "󰕴" "split")
 $(i3_table "$table_width" "t" "󰓪" "tabbed")
@@ -51,15 +39,6 @@ $(i3_table "$table_width" "e" "󰑓" "reset")
 case "$1" in
     --kill)
         i3_notify 1 "$title"
-        ;;
-    --tiling)
-        if systemctl --user -q is-active "$service_name"; then
-            systemctl --user disable "$service_name" --now
-        else
-            systemctl --user enable "$service_name" --now
-        fi \
-            && "$0" \
-            && polybar_services.sh --update
         ;;
     *)
         i3_notify 0 "$title" "$message"
