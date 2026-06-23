@@ -3,7 +3,7 @@
 # path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-06-18T04:15:58+0200
+# date:   2026-06-23T03:54:11+0200
 
 # speed up script by using standard c
 LC_ALL=C
@@ -73,6 +73,8 @@ title="services"
 table_width=26
 message="
 $(i3_table "$table_width" "header" "enable/disable")
+$(i3_table "$table_width" "t" "󰕴" \
+    "$(service_status i3_autotiling.service user) autotiling")
 $(i3_table "$table_width" "l" "󰌾" \
     "$(service_status xautolock.service user) autolock")
 $(i3_table "$table_width" "c" "󰗌" \
@@ -85,7 +87,7 @@ $(i3_table "$table_width" "1" "󰎤" \
     "$(service_status numlockx.service user) numlock")
 $(i3_table "$table_width" "d" "󰇧" \
     "$(service_status systemd-resolved.service) resolver")
-$(i3_table "$table_width" "t" "󱫬" \
+$(i3_table "$table_width" "y" "󱫬" \
     "$(service_status systemd-timesyncd.service) timesync")
 $(i3_table "$table_width" "s" "󰒒" \
     "$(service_status sshd.service) ssh")
@@ -133,6 +135,9 @@ fi)
 case "$1" in
     --polybar)
         service_toggle "polybar.service" "user"
+        ;;
+    --tiling)
+        service_toggle "i3_autotiling.service" "user"
         ;;
     --autolock)
         service_toggle "xautolock.service" "user"
