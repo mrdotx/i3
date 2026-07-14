@@ -1,18 +1,17 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/i3/i3_autotiling.sh
+# path:   /home/klassiker/Projects/repos/i3/i3_autotiling.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-10-26T05:39:30+0100
+# date:   2026-07-14T02:00:34+0200
 
-# speed up script by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 script=$(basename "$0")
 help="$script [-h/--help] -- script for optimal tiling of focused windows
   Usage:
-    $script [-w/-t] [command]
+    $script [-w|-t] [command]
 
   Settings:
     without options, the script runs in the background and divides the focused

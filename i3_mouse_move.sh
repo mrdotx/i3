@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/i3/i3_mouse_move.sh
+# path:   /home/klassiker/Projects/repos/i3/i3_mouse_move.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-08-07T05:32:28+0200
+# date:   2026-07-14T02:00:52+0200
 
-# speed up script by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 # source i3 helper
 . _i3_helper.sh
@@ -15,10 +14,10 @@ LANG=C
 script=$(basename "$0")
 help="$script [-h/--help] -- move mouse pointer to the edge of the monitor
   Usage:
-    $script [-nw/-ne/-se/-sw] [-n/--notify]
+    $script [-nw|-ne|-se|-sw] [-n/--notify]
 
   Settings:
-    [-nw/-ne/-se/-sw] = position to move the mouse pointer
+    [-nw|-ne|-se|-sw] = position to move the mouse pointer
     [-n/--notify]     = send status notification
 
   Examples:

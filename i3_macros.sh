@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/i3/i3_macros.sh
+# path:   /home/klassiker/Projects/repos/i3/i3_macros.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-05-26T04:50:42+0200
+# date:   2026-07-14T02:00:49+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
@@ -136,7 +136,7 @@ autostart() {
 
     # start file manager and wait
     ! window_available "ranger:" \
-        && open_terminal 1 'ranger' "ranger_cd $HOME/.local/share/repos"
+        && open_terminal 1 'ranger' "ranger_cd $HOME/Projects/repos"
     progress_bar 70
     wait_for_max 35 "ranger:" 0 \
         && icon_ofm="$icon_marked"

@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/i3/i3_ssh.sh
+# path:   /home/klassiker/Projects/repos/i3/i3_ssh.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-03-04T05:17:31+0100
+# date:   2026-07-14T02:01:03+0200
 
 # source i3 helper
 . _i3_helper.sh

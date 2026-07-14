@@ -1,21 +1,20 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/i3/i3_workspace_swap.sh
+# path:   /home/klassiker/Projects/repos/i3/i3_workspace_swap.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-08-07T05:33:00+0200
+# date:   2026-07-14T02:01:15+0200
 
-# speed up script by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 script=$(basename "$0")
 help="$script [-h/--help] -- swap workspaces and focus
   Usage:
-    $script [left/right/up/down]
+    $script [left|right|up|down]
 
   Settings:
-    [left/right/up/down] = direction to focus after the workspaces swaped
+    [left|right|up|down] = direction to focus after the workspaces swaped
 
   Examples:
     $script left

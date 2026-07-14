@@ -1,21 +1,20 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/i3/i3_window_move.sh
+# path:   /home/klassiker/Projects/repos/i3/i3_window_move.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2025-08-07T05:32:56+0200
+# date:   2026-07-14T02:01:08+0200
 
-# speed up script by using standard c
-LC_ALL=C
-LANG=C
+# use standard C locale to avoid locale-specific issues and improve performance
+export LC_ALL=C LANG=C
 
 script=$(basename "$0")
 help="$script [-h/--help] -- move floating window to the edge of the monitor
   Usage:
-    $script [nw/n/ne/e/se/s/sw/w] [monitor] [margin x] [margin y]
+    $script [nw|n|ne|e|se|s|sw|w] [monitor] [margin x] [margin y]
 
   Settings:
-    [nw/n/ne/e/se/s/sw/w] = position to move the window
+    [nw|n|ne|e|se|s|sw|w] = position to move the window
     [monitor]             = monitor to move the window (default 0)
     [margin x]            = +/- margin x for the window (default 0)
     [margin y]            = +/- margin y for the window (default 0)
@@ -117,7 +116,7 @@ move_window() {
                 y="$((resolution_y / 2 - HEIGHT / 2))"
                 ;;
         esac \
-        && xdotool getactivewindow windowmove \
+        && xdotool getwindowfocus windowmove \
             "$((x + position_x + margin_x))" \
             "$((y + position_y + margin_y))"
 }

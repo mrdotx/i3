@@ -1,13 +1,9 @@
 #!/bin/sh
 
-# path:   /home/klassiker/.local/share/repos/i3/i3_services.sh
+# path:   /home/klassiker/Projects/repos/i3/i3_services.sh
 # author: klassiker [mrdotx]
 # url:    https://github.com/mrdotx/i3
-# date:   2026-06-23T03:54:11+0200
-
-# speed up script by using standard c
-LC_ALL=C
-LANG=C
+# date:   2026-07-14T02:01:00+0200
 
 # auth can be something like sudo -A, doas -- or nothing,
 # depending on configuration requirements
